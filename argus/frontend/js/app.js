@@ -1,85 +1,104 @@
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM loaded, initializing Argus Law application...');
 
-    // === LETTER ANIMATION ===
-    try {
-        // === Анимация букв заголовка ===
-        const headerElements = document.querySelectorAll('.header-content h1');
-        if (headerElements.length === 0) {
-            console.warn('No header elements found for animation');
-        }
-        
-        headerElements.forEach(e => {
-            if (!e || !e.textContent) return;
-            
-            e.innerHTML = e.textContent.replace(/(\S*)/g, m => {
-                return m.replace(/\S/g, '<span class="letter">$&</span>');
-            });
-            
-            const letters = e.querySelectorAll('.letter');
-            letters.forEach((l, i) => {
-                if (l) {
-                    l.style.cssText = `z-index: -${i}; transition-duration: ${i / 4.4 + 1}s`;
-                }
-            });
-        });
-    } catch (error) {
-        console.error('Error in header animation:', error);
-    }
-
-    // === SWIPER INITIALIZATION ===
+    // === GLOBAL VARIABLES ===
     let verticalSwiper = null;
     let horizontalSwiper = null;
     let isMouseOverHorizontal = false;
     let horizontalScrollLock = false;
 
-    // Check if Swiper is available
-    if (typeof Swiper === 'undefined') {
-        console.error('Swiper library is not loaded. Please include Swiper.js');
-        return;
-    }
+    // API Configuration
+    const API_BASE_URL = 'http://127.0.0.1:8000/api';
+    const API_ENDPOINTS = {
+        login: `${API_BASE_URL}/auth/token/login/`,
+        register: `${API_BASE_URL}/auth/users/`,
+        userProfile: `${API_BASE_URL}/auth/users/me/`,
+        logout: `${API_BASE_URL}/auth/token/logout/`
+    };
 
-    const sliderElement = document.querySelector('.slider');
-    if (!sliderElement) {
-        console.error('Slider element not found. Please check your HTML structure');
-        return;
-    }
-
-    try {
-        verticalSwiper = new Swiper('.slider', {
-            direction: 'vertical',
-            speed: 1700,
-            parallax: true,
-            resistanceRatio: 0.5,
-            touchReleaseOnEdges: true,
-            keyboard: {
-                enabled: true,
-                onlyInViewport: false,
-            },
-            mousewheel: {
-                eventsTarget: '.slider',
-                releaseOnEdges: true,
-                thresholdDelta: 15,
-                thresholdTime: 300,
-            },
-            noSwipingSelector: '.horizontal-swiper, .slide-content, .swiper-pagination, .swiper-button-next, .swiper-button-prev',
-            on: {
-                init: function() {
-                    console.log('Vertical swiper initialized successfully');
-                    triggerSectionAnimations(0);
-                },
-                slideChange: function() {
-                    handleSlideChange(this.activeIndex);
-                    triggerSectionAnimations(this.activeIndex);
-                }
+    // === LETTER ANIMATION ===
+    function initHeaderAnimation() {
+        try {
+            const headerElements = document.querySelectorAll('.header-content h1');
+            if (headerElements.length === 0) {
+                console.warn('No header elements found for animation');
+                return;
             }
-        });
-    } catch (error) {
-        console.error('Error initializing vertical swiper:', error);
-        return;
+            
+            headerElements.forEach(element => {
+                if (!element || !element.textContent) return;
+                
+                element.innerHTML = element.textContent.replace(/(\S*)/g, match => {
+                    return match.replace(/\S/g, '<span class="letter">$&</span>');
+                });
+                
+                const letters = element.querySelectorAll('.letter');
+                letters.forEach((letter, index) => {
+                    if (letter) {
+                        letter.style.cssText = `
+                            z-index: -${index}; 
+                            transition-duration: ${index / 4.4 + 1}s;
+                            display: inline-block;
+                        `;
+                    }
+                });
+            });
+        } catch (error) {
+            console.error('Error in header animation:', error);
+        }
     }
 
-    // === ENHANCED AUTHENTICATION SYSTEM ===
+    // === SWIPER INITIALIZATION ===
+    function initializeSwiper() {
+        // Check if Swiper is available
+        if (typeof Swiper === 'undefined') {
+            console.error('Swiper library is not loaded. Please include Swiper.js');
+            return false;
+        }
+
+        const sliderElement = document.querySelector('.slider');
+        if (!sliderElement) {
+            console.error('Slider element not found. Please check your HTML structure');
+            return false;
+        }
+
+        try {
+            verticalSwiper = new Swiper('.slider', {
+                direction: 'vertical',
+                speed: 1700,
+                parallax: true,
+                resistanceRatio: 0.5,
+                touchReleaseOnEdges: true,
+                keyboard: {
+                    enabled: true,
+                    onlyInViewport: false,
+                },
+                mousewheel: {
+                    eventsTarget: '.slider',
+                    releaseOnEdges: true,
+                    thresholdDelta: 15,
+                    thresholdTime: 300,
+                },
+                noSwipingSelector: '.horizontal-swiper, .slide-content, .swiper-pagination, .swiper-button-next, .swiper-button-prev',
+                on: {
+                    init: function() {
+                        console.log('Vertical swiper initialized successfully');
+                        triggerSectionAnimations(0);
+                    },
+                    slideChange: function() {
+                        handleSlideChange(this.activeIndex);
+                        triggerSectionAnimations(this.activeIndex);
+                    }
+                }
+            });
+            return true;
+        } catch (error) {
+            console.error('Error initializing vertical swiper:', error);
+            return false;
+        }
+    }
+
+    // === AUTHENTICATION SYSTEM ===
     const authElements = {
         modal: document.getElementById('authModal'),
         loginBtn: document.getElementById('loginBtn'),
@@ -92,20 +111,21 @@ document.addEventListener('DOMContentLoaded', function() {
         userName: document.getElementById('userName')
     };
 
-    // Check if auth elements exist
-    const missingElements = Object.entries(authElements).filter(([key, el]) => !el);
-    if (missingElements.length > 0) {
-        console.warn('Missing authentication elements:', missingElements.map(([key]) => key));
-    } else {
-        initializeAuthentication();
-    }
-
     function initializeAuthentication() {
+        const missingElements = Object.entries(authElements).filter(([key, el]) => !el);
+        if (missingElements.length > 0) {
+            console.warn('Missing authentication elements:', missingElements.map(([key]) => key));
+            return false;
+        }
+
         try {
             checkAuthStatus();
             setupAuthEventListeners();
+            setupFormEnhancements();
+            return true;
         } catch (error) {
             console.error('Error initializing authentication:', error);
+            return false;
         }
     }
 
@@ -130,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        // Tab switching with enhanced animations
+        // Tab switching
         const authTabs = document.querySelectorAll('.auth-tab');
         authTabs.forEach(tab => {
             tab.addEventListener('click', () => {
@@ -142,9 +162,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Form submissions
         safeAddEventListener(loginForm, 'submit', handleLogin);
         safeAddEventListener(registerForm, 'submit', handleRegister);
-
-        // Enhanced form interactions
-        setupFormEnhancements();
     }
 
     function setupFormEnhancements() {
@@ -165,6 +182,32 @@ document.addEventListener('DOMContentLoaded', function() {
             if (input.value) {
                 input.parentElement.classList.add('focused');
             }
+        });
+
+        // Add form validation
+        const forms = document.querySelectorAll('form');
+        forms.forEach(form => {
+            const inputs = form.querySelectorAll('input[required]');
+            
+            inputs.forEach(input => {
+                input.addEventListener('invalid', function(e) {
+                    e.preventDefault();
+                    this.classList.add('error');
+                    
+                    // Remove error class after user starts typing
+                    this.addEventListener('input', function() {
+                        this.classList.remove('error');
+                    }, { once: true });
+                });
+
+                input.addEventListener('blur', function() {
+                    if (this.hasAttribute('required') && !this.value.trim()) {
+                        this.classList.add('error');
+                    } else {
+                        this.classList.remove('error');
+                    }
+                });
+            });
         });
     }
 
@@ -237,7 +280,7 @@ document.addEventListener('DOMContentLoaded', function() {
         submitBtn.disabled = true;
 
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/auth/token/login/', {
+            const response = await fetch(API_ENDPOINTS.login, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password })
@@ -249,7 +292,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 localStorage.setItem('authToken', data.auth_token);
                 
                 // Get user data
-                const userResponse = await fetch('http://127.0.0.1:8000/api/auth/users/me/', {
+                const userResponse = await fetch(API_ENDPOINTS.userProfile, {
                     headers: { 'Authorization': `Token ${data.auth_token}` }
                 });
                 
@@ -312,7 +355,7 @@ document.addEventListener('DOMContentLoaded', function() {
         submitBtn.disabled = true;
 
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/auth/users/', {
+            const response = await fetch(API_ENDPOINTS.register, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
@@ -344,19 +387,41 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function handleLogout() {
-        localStorage.removeItem('authToken');
-        localStorage.removeItem('userData');
-        updateUIAfterLogout();
+    async function handleLogout() {
+        const token = localStorage.getItem('authToken');
         
-        // Add visual feedback
+        // Show loading state
         const logoutBtn = document.getElementById('logoutBtn');
         if (logoutBtn) {
             const originalText = logoutBtn.textContent;
             logoutBtn.textContent = 'Выход...';
-            setTimeout(() => {
-                logoutBtn.textContent = originalText;
-            }, 1000);
+            logoutBtn.disabled = true;
+        }
+
+        try {
+            if (token) {
+                // Optional: Call logout endpoint to invalidate token on server
+                await fetch(API_ENDPOINTS.logout, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Token ${token}` }
+                });
+            }
+        } catch (error) {
+            console.error('Logout error:', error);
+        } finally {
+            // Clean up local storage regardless of API call result
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('userData');
+            updateUIAfterLogout();
+            
+            // Reset button state
+            if (logoutBtn) {
+                const originalText = 'Выйти'; // Default text
+                setTimeout(() => {
+                    logoutBtn.textContent = originalText;
+                    logoutBtn.disabled = false;
+                }, 1000);
+            }
         }
     }
 
@@ -418,7 +483,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/auth/users/me/', {
+            const response = await fetch(API_ENDPOINTS.userProfile, {
                 headers: { 'Authorization': `Token ${token}` }
             });
 
@@ -427,6 +492,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 updateUIAfterAuth(userData);
             } else {
                 localStorage.removeItem('authToken');
+                localStorage.removeItem('userData');
                 updateUIAfterLogout();
             }
         } catch (error) {
@@ -458,7 +524,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // === ENHANCED HORIZONTAL SWIPER ===
+    // === HORIZONTAL SWIPER ===
     function initHorizontalSwiper() {
         const horizontalEl = document.querySelector('.horizontal-swiper');
         if (!horizontalEl) {
@@ -507,7 +573,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         console.log('Horizontal swiper initialized with enhanced effects');
                     },
                     slideChange: function() {
-                        // Add ripple effect to active slide
                         const activeSlide = this.slides[this.activeIndex];
                         if (activeSlide) {
                             createSlideRipple(activeSlide);
@@ -604,7 +669,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, { passive: false });
     }
 
-    // === ENHANCED NAVIGATION ===
+    // === NAVIGATION ===
     function setupNavigation() {
         const logo = document.querySelector('.logo');
         if (logo && verticalSwiper) {
@@ -660,7 +725,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 150);
     }
 
-    // === ENHANCED SLIDE CHANGE HANDLER ===
+    // === SLIDE CHANGE HANDLER ===
     function handleSlideChange(activeIndex) {
         try {
             // Update header slides
@@ -668,7 +733,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 e.classList.toggle('active', activeIndex === i);
             });
 
-            // Header visibility control - only show on home section
+            // Header visibility control
             const headerUI = document.querySelector('.slider-ui.home-only');
             const floatingHeader = document.getElementById('floatingHeader');
             
@@ -682,7 +747,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
 
-            // Update menu items with animation
+            // Update menu items
             const menuItems = document.querySelectorAll('.main-menu li');
             menuItems.forEach((item, index) => {
                 item.classList.remove('active');
@@ -714,67 +779,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // === FLOATING HEADER FUNCTIONALITY ===
-    function setupFloatingHeader() {
-        const floatingLogoLink = document.getElementById('floatingLogoLink');
-        const floatingBurger = document.getElementById('floatingBurger');
-        const floatingMenu = document.getElementById('floatingMenu');
-
-        // Floating logo click handler
-        if (floatingLogoLink && verticalSwiper) {
-            floatingLogoLink.addEventListener('click', function(e) {
-                e.preventDefault();
-                verticalSwiper.slideTo(0);
-                addNavigationFeedback(this);
-            });
-        }
-
-        // Floating burger menu toggle
-        if (floatingBurger && floatingMenu) {
-            floatingBurger.addEventListener('click', function() {
-                this.classList.toggle('active');
-                floatingMenu.classList.toggle('show');
-            });
-
-            // Close floating menu when clicking on menu items
-            const floatingMenuLinks = document.querySelectorAll('.floating-menu a');
-            floatingMenuLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    floatingBurger.classList.remove('active');
-                    floatingMenu.classList.remove('show');
-
-                    // Navigate to section
-                    const href = this.getAttribute('href').substring(1);
-                    const slideMap = {
-                        'home': 0,
-                        'about': 1,
-                        'practices': 2,
-                        'contacts': 3
-                    };
-                    
-                    if (slideMap.hasOwnProperty(href) && verticalSwiper) {
-                        verticalSwiper.slideTo(slideMap[href]);
-                    }
-                });
-            });
-
-            // Close floating menu when clicking outside
-            document.addEventListener('click', function(e) {
-                if (!floatingBurger.contains(e.target) && !floatingMenu.contains(e.target)) {
-                    floatingBurger.classList.remove('active');
-                    floatingMenu.classList.remove('show');
-                }
-            });
-        }
-    }
-
     function applySlideEffects(activeIndex) {
         const slides = document.querySelectorAll('.slider__item');
         slides.forEach((slide, index) => {
             if (index === activeIndex) {
                 slide.classList.add('slide-active');
-                // Add parallax effect
                 const layer = slide.querySelector('.slider__layer');
                 if (layer) {
                     layer.style.transform = 'scale(1.1)';
@@ -789,7 +798,57 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // === ENHANCED SECTION ANIMATIONS ===
+    // === FLOATING HEADER ===
+    function setupFloatingHeader() {
+        const floatingLogoLink = document.getElementById('floatingLogoLink');
+        const floatingBurger = document.getElementById('floatingBurger');
+        const floatingMenu = document.getElementById('floatingMenu');
+
+        if (floatingLogoLink && verticalSwiper) {
+            floatingLogoLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                verticalSwiper.slideTo(0);
+                addNavigationFeedback(this);
+            });
+        }
+
+        if (floatingBurger && floatingMenu) {
+            floatingBurger.addEventListener('click', function() {
+                this.classList.toggle('active');
+                floatingMenu.classList.toggle('show');
+            });
+
+            const floatingMenuLinks = document.querySelectorAll('.floating-menu a');
+            floatingMenuLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    floatingBurger.classList.remove('active');
+                    floatingMenu.classList.remove('show');
+
+                    const href = this.getAttribute('href').substring(1);
+                    const slideMap = {
+                        'home': 0,
+                        'about': 1,
+                        'practices': 2,
+                        'contacts': 3
+                    };
+                    
+                    if (slideMap.hasOwnProperty(href) && verticalSwiper) {
+                        verticalSwiper.slideTo(slideMap[href]);
+                    }
+                });
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!floatingBurger.contains(e.target) && !floatingMenu.contains(e.target)) {
+                    floatingBurger.classList.remove('active');
+                    floatingMenu.classList.remove('show');
+                }
+            });
+        }
+    }
+
+    // === SECTION ANIMATIONS ===
     function triggerSectionAnimations(sectionIndex) {
         const sections = [
             '.header-content',
@@ -801,7 +860,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const currentSection = document.querySelector(sections[sectionIndex]);
         if (!currentSection) return;
 
-        // Reset all animations first
+        // Reset all animations
         const allAnimatedElements = document.querySelectorAll('.animate-fade-up, .animate-slide-left, .animate-scale-up, .animate-contact');
         allAnimatedElements.forEach(el => el.classList.remove('animate'));
 
@@ -812,78 +871,94 @@ document.addEventListener('DOMContentLoaded', function() {
             const delay = parseInt(el.dataset.delay) || (index * 100);
             setTimeout(() => {
                 el.classList.add('animate');
-                
-                // Add extra wow effect for specific elements
-                if (el.classList.contains('principle-card')) {
-                    setTimeout(() => {
-                        el.style.transform += ' scale(1.02)';
-                        setTimeout(() => {
-                            el.style.transform = el.style.transform.replace(' scale(1.02)', '');
-                        }, 200);
-                    }, 300);
-                }
             }, delay);
         });
+    }
 
-        // Section-specific animations
-        switch (sectionIndex) {
-            case 1: // About section
-                setTimeout(() => {
-                    triggerAboutEnhancements();
-                }, 500);
-                break;
-            case 3: // Contacts section
-                setTimeout(() => {
-                    triggerContactEnhancements();
-                }, 300);
-                break;
+    // === MOBILE MENU ===
+    function setupMobileMenu() {
+        const submenuBtn = document.querySelector('.submenu');
+        const mainMenu = document.querySelector('.main-menu');
+        
+        if (submenuBtn && mainMenu) {
+            submenuBtn.addEventListener('click', function() {
+                this.classList.toggle('active');
+                mainMenu.classList.toggle('show');
+            });
+
+            const menuLinks = document.querySelectorAll('.main-menu a');
+            menuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    submenuBtn.classList.remove('active');
+                    mainMenu.classList.remove('show');
+                });
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!submenuBtn.contains(e.target) && !mainMenu.contains(e.target)) {
+                    submenuBtn.classList.remove('active');
+                    mainMenu.classList.remove('show');
+                }
+            });
         }
     }
 
-    function triggerAboutEnhancements() {
-        // Enhanced floating orbs animation
-        const orbs = document.querySelectorAll('.floating-orb');
-        orbs.forEach((orb, index) => {
-            setTimeout(() => {
-                orb.style.opacity = '0.6';
-                orb.style.transform = 'scale(1.1)';
-                setTimeout(() => {
-                    orb.style.transform = 'scale(1)';
-                }, 500);
-            }, index * 200);
-        });
+    // === KEYBOARD NAVIGATION ===
+    function setupKeyboardNavigation() {
+        document.addEventListener('keydown', function(e) {
+            let handled = false;
 
-        // Enhanced principle card interactions
-        const principleCards = document.querySelectorAll('.principle-card');
-        principleCards.forEach((card, index) => {
-            setTimeout(() => {
-                card.style.boxShadow = '0 15px 35px rgba(212, 175, 55, 0.2)';
-                setTimeout(() => {
-                    card.style.boxShadow = '';
-                }, 1000);
-            }, index * 300);
-        });
-    }
-
-    function triggerContactEnhancements() {
-        // Enhanced contact item animations
-        const contactItems = document.querySelectorAll('.contact-item');
-        contactItems.forEach((item, index) => {
-            setTimeout(() => {
-                const icon = item.querySelector('.contact-icon-wrapper');
-                if (icon) {
-                    icon.style.transform = 'scale(1.2) rotate(360deg)';
-                    icon.style.background = 'var(--green-color)';
-                    setTimeout(() => {
-                        icon.style.transform = 'scale(1) rotate(0deg)';
-                        icon.style.background = '';
-                    }, 800);
+            // Main navigation keys
+            if (!isMouseOverHorizontal) {
+                switch (e.key) {
+                    case 'ArrowUp':
+                    case 'PageUp':
+                        verticalSwiper?.slidePrev();
+                        handled = true;
+                        break;
+                    case 'ArrowDown':
+                    case 'PageDown':
+                        verticalSwiper?.slideNext();
+                        handled = true;
+                        break;
+                    case 'Home':
+                        verticalSwiper?.slideTo(0);
+                        handled = true;
+                        break;
+                    case 'End':
+                        verticalSwiper?.slideTo(3);
+                        handled = true;
+                        break;
                 }
-            }, index * 400);
+            }
+
+            // Horizontal swiper navigation
+            if (isMouseOverHorizontal && horizontalSwiper) {
+                switch (e.key) {
+                    case 'ArrowLeft':
+                        horizontalSwiper.slidePrev();
+                        handled = true;
+                        break;
+                    case 'ArrowRight':
+                        horizontalSwiper.slideNext();
+                        handled = true;
+                        break;
+                }
+            }
+
+            // Modal controls
+            if (e.key === 'Escape') {
+                closeAuthModal();
+                handled = true;
+            }
+
+            if (handled) {
+                e.preventDefault();
+            }
         });
     }
 
-    // === ADVANCED INTERACTION HANDLERS ===
+    // === ADVANCED INTERACTIONS ===
     function setupAdvancedInteractions() {
         // Enhanced principle card interactions
         const principleCards = document.querySelectorAll('.principle-card');
@@ -895,8 +970,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 isAnimating = true;
 
                 this.style.transform = 'translateY(-10px) rotateX(5deg) rotateY(5deg) scale(1.02)';
-                
-                // Add particle effect
                 createParticleEffect(this);
 
                 setTimeout(() => {
@@ -1019,62 +1092,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 600);
     }
 
-    // === ENHANCED KEYBOARD NAVIGATION ===
-    function setupKeyboardNavigation() {
-        document.addEventListener('keydown', function(e) {
-            // Prevent default behavior if we're handling the key
-            let handled = false;
-
-            // Main navigation keys
-            if (!isMouseOverHorizontal) {
-                switch (e.key) {
-                    case 'ArrowUp':
-                    case 'PageUp':
-                        verticalSwiper?.slidePrev();
-                        handled = true;
-                        break;
-                    case 'ArrowDown':
-                    case 'PageDown':
-                        verticalSwiper?.slideNext();
-                        handled = true;
-                        break;
-                    case 'Home':
-                        verticalSwiper?.slideTo(0);
-                        handled = true;
-                        break;
-                    case 'End':
-                        verticalSwiper?.slideTo(3);
-                        handled = true;
-                        break;
-                }
-            }
-
-            // Horizontal swiper navigation
-            if (isMouseOverHorizontal && horizontalSwiper) {
-                switch (e.key) {
-                    case 'ArrowLeft':
-                        horizontalSwiper.slidePrev();
-                        handled = true;
-                        break;
-                    case 'ArrowRight':
-                        horizontalSwiper.slideNext();
-                        handled = true;
-                        break;
-                }
-            }
-
-            // Modal controls
-            if (e.key === 'Escape') {
-                closeAuthModal();
-                handled = true;
-            }
-
-            if (handled) {
-                e.preventDefault();
-            }
-        });
-    }
-
     // === PERFORMANCE OPTIMIZATIONS ===
     function setupPerformanceOptimizations() {
         // Intersection Observer for animations
@@ -1115,137 +1132,6 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(preloadImages, 1000);
     }
 
-    // === MOBILE MENU TOGGLE ===
-    function setupMobileMenu() {
-        const submenuBtn = document.querySelector('.submenu');
-        const mainMenu = document.querySelector('.main-menu');
-        
-        if (submenuBtn && mainMenu) {
-            submenuBtn.addEventListener('click', function() {
-                this.classList.toggle('active');
-                mainMenu.classList.toggle('show');
-            });
-
-            // Close menu when clicking on menu items
-            const menuLinks = document.querySelectorAll('.main-menu a');
-            menuLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    submenuBtn.classList.remove('active');
-                    mainMenu.classList.remove('show');
-                });
-            });
-
-            // Close menu when clicking outside
-            document.addEventListener('click', function(e) {
-                if (!submenuBtn.contains(e.target) && !mainMenu.contains(e.target)) {
-                    submenuBtn.classList.remove('active');
-                    mainMenu.classList.remove('show');
-                }
-            });
-        }
-    }
-
-    // === SCROLL TO SECTION FUNCTIONALITY ===
-    function setupScrollToSection() {
-        // Handle anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = this.getAttribute('href').substring(1);
-                
-                // Map sections to slide indices
-                const slideMap = {
-                    'home': 0,
-                    'about': 1,
-                    'practices': 2,
-                    'contacts': 3
-                };
-                
-                if (slideMap.hasOwnProperty(target) && verticalSwiper) {
-                    verticalSwiper.slideTo(slideMap[target]);
-                }
-            });
-        });
-    }
-
-    // === FORM VALIDATION ENHANCEMENTS ===
-    function setupFormValidation() {
-        const forms = document.querySelectorAll('form');
-        
-        forms.forEach(form => {
-            const inputs = form.querySelectorAll('input[required]');
-            
-            inputs.forEach(input => {
-                input.addEventListener('invalid', function(e) {
-                    e.preventDefault();
-                    this.classList.add('error');
-                    
-                    // Remove error class after user starts typing
-                    this.addEventListener('input', function() {
-                        this.classList.remove('error');
-                    }, { once: true });
-                });
-
-                input.addEventListener('blur', function() {
-                    if (this.hasAttribute('required') && !this.value.trim()) {
-                        this.classList.add('error');
-                    } else {
-                        this.classList.remove('error');
-                    }
-                });
-            });
-        });
-    }
-
-    // === INITIALIZATION ===
-    function initializeApplication() {
-        try {
-            setupNavigation();
-            setupKeyboardNavigation();
-            setupAdvancedInteractions();
-            setupPerformanceOptimizations();
-            setupMobileMenu();
-            setupScrollToSection();
-            setupFormValidation();
-            setupFloatingHeader();
-
-            // Initialize on first slide if needed
-            if (verticalSwiper && verticalSwiper.activeIndex === 2) {
-                setTimeout(() => initHorizontalSwiper(), 100);
-            }
-
-            console.log('Argus Law application initialized successfully');
-        } catch (error) {
-            console.error('Error during application initialization:', error);
-        }
-    }
-
-    // === ERROR HANDLING ===
-    window.addEventListener('error', function(e) {
-        console.error('Global error caught:', e.error);
-        // Could send error reports to analytics here
-    });
-
-    window.addEventListener('unhandledrejection', function(e) {
-        console.error('Unhandled promise rejection:', e.reason);
-    });
-
-    // === FINAL INITIALIZATION ===
-    initializeApplication();
-
-    // Add loading state management
-    window.addEventListener('load', function() {
-        document.body.classList.add('loaded');
-        triggerSectionAnimations(0);
-        
-        // Add smooth fade-in effect
-        document.body.style.opacity = '0';
-        setTimeout(() => {
-            document.body.style.transition = 'opacity 0.5s ease-in';
-            document.body.style.opacity = '1';
-        }, 100);
-    });
-
     // === UTILITY FUNCTIONS ===
     function debounce(func, wait) {
         let timeout;
@@ -1282,7 +1168,52 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }, 250);
 
-    window.addEventListener('resize', handleResize);
+    // === ERROR HANDLING ===
+    window.addEventListener('error', function(e) {
+        console.error('Global error caught:', e.error);
+        // Could send error reports to analytics here
+    });
+
+    window.addEventListener('unhandledrejection', function(e) {
+        console.error('Unhandled promise rejection:', e.reason);
+    });
+
+    // === INITIALIZATION ===
+    function initializeApplication() {
+        try {
+            // Initialize core components
+            initHeaderAnimation();
+            
+            // Initialize Swiper first
+            if (!initializeSwiper()) {
+                console.error('Failed to initialize Swiper - stopping initialization');
+                return;
+            }
+
+            // Initialize authentication system
+            initializeAuthentication();
+
+            // Setup all other components
+            setupNavigation();
+            setupKeyboardNavigation();
+            setupAdvancedInteractions();
+            setupPerformanceOptimizations();
+            setupMobileMenu();
+            setupFloatingHeader();
+
+            // Setup event listeners
+            window.addEventListener('resize', handleResize);
+
+            // Initialize horizontal swiper if on practices section
+            if (verticalSwiper && verticalSwiper.activeIndex === 2) {
+                setTimeout(() => initHorizontalSwiper(), 100);
+            }
+
+            console.log('Argus Law application initialized successfully');
+        } catch (error) {
+            console.error('Error during application initialization:', error);
+        }
+    }
 
     // === CLEANUP ON PAGE UNLOAD ===
     window.addEventListener('beforeunload', () => {
@@ -1293,4 +1224,20 @@ document.addEventListener('DOMContentLoaded', function() {
             horizontalSwiper.destroy(true, true);
         }
     });
+
+    // === LOADING STATE MANAGEMENT ===
+    window.addEventListener('load', function() {
+        document.body.classList.add('loaded');
+        triggerSectionAnimations(0);
+        
+        // Add smooth fade-in effect
+        document.body.style.opacity = '0';
+        setTimeout(() => {
+            document.body.style.transition = 'opacity 0.5s ease-in';
+            document.body.style.opacity = '1';
+        }, 100);
+    });
+
+    // === FINAL INITIALIZATION ===
+    initializeApplication();
 });
