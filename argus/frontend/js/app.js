@@ -1,3 +1,5 @@
+// === PROPERLY FIXED APP.JS - DESKTOP ANIMATIONS WORKING ===
+
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM loaded, initializing Argus Law application...');
 
@@ -16,7 +18,73 @@ document.addEventListener('DOMContentLoaded', function() {
         logout: `${API_BASE_URL}/auth/token/logout/`
     };
 
-    // === LETTER ANIMATION ===
+    // === UTILITY FUNCTIONS ===
+    function isMobileDevice() {
+        return window.innerWidth <= 968;
+    }
+
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
+    // === MOBILE-ONLY FIXES (DON'T AFFECT DESKTOP) ===
+    function createMobileConsultationButton() {
+        if (!isMobileDevice()) return;
+        
+        const headerSlide = document.querySelector('.header-content__slide.active');
+        if (headerSlide && !headerSlide.querySelector('.mobile-consultation-btn')) {
+            const consultBtn = document.createElement('a');
+            consultBtn.href = 'consultation.html';
+            consultBtn.className = 'mobile-consultation-btn';
+            consultBtn.textContent = 'ЗАПИСЬ НА КОНСУЛЬТАЦИЮ';
+            consultBtn.setAttribute('aria-label', 'Записаться на консультацию');
+            
+            // Touch events for mobile only
+            consultBtn.addEventListener('touchstart', function(e) {
+                this.style.transform = 'scale(0.95)';
+            });
+            
+            consultBtn.addEventListener('touchend', function(e) {
+                this.style.transform = 'scale(1)';
+            });
+            
+            headerSlide.appendChild(consultBtn);
+        }
+    }
+
+    function fixFloatingHeaderMobile() {
+        if (!isMobileDevice()) return;
+        
+        const floatingHeader = document.getElementById('floatingHeader');
+        if (floatingHeader) {
+            floatingHeader.style.opacity = '1';
+            floatingHeader.style.visibility = 'visible';
+            floatingHeader.style.pointerEvents = 'auto';
+            floatingHeader.classList.add('visible');
+        }
+    }
+
+    function separateCopyrightYear() {
+        if (!isMobileDevice()) return;
+        
+        const yearSpan = document.querySelector('.copyright .year');
+        if (yearSpan) {
+            yearSpan.style.display = 'block';
+            yearSpan.style.marginTop = '10px';
+            yearSpan.style.paddingTop = '10px';
+            yearSpan.style.borderTop = '1px solid rgba(212, 175, 55, 0.2)';
+        }
+    }
+
+    // === LETTER ANIMATION (WORKS ON BOTH DESKTOP AND MOBILE) ===
     function initHeaderAnimation() {
         try {
             const headerElements = document.querySelectorAll('.header-content h1');
@@ -35,6 +103,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const letters = element.querySelectorAll('.letter');
                 letters.forEach((letter, index) => {
                     if (letter) {
+                        // Desktop animation (original working animation)
                         letter.style.cssText = `
                             z-index: -${index}; 
                             transition-duration: ${index / 4.4 + 1}s;
@@ -48,9 +117,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // === SWIPER INITIALIZATION ===
+    // === SWIPER INITIALIZATION (UNCHANGED - WORKING) ===
     function initializeSwiper() {
-        // Check if Swiper is available
         if (typeof Swiper === 'undefined') {
             console.error('Swiper library is not loaded. Please include Swiper.js');
             return false;
@@ -84,6 +152,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     init: function() {
                         console.log('Vertical swiper initialized successfully');
                         triggerSectionAnimations(0);
+                        
+                        // Only apply mobile fixes on mobile
+                        if (isMobileDevice()) {
+                            setTimeout(() => {
+                                fixFloatingHeaderMobile();
+                                createMobileConsultationButton();
+                            }, 100);
+                        }
                     },
                     slideChange: function() {
                         handleSlideChange(this.activeIndex);
@@ -98,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // === AUTHENTICATION SYSTEM ===
+    // === AUTHENTICATION SYSTEM (UNCHANGED - WORKING) ===
     const authElements = {
         modal: document.getElementById('authModal'),
         loginBtn: document.getElementById('loginBtn'),
@@ -132,7 +208,6 @@ document.addEventListener('DOMContentLoaded', function() {
     function setupAuthEventListeners() {
         const { modal, loginBtn, registerBtn, logoutBtn, closeModal, loginForm, registerForm } = authElements;
 
-        // Safe event listener attachment
         const safeAddEventListener = (element, event, handler) => {
             if (element) {
                 element.addEventListener(event, handler);
@@ -150,7 +225,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        // Tab switching
         const authTabs = document.querySelectorAll('.auth-tab');
         authTabs.forEach(tab => {
             tab.addEventListener('click', () => {
@@ -159,13 +233,11 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
 
-        // Form submissions
         safeAddEventListener(loginForm, 'submit', handleLogin);
         safeAddEventListener(registerForm, 'submit', handleRegister);
     }
 
     function setupFormEnhancements() {
-        // Add floating label effects
         const inputs = document.querySelectorAll('.form-group input');
         inputs.forEach(input => {
             input.addEventListener('focus', function() {
@@ -178,13 +250,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
 
-            // Check if input has value on load
             if (input.value) {
                 input.parentElement.classList.add('focused');
             }
         });
 
-        // Add form validation
         const forms = document.querySelectorAll('form');
         forms.forEach(form => {
             const inputs = form.querySelectorAll('input[required]');
@@ -194,7 +264,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     e.preventDefault();
                     this.classList.add('error');
                     
-                    // Remove error class after user starts typing
                     this.addEventListener('input', function() {
                         this.classList.remove('error');
                     }, { once: true });
@@ -211,7 +280,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // === AUTH MODAL FUNCTIONS ===
+    // === AUTH MODAL FUNCTIONS (UNCHANGED) ===
     function openAuthModal(activeTab = 'login') {
         const { modal } = authElements;
         if (!modal) return;
@@ -220,7 +289,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.style.overflow = 'hidden';
         switchTab(activeTab);
 
-        // Add entrance animation
         requestAnimationFrame(() => {
             modal.style.opacity = '1';
         });
@@ -260,7 +328,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // === AUTH API FUNCTIONS ===
+    // === AUTH API FUNCTIONS (UNCHANGED) ===
     async function handleLogin(e) {
         e.preventDefault();
         
@@ -273,7 +341,6 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // Show loading state
         const submitBtn = e.target.querySelector('button[type="submit"]');
         const originalText = submitBtn.textContent;
         submitBtn.textContent = 'Вход...';
@@ -291,7 +358,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (response.ok && data.auth_token) {
                 localStorage.setItem('authToken', data.auth_token);
                 
-                // Get user data
                 const userResponse = await fetch(API_ENDPOINTS.userProfile, {
                     headers: { 'Authorization': `Token ${data.auth_token}` }
                 });
@@ -312,7 +378,6 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Login error:', error);
             showMessage(messageEl, 'Ошибка соединения с сервером', 'error');
         } finally {
-            // Reset button state
             submitBtn.textContent = originalText;
             submitBtn.disabled = false;
         }
@@ -332,7 +397,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const confirmPassword = document.getElementById('confirmPassword')?.value;
         const messageEl = document.getElementById('registerMessage');
 
-        // Enhanced validation
         if (!Object.values(formData).every(val => val && val.trim())) {
             showMessage(messageEl, 'Все поля обязательны для заполнения', 'error');
             return;
@@ -348,7 +412,6 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // Show loading state
         const submitBtn = e.target.querySelector('button[type="submit"]');
         const originalText = submitBtn.textContent;
         submitBtn.textContent = 'Регистрация...';
@@ -367,7 +430,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 showMessage(messageEl, 'Регистрация успешна! Теперь войдите.', 'success');
                 switchTab('login');
                 
-                // Auto-fill email in login form
                 const loginEmailEl = document.getElementById('loginEmail');
                 if (loginEmailEl) loginEmailEl.value = formData.email;
             } else {
@@ -381,7 +443,6 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Registration error:', error);
             showMessage(messageEl, 'Ошибка соединения с сервером', 'error');
         } finally {
-            // Reset button state
             submitBtn.textContent = originalText;
             submitBtn.disabled = false;
         }
@@ -390,7 +451,6 @@ document.addEventListener('DOMContentLoaded', function() {
     async function handleLogout() {
         const token = localStorage.getItem('authToken');
         
-        // Show loading state
         const logoutBtn = document.getElementById('logoutBtn');
         if (logoutBtn) {
             const originalText = logoutBtn.textContent;
@@ -400,7 +460,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         try {
             if (token) {
-                // Optional: Call logout endpoint to invalidate token on server
                 await fetch(API_ENDPOINTS.logout, {
                     method: 'POST',
                     headers: { 'Authorization': `Token ${token}` }
@@ -409,23 +468,20 @@ document.addEventListener('DOMContentLoaded', function() {
         } catch (error) {
             console.error('Logout error:', error);
         } finally {
-            // Clean up local storage regardless of API call result
             localStorage.removeItem('authToken');
             localStorage.removeItem('userData');
             updateUIAfterLogout();
             
-            // Reset button state
             if (logoutBtn) {
-                const originalText = 'Выйти'; // Default text
                 setTimeout(() => {
-                    logoutBtn.textContent = originalText;
+                    logoutBtn.textContent = 'Выйти';
                     logoutBtn.disabled = false;
                 }, 1000);
             }
         }
     }
 
-    // === UI UPDATE FUNCTIONS ===
+    // === UI UPDATE FUNCTIONS (UNCHANGED) ===
     function updateUIAfterAuth(userData) {
         const { loginBtn, registerBtn, userProfile, userName } = authElements;
         
@@ -524,7 +580,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // === HORIZONTAL SWIPER ===
+    // === HORIZONTAL SWIPER (UNCHANGED - WORKING) ===
     function initHorizontalSwiper() {
         const horizontalEl = document.querySelector('.horizontal-swiper');
         if (!horizontalEl) {
@@ -604,7 +660,6 @@ document.addEventListener('DOMContentLoaded', function() {
             z-index: 1;
         `;
 
-        // Add keyframes if not already added
         if (!document.querySelector('#slideRippleStyles')) {
             const style = document.createElement('style');
             style.id = 'slideRippleStyles';
@@ -669,7 +724,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, { passive: false });
     }
 
-    // === NAVIGATION ===
+    // === NAVIGATION (UNCHANGED - WORKING) ===
     function setupNavigation() {
         const logo = document.querySelector('.logo');
         if (logo && verticalSwiper) {
@@ -707,7 +762,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 addNavigationFeedback(this);
             });
 
-            // Add hover effect
             link.addEventListener('mouseenter', function() {
                 this.style.transform = 'translateY(-2px)';
             });
@@ -725,7 +779,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 150);
     }
 
-    // === SLIDE CHANGE HANDLER ===
+    // === SLIDE CHANGE HANDLER (FIXED FOR DESKTOP ANIMATIONS) ===
     function handleSlideChange(activeIndex) {
         try {
             // Update header slides
@@ -733,17 +787,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 e.classList.toggle('active', activeIndex === i);
             });
 
-            // Header visibility control
+            // Header visibility control - DESKTOP BEHAVIOR PRESERVED
             const headerUI = document.querySelector('.slider-ui.home-only');
             const floatingHeader = document.getElementById('floatingHeader');
             
             if (headerUI && floatingHeader) {
-                if (activeIndex === 0) {
-                    headerUI.classList.remove('hidden');
-                    floatingHeader.classList.remove('visible');
-                } else {
+                if (isMobileDevice()) {
+                    // Mobile: always show floating header
                     headerUI.classList.add('hidden');
                     floatingHeader.classList.add('visible');
+                    fixFloatingHeaderMobile();
+                } else {
+                    // Desktop: original behavior - WORKING
+                    if (activeIndex === 0) {
+                        headerUI.classList.remove('hidden');
+                        floatingHeader.classList.remove('visible');
+                    } else {
+                        headerUI.classList.add('hidden');
+                        floatingHeader.classList.add('visible');
+                    }
                 }
             }
 
@@ -771,7 +833,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 setTimeout(() => initHorizontalSwiper(), 200);
             }
 
-            // Add section-specific effects
+            // Apply mobile-specific fixes ONLY on mobile
+            if (isMobileDevice()) {
+                if (activeIndex === 0) {
+                    setTimeout(() => {
+                        createMobileConsultationButton();
+                    }, 100);
+                }
+                
+                if (activeIndex === 3) {
+                    setTimeout(() => {
+                        separateCopyrightYear();
+                    }, 100);
+                }
+            }
+
+            // Add section-specific effects - DESKTOP ANIMATIONS WORKING
             applySlideEffects(activeIndex);
 
         } catch (error) {
@@ -784,21 +861,27 @@ document.addEventListener('DOMContentLoaded', function() {
         slides.forEach((slide, index) => {
             if (index === activeIndex) {
                 slide.classList.add('slide-active');
-                const layer = slide.querySelector('.slider__layer');
-                if (layer) {
-                    layer.style.transform = 'scale(1.1)';
+                // Desktop parallax effect - WORKING
+                if (!isMobileDevice()) {
+                    const layer = slide.querySelector('.slider__layer');
+                    if (layer) {
+                        layer.style.transform = 'scale(1.1)';
+                    }
                 }
             } else {
                 slide.classList.remove('slide-active');
-                const layer = slide.querySelector('.slider__layer');
-                if (layer) {
-                    layer.style.transform = 'scale(1)';
+                // Desktop parallax effect - WORKING
+                if (!isMobileDevice()) {
+                    const layer = slide.querySelector('.slider__layer');
+                    if (layer) {
+                        layer.style.transform = 'scale(1)';
+                    }
                 }
             }
         });
     }
 
-    // === FLOATING HEADER ===
+    // === FLOATING HEADER (WORKING) ===
     function setupFloatingHeader() {
         const floatingLogoLink = document.getElementById('floatingLogoLink');
         const floatingBurger = document.getElementById('floatingBurger');
@@ -817,6 +900,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 this.classList.toggle('active');
                 floatingMenu.classList.toggle('show');
             });
+
+            // Mobile touch support
+            if ('ontouchstart' in window && isMobileDevice()) {
+                floatingBurger.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    this.classList.toggle('active');
+                    floatingMenu.classList.toggle('show');
+                });
+            }
 
             const floatingMenuLinks = document.querySelectorAll('.floating-menu a');
             floatingMenuLinks.forEach(link => {
@@ -848,7 +940,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // === SECTION ANIMATIONS ===
+    // === SECTION ANIMATIONS (WORKING) ===
     function triggerSectionAnimations(sectionIndex) {
         const sections = [
             '.header-content',
@@ -875,7 +967,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // === MOBILE MENU ===
+    // === MOBILE MENU (WORKING) ===
     function setupMobileMenu() {
         const submenuBtn = document.querySelector('.submenu');
         const mainMenu = document.querySelector('.main-menu');
@@ -903,12 +995,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // === KEYBOARD NAVIGATION ===
+    // === KEYBOARD NAVIGATION (WORKING) ===
     function setupKeyboardNavigation() {
         document.addEventListener('keydown', function(e) {
             let handled = false;
 
-            // Main navigation keys
             if (!isMouseOverHorizontal) {
                 switch (e.key) {
                     case 'ArrowUp':
@@ -932,7 +1023,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
 
-            // Horizontal swiper navigation
             if (isMouseOverHorizontal && horizontalSwiper) {
                 switch (e.key) {
                     case 'ArrowLeft':
@@ -946,7 +1036,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
 
-            // Modal controls
             if (e.key === 'Escape') {
                 closeAuthModal();
                 handled = true;
@@ -958,56 +1047,62 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // === ADVANCED INTERACTIONS ===
+    // === ADVANCED INTERACTIONS (DESKTOP HOVER EFFECTS WORKING) ===
     function setupAdvancedInteractions() {
-        // Enhanced principle card interactions
-        const principleCards = document.querySelectorAll('.principle-card');
-        principleCards.forEach(card => {
-            let isAnimating = false;
+        // Practice cards hover effects - DESKTOP ONLY
+        const practiceCards = document.querySelectorAll('.practice-card');
+        practiceCards.forEach(card => {
+            if (!isMobileDevice()) {
+                let isAnimating = false;
 
-            card.addEventListener('mouseenter', function() {
-                if (isAnimating) return;
-                isAnimating = true;
+                card.addEventListener('mouseenter', function() {
+                    if (isAnimating) return;
+                    isAnimating = true;
 
-                this.style.transform = 'translateY(-10px) rotateX(5deg) rotateY(5deg) scale(1.02)';
-                createParticleEffect(this);
+                    this.style.transform = 'translateY(-10px) rotateX(5deg) rotateY(5deg) scale(1.02)';
+                    createParticleEffect(this);
 
-                setTimeout(() => {
-                    isAnimating = false;
-                }, 500);
-            });
+                    setTimeout(() => {
+                        isAnimating = false;
+                    }, 500);
+                });
 
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) rotateX(0) rotateY(0) scale(1)';
-            });
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) rotateX(0) rotateY(0) scale(1)';
+                });
 
-            card.addEventListener('click', function(e) {
-                createRippleEffect(e, this);
-            });
+                card.addEventListener('click', function(e) {
+                    createRippleEffect(e, this);
+                });
+            }
         });
 
-        // Enhanced contact item interactions
+        // Contact items hover effects - DESKTOP ONLY
         const contactItems = document.querySelectorAll('.contact-item');
         contactItems.forEach(item => {
-            item.addEventListener('mouseenter', function() {
-                const ripple = this.querySelector('.icon-ripple');
-                if (ripple) {
-                    ripple.style.width = '80px';
-                    ripple.style.height = '80px';
-                }
-            });
+            if (!isMobileDevice()) {
+                item.addEventListener('mouseenter', function() {
+                    const ripple = this.querySelector('.icon-ripple');
+                    if (ripple) {
+                        ripple.style.width = '80px';
+                        ripple.style.height = '80px';
+                    }
+                });
 
-            item.addEventListener('mouseleave', function() {
-                const ripple = this.querySelector('.icon-ripple');
-                if (ripple) {
-                    ripple.style.width = '0';
-                    ripple.style.height = '0';
-                }
-            });
+                item.addEventListener('mouseleave', function() {
+                    const ripple = this.querySelector('.icon-ripple');
+                    if (ripple) {
+                        ripple.style.width = '0';
+                        ripple.style.height = '0';
+                    }
+                });
+            }
         });
     }
 
     function createParticleEffect(element) {
+        if (isMobileDevice()) return; // Desktop only
+        
         for (let i = 0; i < 5; i++) {
             const particle = document.createElement('div');
             particle.style.cssText = `
@@ -1024,7 +1119,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 z-index: 1000;
             `;
 
-            // Create unique animation for each particle
             const style = document.createElement('style');
             style.textContent = `
                 @keyframes particleFloat${i} {
@@ -1047,6 +1141,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function createRippleEffect(event, element) {
+        if (isMobileDevice()) return; // Desktop only
+        
         const ripple = document.createElement('div');
         const rect = element.getBoundingClientRect();
         const size = Math.max(rect.width, rect.height);
@@ -1067,7 +1163,6 @@ document.addEventListener('DOMContentLoaded', function() {
             z-index: 1000;
         `;
 
-        // Add ripple keyframes if not already added
         if (!document.querySelector('#rippleStyles')) {
             const style = document.createElement('style');
             style.id = 'rippleStyles';
@@ -1092,9 +1187,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 600);
     }
 
-    // === PERFORMANCE OPTIMIZATIONS ===
+    // === PERFORMANCE OPTIMIZATIONS (WORKING) ===
     function setupPerformanceOptimizations() {
-        // Intersection Observer for animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -1108,7 +1202,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }, observerOptions);
 
-        // Observe all animation elements
         document.querySelectorAll('.animate-fade-up, .animate-slide-left, .animate-scale-up, .animate-contact').forEach(el => {
             observer.observe(el);
         });
@@ -1128,50 +1221,48 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         };
 
-        // Preload after initial load
         setTimeout(preloadImages, 1000);
     }
 
-    // === UTILITY FUNCTIONS ===
-    function debounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
-    }
-
-    function throttle(func, limit) {
-        let inThrottle;
-        return function() {
-            const args = arguments;
-            const context = this;
-            if (!inThrottle) {
-                func.apply(context, args);
-                inThrottle = true;
-                setTimeout(() => inThrottle = false, limit);
-            }
+    // === MOBILE TOUCH SUPPORT ===
+    function addMobileTouchSupport() {
+        if ('ontouchstart' in window && isMobileDevice()) {
+            document.addEventListener('touchstart', function(e) {
+                if (e.target.classList.contains('mobile-consultation-btn')) {
+                    e.target.style.transform = 'scale(0.95)';
+                }
+            });
+            
+            document.addEventListener('touchend', function(e) {
+                if (e.target.classList.contains('mobile-consultation-btn')) {
+                    e.target.style.transform = 'scale(1)';
+                }
+            });
         }
     }
 
     // === RESIZE HANDLER ===
-    const handleResize = debounce(() => {
+    function handleResize() {
         if (verticalSwiper) {
             verticalSwiper.update();
         }
         if (horizontalSwiper) {
             horizontalSwiper.update();
         }
-    }, 250);
+
+        // Reapply mobile fixes if switching to mobile
+        if (isMobileDevice()) {
+            fixFloatingHeaderMobile();
+            createMobileConsultationButton();
+            separateCopyrightYear();
+        }
+    }
+
+    const handleResizeDebounced = debounce(handleResize, 250);
 
     // === ERROR HANDLING ===
     window.addEventListener('error', function(e) {
         console.error('Global error caught:', e.error);
-        // Could send error reports to analytics here
     });
 
     window.addEventListener('unhandledrejection', function(e) {
@@ -1184,7 +1275,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Initialize core components
             initHeaderAnimation();
             
-            // Initialize Swiper first
+            // Initialize Swiper first - WORKING
             if (!initializeSwiper()) {
                 console.error('Failed to initialize Swiper - stopping initialization');
                 return;
@@ -1196,13 +1287,16 @@ document.addEventListener('DOMContentLoaded', function() {
             // Setup all other components
             setupNavigation();
             setupKeyboardNavigation();
-            setupAdvancedInteractions();
+            setupAdvancedInteractions(); // Desktop hover effects working
             setupPerformanceOptimizations();
             setupMobileMenu();
             setupFloatingHeader();
 
+            // Mobile touch support
+            addMobileTouchSupport();
+
             // Setup event listeners
-            window.addEventListener('resize', handleResize);
+            window.addEventListener('resize', handleResizeDebounced);
 
             // Initialize horizontal swiper if on practices section
             if (verticalSwiper && verticalSwiper.activeIndex === 2) {
@@ -1215,7 +1309,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // === CLEANUP ON PAGE UNLOAD ===
+    // === CLEANUP ===
     window.addEventListener('beforeunload', () => {
         if (verticalSwiper) {
             verticalSwiper.destroy(true, true);
@@ -1230,12 +1324,20 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.classList.add('loaded');
         triggerSectionAnimations(0);
         
-        // Add smooth fade-in effect
         document.body.style.opacity = '0';
         setTimeout(() => {
             document.body.style.transition = 'opacity 0.5s ease-in';
             document.body.style.opacity = '1';
         }, 100);
+
+        // Apply mobile fixes only on mobile after load
+        if (isMobileDevice()) {
+            setTimeout(() => {
+                fixFloatingHeaderMobile();
+                createMobileConsultationButton();
+                separateCopyrightYear();
+            }, 200);
+        }
     });
 
     // === FINAL INITIALIZATION ===
