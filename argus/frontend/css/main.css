@@ -1,5 +1,3 @@
-/* === PROPERLY FIXED MAIN.CSS WITH WORKING DESKTOP AND MOBILE === */
-
 /* === IMPORTS (MUST BE FIRST) === */
 @import 'vars.css';
 @import 'grid.css';
@@ -182,7 +180,7 @@ body {
 .floating-logo .logo-text-wrapper {
     display: flex;
     flex-direction: column;
-    line-height: 1;
+    line-height: 1.1;
 }
 
 .floating-logo .logo-text-top {
@@ -1135,7 +1133,22 @@ body {
 
 .copyright .year {
     color: var(--green-color, #d4af37);
-    font-weight: 600;
+    font-weight: 700;
+    font-size: 1.1em;
+    position: relative;
+    display: inline-block;
+    padding: 0 3px;
+}
+
+.copyright .year::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--green-color, #d4af37);
+    opacity: 0.7;
 }
 
 .copyright .company-name {
@@ -1566,31 +1579,115 @@ body {
     }
 }
 
-/* === MOBILE FIXES ONLY - DESKTOP UNCHANGED === */
+/* === MOBILE RESPONSIVE === */
 @media (max-width: 968px) {
-    /* HIDE DESKTOP HEADER ON MOBILE ONLY */
+    /* Удаляем скрытие главного контента */
+    /* .slider-ui.home-only {
+        display: none !important;
+    } */
+    
+    /* Вместо этого скрываем только верхнюю панель на главной */
     .slider-ui.home-only .top-line {
-        display: none !important;
+        display: none;
     }
-    
-    .header-bottom {
-        display: none !important;
-    }
-    
-    .button--consultation {
-        display: none !important;
-    }
-    
-    /* SHOW FLOATING HEADER ON MOBILE ALWAYS */
+
     .floating-header {
+        display: flex;
         opacity: 1 !important;
         visibility: visible !important;
-        pointer-events: auto !important;
-        top: 15px;
-        left: 15px;
-        right: 15px;
     }
     
+    /* Восстанавливаем анимацию */
+    .header-content {
+        padding-top: 100px;
+        opacity: 1 !important;
+        visibility: visible !important;
+        display: flex !important;
+    }
+    
+    .header-content__slide.active .letter {
+        opacity: 1;
+        top: 0;
+    }
+    
+    .header-content__slide:not(.active) .letter {
+        top: 12em;
+    }
+    
+    .header-content__slide.active .header-content__info {
+        opacity: 1;
+        top: 0;
+    }
+
+    /* Остальные стили без изменений */
+    .top-line {
+        padding: 0.6rem 1rem;
+    }
+
+    .logo {
+        margin-left: 0;
+        flex: 1;
+    }
+
+    .logo-image {
+        width: 8vw;
+        max-width: 45px;
+        min-width: 35px;
+    }
+
+    .logo-text-top {
+        font-size: 1.2rem;
+    }
+
+    .logo-text-bottom {
+        font-size: 1.5rem;
+    }
+
+    .main-menu {
+        display: none;
+        flex-direction: column;
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: rgba(26, 17, 9, 0.98);
+        backdrop-filter: blur(20px);
+        z-index: 999;
+        padding: 1.5rem 0;
+        border-top: 1px solid rgba(212, 175, 55, 0.2);
+        transform: translateY(-100%);
+        transition: transform 0.4s var(--ease-out-expo, ease-out);
+    }
+
+    .main-menu.show {
+        display: flex;
+        transform: translateY(0);
+    }
+
+    .main-menu li {
+        display: block;
+        text-align: center;
+        margin: 0.8rem 0;
+        opacity: 0;
+        animation: menuItemSlide 0.4s var(--ease-out-expo, ease-out) forwards;
+    }
+
+    .main-menu li:nth-child(1) { animation-delay: 0.1s; }
+    .main-menu li:nth-child(2) { animation-delay: 0.2s; }
+    .main-menu li:nth-child(3) { animation-delay: 0.3s; }
+    .main-menu li:nth-child(4) { animation-delay: 0.4s; }
+
+    @keyframes menuItemSlide {
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        from {
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+    }
+
     .floating-logo .logo-text-wrapper {
         display: none;
     }
@@ -1599,140 +1696,13 @@ body {
         width: 30px;
         height: 30px;
     }
-    
-    /* MOBILE HEADER CONTENT FIXES */
-    .header-content {
-        padding-top: 100px !important;
-        transform: translateY(0) !important;
-        height: calc(100vh - 120px) !important;
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        justify-content: center !important;
-        gap: 20px;
-    }
-    
-    .header-content h1 {
-        margin-top: -50px;
-        margin-bottom: 20px;
-        font-size: clamp(2.5rem, 10vw, 4rem) !important;
-    }
-    
-    .header-content p {
-        margin-top: 10px;
-        font-size: clamp(1.2rem, 5vw, 1.8rem);
+
+    .floating-header {
+        top: 15px;
+        left: 15px;
+        right: 15px;
     }
 
-    .header-content__info {
-        margin-bottom: 20px;
-    }
-    
-    /* MOBILE LETTER ANIMATION */
-    @keyframes mobileLetterSlide {
-        0% {
-            opacity: 0;
-            transform: translateY(-50px) scale(0.8);
-        }
-        100% {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-    }
-    
-    .header-content__slide.active .letter {
-        animation: mobileLetterSlide 0.8s var(--ease-out-expo, ease-out) forwards;
-    }
-    
-    .letters .letter:nth-child(1) { animation-delay: 0.1s; }
-    .letters .letter:nth-child(2) { animation-delay: 0.2s; }
-    .letters .letter:nth-child(3) { animation-delay: 0.3s; }
-    .letters .letter:nth-child(4) { animation-delay: 0.4s; }
-    .letters .letter:nth-child(5) { animation-delay: 0.5s; }
-    
-    /* MOBILE CONSULTATION BUTTON */
-    .mobile-consultation-btn {
-        display: block !important;
-        margin: 30px auto 0;
-        padding: 15px 30px;
-        color: var(--white-color, #ffffff);
-        background-color: transparent;
-        border: 2px solid var(--green-color, #d4af37);
-        border-radius: 30px;
-        font-weight: 600;
-        text-decoration: none;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-        font-size: 0.9rem;
-        cursor: pointer;
-        transition: all 0.3s var(--ease-out-expo, ease-out);
-        text-align: center;
-        width: fit-content;
-        max-width: 280px;
-        line-height: 1.2;
-        pointer-events: auto;
-    }
-
-    .mobile-consultation-btn:hover {
-        background-color: var(--green-color, #d4af37);
-        color: var(--dark-bg, #1a1109);
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-glow, 0 0 20px rgba(212, 175, 55, 0.4));
-    }
-    
-    /* MOBILE CONTACTS FIXES */
-    .contacts-section {
-        padding: 10px !important;
-        align-items: flex-start !important;
-        padding-top: 80px !important;
-        height: 100vh !important;
-        overflow-y: auto !important;
-    }
-    
-    .contacts-section__inner {
-        width: 100%;
-        max-width: 100%;
-        height: auto;
-        display: block;
-        min-height: calc(100vh - 80px);
-    }
-    
-    .contacts-container {
-        margin-top: 20px;
-        padding: 20px 15px;
-        max-height: none;
-        height: auto;
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-    }
-    
-    .copyright .year {
-        display: block !important;
-        margin-top: 10px !important;
-        padding-top: 10px !important;
-        border-top: 1px solid rgba(212, 175, 55, 0.2) !important;
-    }
-    
-    /* MOBILE NAVIGATION */
-    .floating-menu {
-        padding-top: 70px;
-    }
-
-    .floating-menu a {
-        padding: 20px;
-        min-height: 48px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .floating-burger {
-        min-width: 48px;
-        min-height: 48px;
-    }
-    
-    /* MOBILE ABOUT SECTION */
     .about-section {
         padding: clamp(0.5rem, 2vw, 1rem);
     }
@@ -1743,7 +1713,6 @@ body {
         padding: clamp(1rem, 3vw, 1.5rem);
     }
 
-    /* MOBILE PRACTICES */
     .horizontal-swiper-container {
         padding: clamp(0.5rem, 2vw, 1rem);
     }
@@ -1756,39 +1725,85 @@ body {
 
     .practice-card {
         padding: clamp(15px, 4vw, 25px);
+        max-height: none;
+        overflow-y: auto;
+    }
+
+    .contacts-section {
+        padding: clamp(5px, 2vw, 15px);
+    }
+
+    .contacts-container {
+        padding: clamp(15px, 4vw, 30px) clamp(10px, 3vw, 20px);
+        margin: 0 auto;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    .contact-item {
+        padding: clamp(8px, 2.5vw, 12px);
+        gap: clamp(8px, 2.5vw, 12px);
+    }
+
+    .contact-icon-wrapper {
+        width: clamp(30px, 7vw, 35px);
+        height: clamp(30px, 7vw, 35px);
+        flex-shrink: 0;
+    }
+
+    .contact-item h3 {
+        font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+    }
+
+    .contact-link {
+        font-size: clamp(0.8rem, 2vw, 1rem);
+        word-break: break-word;
+        line-height: 1.3;
     }
     
-    /* MOBILE PERFORMANCE */
-    .slider__layer {
-        transform: none !important;
+    /* Button repositioning */
+    .col--lead {
+        justify-content: flex-end;
+        padding-right: 60px;
     }
     
-    .practice-card:hover::before,
-    .contact-item:hover::before {
-        display: none;
-    }
-    
-    .contacts-container::before {
-        display: none;
+    .button--consultation {
+        margin-right: 0;
+        font-size: 0.7rem;
+        padding: 0.6rem 1rem;
     }
 }
 
-/* === SMALLER MOBILE SCREENS === */
 @media (max-width: 640px) {
+    .top-line {
+        padding: 0.5rem 0.8rem;
+    }
+
+    .logo-text-wrapper {
+        display: none;
+    }
+
+    .logo-image {
+        width: 10vw;
+        max-width: 40px;
+        min-width: 30px;
+    }
+
     .header-content {
-        padding-top: 80px;
-        height: calc(100vh - 100px);
+        padding-top: 100px;
+        transform: translateY(-20px);
     }
 
-    .header-content h1 {
-        margin-top: -30px;
-        font-size: clamp(2.5rem, 10vw, 4rem) !important;
+    .header-bottom {
+        min-height: 40px;
     }
 
-    .mobile-consultation-btn {
-        padding: 12px 25px;
-        font-size: 0.8rem;
-        margin-top: 25px;
+    .letters {
+        font-size: clamp(3rem, 12vw, 6rem) !important;
+    }
+
+    .header-content p {
+        font-size: clamp(1.2rem, 5vw, 1.8rem);
     }
 
     .floating-header {
@@ -1802,26 +1817,187 @@ body {
         height: 25px;
     }
 
+    .about-section {
+        padding: clamp(0.25rem, 1.5vw, 0.5rem);
+    }
+
+    .about-section__inner {
+        max-width: 98vw;
+        max-height: 88vh;
+        padding: clamp(0.75rem, 2.5vw, 1rem);
+    }
+
+    .about-section h2 {
+        font-size: clamp(1rem, 4vw, 1.4rem);
+        margin-bottom: 0.8rem;
+    }
+
+    .about-section p {
+        font-size: clamp(0.8rem, 3vw, 1rem);
+        text-indent: 1em;
+        margin-bottom: 0.8rem;
+    }
+
+    .horizontal-swiper-container {
+        padding: clamp(0.25rem, 1.5vw, 0.5rem);
+    }
+
+    .horizontal-swiper {
+        width: 98%;
+        height: min(70vh, 450px);
+        padding: clamp(0.75em, 2vw, 1.5em);
+    }
+
+    .practice-card {
+        padding: clamp(10px, 3vw, 20px);
+    }
+
+    .practice-icon {
+        font-size: clamp(1.5rem, 4vw, 2.5rem);
+        margin-bottom: 15px;
+    }
+
+    .practice-card h3 {
+        font-size: clamp(0.9rem, 3vw, 1.2rem);
+        margin-bottom: 10px;
+        line-height: 1.2;
+    }
+
+    .practice-card p {
+        font-size: clamp(0.75rem, 2.5vw, 0.95rem);
+        line-height: 1.4;
+    }
+
     .contacts-section {
-        padding-top: 70px;
+        padding: clamp(2px, 1vw, 10px);
     }
 
     .contacts-container {
-        padding: 15px 10px;
-        margin: 10px 5px;
+        padding: clamp(10px, 3vw, 20px) clamp(8px, 2.5vw, 15px);
+        max-height: 95vh;
+        margin: 0;
+    }
+
+    .contacts-title {
+        font-size: clamp(1.2rem, 5vw, 2rem);
+        margin-bottom: clamp(15px, 3vw, 20px);
     }
 
     .contact-item {
-        padding: 12px;
+        padding: clamp(6px, 2vw, 10px);
+        gap: clamp(6px, 2vw, 10px);
         flex-direction: column;
         text-align: center;
-        gap: 10px;
+        align-items: center;
+        width: 90%;
+        max-width: 300px;
+        margin: 0 auto;
     }
 
     .contact-icon-wrapper {
-        margin: 0 auto;
-        width: 35px;
-        height: 35px;
+        width: clamp(30px, 6vw, 35px);
+        height: clamp(30px, 6vw, 35px);
+        margin: 0 auto 15px;
+    }
+
+    .contact-item h3 {
+        font-size: clamp(0.8rem, 3vw, 1rem);
+        text-align: center;
+    }
+
+    .contact-link {
+        font-size: clamp(0.75rem, 2.5vw, 0.9rem);
+        text-align: center;
+    }
+    
+    .spbgka-link {
+        margin-top: 15px;
+        width: 100%;
+    }
+
+    .working-hours,
+    .copyright {
+        padding: clamp(8px, 2.5vw, 12px);
+        margin-bottom: clamp(10px, 2.5vw, 15px);
+    }
+
+    .working-hours h3 {
+        font-size: clamp(0.8rem, 3vw, 1.1rem);
+    }
+
+    .working-hours p {
+        font-size: clamp(0.75rem, 2.5vw, 0.95rem);
+    }
+
+    .copyright p {
+        font-size: clamp(0.65rem, 2vw, 0.85rem);
+    }
+}
+
+@media (max-width: 480px) {
+    .top-line {
+        padding: 0.4rem 0.5rem;
+    }
+
+    .header-content {
+        padding: 20px 10px;
+        transform: translateY(-10px);
+    }
+
+    .floating-logo .logo-image {
+        width: 22px;
+        height: 22px;
+    }
+
+    .contacts-container {
+        padding: clamp(8px, 2.5vw, 15px) clamp(5px, 2vw, 10px);
+        margin: 0;
+        max-height: 98vh;
+    }
+
+    .contact-item {
+        padding: clamp(4px, 1.5vw, 8px);
+    }
+
+    .horizontal-swiper {
+        height: min(65vh, 400px);
+    }
+    
+    /* Button repositioning for small screens */
+    .col--lead {
+        padding-right: 50px;
+    }
+    
+    .button--consultation {
+        font-size: 0.65rem;
+        padding: 0.5rem 0.8rem;
+    }
+}
+
+/* === ADDITIONAL MOBILE FIXES === */
+@media (max-width: 375px) {
+    .floating-logo .logo-text-wrapper {
+        display: none;
+    }
+
+    .floating-logo .logo-image {
+        width: 25px;
+        height: 25px;
+    }
+
+    .floating-header {
+        top: 10px;
+        left: 10px;
+        right: 10px;
+    }
+
+    .practice-card h3 {
+        font-size: clamp(0.8rem, 3.5vw, 1rem);
+        line-height: 1.1;
+    }
+
+    .contact-item {
+        min-height: auto;
     }
 }
 
@@ -1834,13 +2010,61 @@ body {
     }
 }
 
-/* === FOCUS MANAGEMENT === */
+@media (prefers-contrast: high) {
+    .practice-card,
+    .contacts-container,
+    .auth-modal-content {
+        border: 2px solid var(--green-color, #d4af37);
+    }
+    
+    .main-menu li > *::after {
+        height: 3px;
+    }
+}
+
+/* === PRINT STYLES === */
+@media print {
+    .slider-ui,
+    .floating-header,
+    .floating-menu,
+    .swiper-pagination,
+    .swiper-button-next,
+    .swiper-button-prev,
+    .auth-modal {
+        display: none !important;
+    }
+    
+    .slider__item {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+    
+    body {
+        background: white !important;
+        color: black !important;
+    }
+    
+    .contacts-container,
+    .about-section__inner,
+    .practice-card {
+        background: white !important;
+        color: black !important;
+        border: 1px solid #000 !important;
+    }
+    
+    .contacts-title,
+    .about-section h2,
+    .practice-card h3 {
+        color: #333 !important;
+    }
+}
+
+/* === FOCUS MANAGEMENT FOR ACCESSIBILITY === */
 .button--consultation:focus-visible,
 .floating-logo:focus-visible,
 .floating-burger:focus-visible,
 .contact-link:focus-visible,
-.auth-submit-btn:focus-visible,
-.mobile-consultation-btn:focus-visible {
+.auth-submit-btn:focus-visible {
     outline: 2px solid var(--green-color, #d4af37);
     outline-offset: 2px;
 }
@@ -1870,15 +2094,30 @@ body {
     100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
-/* === ERROR & SUCCESS STATES === */
+/* === ERROR STATES === */
 .error {
     border-color: #ff6b6b !important;
     background: rgba(255, 107, 107, 0.1) !important;
 }
 
+.error-message {
+    color: #ff6b6b;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    display: block;
+}
+
+/* === SUCCESS STATES === */
 .success {
     border-color: var(--green-color, #d4af37) !important;
     background: rgba(212, 175, 55, 0.1) !important;
+}
+
+.success-message {
+    color: var(--green-color, #d4af37);
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    display: block;
 }
 
 /* === UTILITY CLASSES === */
@@ -1897,6 +2136,32 @@ body {
 .no-scroll {
     overflow: hidden;
 }
+
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.mb-0 { margin-bottom: 0; }
+.mb-1 { margin-bottom: 0.25rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 1rem; }
+.mb-4 { margin-bottom: 1.5rem; }
+.mb-5 { margin-bottom: 3rem; }
+
+.mt-0 { margin-top: 0; }
+.mt-1 { margin-top: 0.25rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-3 { margin-top: 1rem; }
+.mt-4 { margin-top: 1.5rem; }
+.mt-5 { margin-top: 3rem; }
 
 /* === PERFORMANCE OPTIMIZATIONS === */
 .will-change-transform {
