@@ -81,6 +81,10 @@ body {
     font-size: 20px;
     font-family: cormorant-g, serif;
     line-height: 1.6;
+    padding-top: env(safe-area-inset-top);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    padding-bottom: env(safe-area-inset-bottom);
 }
 
 /* === SLIDER BASE === */
