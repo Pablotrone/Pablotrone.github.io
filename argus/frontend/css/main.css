@@ -81,10 +81,6 @@ body {
     font-size: 20px;
     font-family: cormorant-g, serif;
     line-height: 1.6;
-    padding-top: env(safe-area-inset-top);
-    padding-left: env(safe-area-inset-left);
-    padding-right: env(safe-area-inset-right);
-    padding-bottom: env(safe-area-inset-bottom);
 }
 
 /* === SLIDER BASE === */
@@ -104,12 +100,19 @@ body {
 
 .slider__item {
     overflow: hidden;
-    transform: scale(1.10) !important;
-    transition: transform 2s var(--ease-out-expo, ease-out) !important;
+}
+
+.slider__item.swiper-slide-active {
+    transform: scale(1.05) !important;
 }
 
 .slider__item:not(.swiper-slide-active) {
     transform: scale(1) !important;
+}
+
+.slider__item .slider__layer {
+    transform: none !important;
+    scale: none !important;
 }
 
 .slider-ui {
@@ -541,7 +544,7 @@ body {
     font-size: calc(var(--index, 1vw) * 10);
     text-transform: uppercase;
     font-weight: 900;
-    color: #b9a359;
+    color: #c2a441;
     overflow: visible;
     height: auto;
     margin: 0;
@@ -583,20 +586,35 @@ body {
     margin-left: 0;
     right: 0;
     opacity: 0;
-    top: -12em;
-    transition: opacity var(--transition, 0.6s ease), top var(--transition, 0.6s ease);
+    top: -20em;
     display: inline-block;
     z-index: 1;
+    transform: translateY(1em);
+    transition: transform 0.8s var(--ease-out-expo), 
+                opacity 0.8s var(--ease-out-expo),
+                top 0.8s var(--ease-out-expo);
 }
 
 .header-content__slide.active .letter {
     opacity: 1;
     top: 0;
+    transform: translateY(0);
 }
 
 .header-content__slide:not(.active) .letter {
-    top: 12em;
+    top: -12em;
+    transform: translateY(0);
+    transition: transform 0.6s var(--ease-out-expo), 
+                opacity 0.6s var(--ease-out-expo),
+                top 0.6s var(--ease-out-expo);
 }
+
+/* Оставляем задержки для букв */
+.letters .letter:nth-child(1) { transition-delay: 0.2s; }
+.letters .letter:nth-child(2) { transition-delay: 0.4s; }
+.letters .letter:nth-child(3) { transition-delay: 0.6s; }
+.letters .letter:nth-child(4) { transition-delay: 0.8s; }
+.letters .letter:nth-child(5) { transition-delay: 1s; }
 
 .header-content__info {
     position: relative;
@@ -638,79 +656,438 @@ body {
     pointer-events: auto;
 }
 
-/* === ABOUT SECTION === */
+/* === ABOUT SECTION - УЛУЧШЕННАЯ ВЕРСИЯ БЕЗ СКРОЛЛА === */
 .about-section {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     z-index: 5;
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    padding: clamp(1rem, 5vw, 5rem);
+    padding: 20px;
     pointer-events: none;
+    overflow: hidden;
 }
 
 .about-section__inner {
-    backdrop-filter: blur(5px);
-    max-width: 70vw;
-    max-height: 80vh;
+    backdrop-filter: blur(15px);
     width: 100%;
-    height: auto;
+    max-width: 1000px;
+    height: 90vh;
     box-sizing: border-box;
     color: #fff;
-    background: rgba(0, 0, 0, 0.55);
-    padding: 2rem;
-    border-radius: 1rem;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(26, 17, 9, 0.8));
+    padding: clamp(1.5rem, 3vw, 2rem);
+    border-radius: 20px;
     pointer-events: auto;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: var(--green-color, #d4af37) rgba(0, 0, 0, 0.3);
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: clamp(1rem, 2vw, 1.5rem);
+    overflow: hidden;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+    position: relative;
 }
 
-.about-section__inner::-webkit-scrollbar {
-    width: 6px;
-}
-
-.about-section__inner::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 3px;
-}
-
-.about-section__inner::-webkit-scrollbar-thumb {
-    background: var(--green-color, #d4af37);
-    border-radius: 3px;
-}
-
-.about-section h2 {
-    font-family: cormorant-g, sans-serif;
+/* === ЗАГОЛОВОК === */
+.about-header h2 {
+    font-family: cormorant-g, serif;
     color: var(--green-color, #d4af37);
-    font-size: clamp(1.2rem, 3vw, 2rem);
-    margin-bottom: 1rem;
-    margin-top: 0.9rem;
-    text-shadow: var(--shadow-glow, 0 0 20px rgba(212, 175, 55, 0.4));
-}
-
-.about-section h3 {
-    font-family: cormorant-g, sans-serif;
-    color: var(--white-color, #ffffff);
-    font-size: clamp(1rem, 2.5vw, 1.4rem);
-    margin: 1.5rem 0;
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    margin: 0;
     text-align: center;
-    font-style: italic;
+    text-shadow: 0 2px 10px rgba(212, 175, 55, 0.5);
+    font-weight: 300;
+    letter-spacing: 1px;
+    position: relative;
 }
 
-.about-section p {
-    font-family: cormorant-g, sans-serif;
-    color: var(--white-color, #ffffff);
-    font-size: clamp(0.85rem, 2vw, 1.2rem);
-    line-height: 1.5;
+.about-header h2::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--green-color, #d4af37), transparent);
+}
+
+/* === ОСНОВНОЙ КОНТЕНТ === */
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(0.8rem, 1.5vw, 1.2rem);
+    align-items: start;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.about-main-content {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.6rem, 1.2vw, 1rem);
+}
+
+.about-text-block p {
+    font-family: cormorant-g, serif;
+    color: rgba(255, 255, 255, 0.95);
+    font-size: clamp(0.8rem, 1.8vw, 1rem);
+    line-height: 1.4;
     text-align: justify;
-    text-indent: 2em;
-    margin-bottom: 1rem;
+    text-indent: 1.5em;
+    margin: 0;
+    font-weight: 400;
+}
+
+.about-principles {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: clamp(1rem, 2.5vw, 1.5rem);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.about-principles::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 20%, var(--green-color, #d4af37) 50%, transparent 80%);
+}
+
+.about-principles h3 {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    margin-bottom: clamp(0.8rem, 1.5vw, 1rem);
+    text-align: center;
+    color: var(--green-color, #d4af37);
+    font-weight: 600;
+}
+
+.principles-list {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.4rem, 0.8vw, 0.6rem);
+    margin-bottom: clamp(0.6rem, 1.2vw, 0.8rem);
+}
+
+.principle-item {
+    position: relative;
+    padding: clamp(0.4rem, 0.8vw, 0.6rem);
+    background: rgba(212, 175, 55, 0.05);
+    border-radius: 6px;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    transition: all 0.3s var(--ease-out-expo, ease-out);
+}
+
+.principle-item:hover {
+    background: rgba(212, 175, 55, 0.1);
+    border-color: rgba(212, 175, 55, 0.3);
+    transform: translateY(-1px);
+}
+
+.principle-text {
+    font-family: cormorant-g, serif;
+    font-size: clamp(0.75rem, 1.6vw, 0.9rem);
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.3;
+    margin: 0;
+}
+
+.principle-text strong {
+    color: var(--green-color, #d4af37);
+    font-weight: 700;
+}
+
+.latin-quote p {
+    font-style: italic;
+    font-size: clamp(0.7rem, 1.5vw, 0.85rem);
+    color: var(--green-color, #d4af37);
+    text-align: center;
+    padding: clamp(0.4rem, 0.8vw, 0.6rem);
+    background: rgba(212, 175, 55, 0.1);
+    border-radius: 6px;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    border-left: 2px solid var(--green-color, #d4af37);
+    margin: 0;
+}
+
+/* === ПОДПИСЬ ДИРЕКТОРА === */
+.director-signature {
+    display: flex;
+    align-items: center;
+    gap: clamp(1rem, 2vw, 1.5rem);
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: clamp(1rem, 2vw, 1.5rem);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    transition: all 0.3s var(--ease-out-expo, ease-out);
+    justify-content: flex-end;
+    align-self: flex-end;
+    max-width: fit-content;
+    margin-left: auto;
+}
+
+.director-signature:hover {
+    background: rgba(0, 0, 0, 0.3);
+    border-color: rgba(212, 175, 55, 0.2);
+}
+
+.director-photo {
+    flex-shrink: 0;
+    position: relative;
+    order: 1;
+}
+
+.director-info {
+    flex: 1;
+    font-family: cormorant-g, serif;
+    font-size: clamp(0.8rem, 1.8vw, 1rem);
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.3;
+    order: 2;
+    text-align: left;
+}
+
+.director-image {
+    width: clamp(60px, 10vw, 80px);
+    height: clamp(60px, 10vw, 80px);
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--green-color, #d4af37);
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+    transition: all 0.3s var(--ease-out-expo, ease-out);
+}
+
+.director-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
+}
+
+.director-title {
+    color: var(--green-color, #d4af37);
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+}
+
+.director-subtitle {
+    font-size: clamp(0.75rem, 1.6vw, 0.9rem);
+    margin-bottom: 0.2rem;
+}
+
+.director-degree {
+    font-style: italic;
+    margin-bottom: 0.3rem;
+}
+
+.director-name {
+    color: var(--green-color, #d4af37);
+    font-weight: 700;
+    font-size: clamp(0.85rem, 1.9vw, 1.1rem);
+}
+
+/* === МОБИЛЬНАЯ АДАПТАЦИЯ === */
+@media (max-width: 968px) {
+    .about-section {
+        padding: 10px;
+    }
+    
+    .about-section__inner {
+        width: 100%;
+        height: 92vh;
+        padding: 1.2rem;
+        gap: 1rem;
+    }
+    
+    .about-content {
+        gap: 1rem;
+    }
+    
+    .principles-list {
+        gap: 0.4rem;
+    }
+    
+    .director-signature {
+        gap: 1rem;
+        padding: 1rem;
+        justify-content: center;
+        align-self: center;
+        margin-left: 0;
+        max-width: none;
+    }
+    
+    .director-image {
+        width: clamp(70px, 12vw, 90px);
+        height: clamp(70px, 12vw, 90px);
+    }
+}
+
+@media (max-width: 768px) {
+    .about-section__inner {
+        height: 90vh;
+        padding: 1rem;
+        gap: 0.8rem;
+    }
+    
+    .about-main-content {
+        gap: 0.6rem;
+    }
+    
+    .about-text-block p {
+        font-size: clamp(0.75rem, 1.6vw, 0.9rem);
+        line-height: 1.3;
+        text-indent: 1em;
+    }
+    
+    .about-content {
+        gap: 0.6rem;
+    }
+    
+    .about-principles {
+        padding: 0.6rem;
+    }
+    
+    .principles-list {
+        gap: 0.4rem;
+    }
+    
+    .director-signature {
+        gap: 0.8rem;
+        padding: 0.8rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .about-section__inner {
+        height: 95vh;
+        padding: 1rem;
+        gap: 0.6rem;
+    }
+    
+    .about-main-content {
+        gap: 0.4rem;
+    }
+    
+    .about-text-block p {
+        font-size: clamp(0.7rem, 1.5vw, 0.85rem);
+        line-height: 1.25;
+        text-indent: 0.8em;
+    }
+    
+    .about-principles {
+        padding: 0.6rem;
+    }
+    
+    .principles-list {
+        gap: 0.3rem;
+    }
+    
+    .director-signature {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.6rem;
+        padding: 0.6rem;
+    }
+    
+    .director-info {
+        text-align: center;
+    }
+    
+    .director-info {
+        order: 2;
+        text-align: center;
+    }
+    
+    .director-photo {
+        order: 1;
+    }
+    
+    .director-image {
+        width: clamp(80px, 15vw, 100px);
+        height: clamp(80px, 15vw, 100px);
+    }
+}
+
+@media (max-width: 480px) {
+    .about-section__inner {
+        height: 98vh;
+        padding: 0.6rem;
+        gap: 0.4rem;
+    }
+    
+    .about-main-content {
+        gap: 0.3rem;
+    }
+    
+    .about-text-block p {
+        font-size: clamp(0.65rem, 1.4vw, 0.8rem);
+        line-height: 1.2;
+        text-indent: 0.5em;
+    }
+    
+    .about-principles {
+        padding: 0.5rem;
+    }
+    
+    .principles-list {
+        gap: 0.2rem;
+    }
+    
+    .director-image {
+        width: clamp(90px, 18vw, 110px);
+        height: clamp(90px, 18vw, 110px);
+    }
+}
+
+@media (max-width: 375px) {
+    .about-section__inner {
+        padding: 0.5rem;
+        gap: 0.3rem;
+    }
+    
+    .about-main-content {
+        gap: 0.2rem;
+    }
+    
+    .about-text-block p {
+        font-size: clamp(0.6rem, 1.3vw, 0.75rem);
+        line-height: 1.15;
+    }
+    
+    .director-signature {
+        justify-content: center;
+        align-self: center;
+        margin-left: 0;
+        max-width: none;
+    }
+    
+    .director-image {
+        width: clamp(100px, 20vw, 120px);
+        height: clamp(100px, 20vw, 120px);
+    }
+}
+
+/* === ACCESSIBILITY & PERFORMANCE === */
+@media (prefers-reduced-motion: reduce) {
+    .principle-item,
+    .director-signature,
+    .director-image {
+        transition: none;
+    }
+}
+
+@media (prefers-contrast: high) {
+    .about-section__inner,
+    .about-principles {
+        border: 2px solid var(--green-color, #d4af37);
+    }
 }
 
 /* === PRACTICES SECTION === */
@@ -1583,14 +1960,8 @@ body {
     }
 }
 
-/* === MOBILE RESPONSIVE === */
+/* === МОБИЛЬНАЯ АДАПТАЦИЯ === */
 @media (max-width: 968px) {
-    /* Удаляем скрытие главного контента */
-    /* .slider-ui.home-only {
-        display: none !important;
-    } */
-    
-    /* Вместо этого скрываем только верхнюю панель на главной */
     .slider-ui.home-only .top-line {
         display: none;
     }
@@ -1601,7 +1972,6 @@ body {
         visibility: visible !important;
     }
     
-    /* Восстанавливаем анимацию */
     .header-content {
         padding-top: 100px;
         opacity: 1 !important;
@@ -1623,7 +1993,6 @@ body {
         top: 0;
     }
 
-    /* Остальные стили без изменений */
     .top-line {
         padding: 0.6rem 1rem;
     }
@@ -1707,14 +2076,73 @@ body {
         right: 15px;
     }
 
+    /* === МОБИЛЬНАЯ АДАПТАЦИЯ ABOUT === */
     .about-section {
-        padding: clamp(0.5rem, 2vw, 1rem);
+        padding: 10px;
+    }
+    
+    .about-section__inner {
+        width: 100%;
+        height: 92vh;
+        padding: 1.2rem;
+        gap: 0.8rem;
+    }
+    
+    .about-section h2 {
+        font-size: clamp(1.3rem, 4vw, 1.8rem);
+        margin-bottom: 0.8rem;
+    }
+    
+    .about-main-content {
+        gap: 0.6rem;
+    }
+    
+    .about-main-content p {
+        font-size: clamp(0.8rem, 3vw, 0.95rem);
+        line-height: 1.4;
+        text-indent: 1em;
+    }
+    
+    .about-principles {
+        padding: 1rem;
+    }
+    
+    .about-principles h2 {
+        font-size: clamp(0.95rem, 3.2vw, 1.2rem);
+        margin-bottom: 0.6rem;
+    }
+    
+    .principles-text {
+        gap: 0.5rem;
+    }
+    
+    .principles-text p {
+        font-size: clamp(0.7rem, 2.5vw, 0.85rem);
+        padding-left: 0.8rem;
+        line-height: 1.3;
+    }
+    
+    .principles-text p.latin-quote {
+        font-size: clamp(0.65rem, 2.2vw, 0.75rem);
+        padding: 0.5rem;
+        margin-top: 0.2rem;
+    }
+    
+    .director-signature {
+        text-align: center;
+        padding: 0.6rem;
+        font-size: clamp(0.7rem, 2.3vw, 0.8rem);
     }
 
-    .about-section__inner {
-        max-width: 95vw;
-        max-height: 85vh;
-        padding: clamp(1rem, 3vw, 1.5rem);
+    .col--lead {
+        justify-content: flex-end;
+        padding-right: 60px;
+    }
+    
+    .button--consultation {
+        margin-right: 0;
+        font-size: 0.7rem;
+        padding: 0.6rem 1rem;
     }
 
     .horizontal-swiper-container {
@@ -1764,18 +2192,109 @@ body {
         word-break: break-word;
         line-height: 1.3;
     }
-    
-    /* Button repositioning */
-    .col--lead {
-        justify-content: flex-end;
-        padding-right: 60px;
-    }
-    
-    .button--consultation {
-        margin-right: 0;
-        font-size: 0.7rem;
-        padding: 0.6rem 1rem;
-    }
+}
+
+@media (max-width: 768px) {
+  .header-content {
+    padding-top: 60px;
+    transform: translateY(-30px);
+  }
+  
+  .logo-image {
+    width: 30px;
+  }
+  
+  body {
+    font-size: 18px;
+  }
+  
+  .logo-text-bottom,
+  .header-bottom {
+    display: none;
+  }
+
+  .horizontal-swiper {
+    height: 75vh;
+    padding: 1em;
+  }
+  
+  .practice-card {
+    padding: 1.5rem;
+  }
+  
+  .practice-icon {
+    font-size: 2rem;
+    margin-bottom: 15px;
+  }
+  
+  .practice-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+  }
+  
+  .practice-card p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .contacts-container {
+    padding: 1.5rem 1rem;
+    max-height: 85vh;
+  }
+  
+  .contacts-title {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .contact-item {
+    padding: 0.8rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  .contact-icon-wrapper {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .contact-link {
+    font-size: 0.9rem;
+  }
+
+  /* === ПЛАНШЕТНАЯ АДАПТАЦИЯ ABOUT === */
+  .about-section__inner {
+    height: 90vh;
+    padding: 1rem;
+    gap: 0.6rem;
+  }
+  
+  .about-section h2 {
+    font-size: clamp(1.2rem, 4vw, 1.6rem);
+    margin-bottom: 0.6rem;
+  }
+  
+  .about-main-content p {
+    font-size: clamp(0.75rem, 2.8vw, 0.9rem);
+    line-height: 1.3;
+  }
+  
+  .about-principles {
+    padding: 0.8rem;
+  }
+  
+  .about-principles h2 {
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
+  }
+  
+  .principles-text p {
+    font-size: clamp(0.65rem, 2.3vw, 0.8rem);
+    line-height: 1.2;
+  }
+  
+  .director-signature {
+    padding: 0.5rem;
+    font-size: clamp(0.65rem, 2.2vw, 0.75rem);
+  }
 }
 
 @media (max-width: 640px) {
@@ -1803,7 +2322,7 @@ body {
     }
 
     .letters {
-        font-size: clamp(3rem, 12vw, 6rem) !important;
+        font-size: clamp(5rem, 12vw, 6rem) !important;
     }
 
     .header-content p {
@@ -1821,25 +2340,69 @@ body {
         height: 25px;
     }
 
-    .about-section {
-        padding: clamp(0.25rem, 1.5vw, 0.5rem);
-    }
-
+    /* === КОМПАКТНАЯ МОБИЛЬНАЯ ABOUT === */
     .about-section__inner {
-        max-width: 98vw;
-        max-height: 88vh;
-        padding: clamp(0.75rem, 2.5vw, 1rem);
+        width: 99vw;
+        height: 96vh;
+        padding: 1rem;
+        gap: 0.6rem;
+        border-radius: 10px;
     }
-
-    .about-section h2 {
-        font-size: clamp(1rem, 4vw, 1.4rem);
-        margin-bottom: 0.8rem;
+    
+    .about-section__inner > h2:first-child {
+        font-size: clamp(1.3rem, 4.5vw, 1.8rem);
     }
-
-    .about-section p {
-        font-size: clamp(0.8rem, 3vw, 1rem);
-        text-indent: 1em;
-        margin-bottom: 0.8rem;
+    
+    .about-main-content {
+        gap: 0.6rem;
+    }
+    
+    .about-main-content p {
+        font-size: clamp(0.75rem, 2.8vw, 0.9rem);
+        line-height: 1.3;
+        text-indent: 0.8em;
+    }
+    
+    .about-principles {
+        padding: 0.8rem;
+    }
+    
+    .about-principles h2 {
+        font-size: clamp(0.9rem, 3.5vw, 1.2rem);
+        margin-bottom: 0.6rem;
+    }
+    
+    .principles-text {
+        gap: 0.4rem;
+    }
+    
+    .principles-text p {
+        font-size: clamp(0.65rem, 2.3vw, 0.8rem);
+        line-height: 1.2;
+        padding-left: 0.6rem;
+    }
+    
+    .principles-text p.latin-quote {
+        font-size: clamp(0.6rem, 2vw, 0.75rem);
+        padding: 0.4rem;
+        margin-top: 0.2rem;
+    }
+    
+    .director-signature {
+        flex-direction: row;
+        gap: 0.8rem;
+        padding: 0.6rem;
+        font-size: clamp(0.65rem, 2.2vw, 0.8rem);
+    }
+    
+    .signature-photo {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .signature-text {
+        text-align: right;
+        line-height: 1.2;
     }
 
     .horizontal-swiper-container {
@@ -1936,6 +2499,15 @@ body {
     .copyright p {
         font-size: clamp(0.65rem, 2vw, 0.85rem);
     }
+
+    .col--lead {
+        padding-right: 50px;
+    }
+    
+    .button--consultation {
+        font-size: 0.65rem;
+        padding: 0.5rem 0.8rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1953,6 +2525,41 @@ body {
         height: 22px;
     }
 
+    /* === ЭКСТРА КОМПАКТНАЯ ABOUT === */
+    .about-section__inner {
+        height: 98vh;
+        padding: 0.8rem;
+        gap: 0.4rem;
+    }
+    
+    .about-section__inner > h2:first-child {
+        font-size: clamp(1.2rem, 4vw, 1.6rem);
+    }
+    
+    .about-main-content p {
+        font-size: clamp(0.7rem, 2.5vw, 0.85rem);
+        line-height: 1.2;
+    }
+    
+    .about-principles {
+        padding: 0.6rem;
+    }
+    
+    .principles-text p {
+        font-size: clamp(0.6rem, 2vw, 0.75rem);
+        line-height: 1.1;
+    }
+    
+    .director-signature {
+        gap: 0.6rem;
+        padding: 0.4rem;
+    }
+    
+    .signature-photo {
+        width: 35px;
+        height: 35px;
+    }
+
     .contacts-container {
         padding: clamp(8px, 2.5vw, 15px) clamp(5px, 2vw, 10px);
         margin: 0;
@@ -1966,19 +2573,8 @@ body {
     .horizontal-swiper {
         height: min(65vh, 400px);
     }
-    
-    /* Button repositioning for small screens */
-    .col--lead {
-        padding-right: 50px;
-    }
-    
-    .button--consultation {
-        font-size: 0.65rem;
-        padding: 0.5rem 0.8rem;
-    }
 }
 
-/* === ADDITIONAL MOBILE FIXES === */
 @media (max-width: 375px) {
     .floating-logo .logo-text-wrapper {
         display: none;
@@ -2003,6 +2599,29 @@ body {
     .contact-item {
         min-height: auto;
     }
+
+    /* === ЭКСТРЕМАЛЬНО КОМПАКТНАЯ ABOUT === */
+    .about-section__inner {
+        padding: 0.6rem;
+        gap: 0.3rem;
+    }
+    
+    .about-main-content p {
+        font-size: clamp(0.65rem, 2.2vw, 0.8rem);
+    }
+    
+    .principles-text p {
+        font-size: clamp(0.55rem, 1.8vw, 0.7rem);
+    }
+    
+    .director-signature {
+        font-size: clamp(0.6rem, 2vw, 0.75rem);
+    }
+    
+    .signature-photo {
+        width: 30px;
+        height: 30px;
+    }
 }
 
 /* === ACCESSIBILITY & PERFORMANCE === */
@@ -2017,7 +2636,8 @@ body {
 @media (prefers-contrast: high) {
     .practice-card,
     .contacts-container,
-    .auth-modal-content {
+    .auth-modal-content,
+    .about-section__inner {
         border: 2px solid var(--green-color, #d4af37);
     }
     

@@ -3,557 +3,324 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Получить консультацию</title>
-    <style>
-        body {
-            background-image: url('img/bcg4.png');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-            background-attachment: fixed;
-            line-height: 1.6;
-            color: #ffffff;
-            background-color: #1a1a1a;
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 20px;
-        }
-
-        .consultation-container {
-            max-width: 800px;
-            margin: 2em auto;
-            padding: 2em;
-            background: rgba(0, 0, 0, 0.8);
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-        }
-
-        .disclaimer-text {
-            text-align: center;
-            margin-bottom: 2em;
-            padding: 1em;
-            background: rgba(212, 175, 55, 0.1);
-            border: 1px solid #d4af37;
-            border-radius: 8px;
-            color: #d4af37;
-            font-size: 0.95em;
-        }
-
-        h2 {
-            text-align: center;
-            color: #d4af37;
-            font-size: 1.8em;
-            margin-bottom: 1.5em;
-        }
-
-        .consultation-types {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5em;
-            margin-bottom: 2em;
-        }
-
-        .consultation-card {
-            background: rgba(212, 175, 55, 0.1);
-            border: 2px solid #d4af37;
-            border-radius: 10px;
-            padding: 1.5em;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            min-height: 120px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .consultation-card:hover {
-            background: rgba(212, 175, 55, 0.2);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
-        }
-
-        .consultation-card.active {
-            background: rgba(212, 175, 55, 0.3);
-            border-color: #f4d03f;
-        }
-
-        .consultation-card.special {
-            border-color: #f39c12;
-            background: rgba(243, 156, 18, 0.1);
-        }
-
-        .consultation-card.special::after {
-            content: "★";
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            color: #f39c12;
-            font-size: 1.5em;
-        }
-
-        .consultation-title {
-            font-size: 1.2em;
-            font-weight: bold;
-            margin-bottom: 0.5em;
-            color: #d4af37;
-        }
-
-        .consultation-price {
-            font-size: 1.1em;
-            color: #ffffff;
-        }
-
-        .special-note {
-            position: absolute;
-            bottom: -40px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #f39c12;
-            color: #000;
-            padding: 8px 12px;
-            border-radius: 5px;
-            font-size: 0.8em;
-            white-space: nowrap;
-            display: none;
-            z-index: 10;
-        }
-
-        .consultation-card.special:hover .special-note {
-            display: block;
-        }
-
-        .consultation-form {
-            background: rgba(0, 0, 0, 0.6);
-            padding: 2em;
-            border-radius: 10px;
-            margin-top: 2em;
-            border: 1px solid #d4af37;
-        }
-
-        .consultation-form h3 {
-            color: #d4af37;
-            margin-bottom: 1.5em;
-            text-align: center;
-        }
-
-        .form-group {
-            margin-bottom: 1.5em;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5em;
-            color: #d4af37;
-            font-weight: bold;
-        }
-
-        .consultation-form input,
-        .consultation-form select,
-        .consultation-form textarea {
-            width: 100%;
-            padding: 0.8em;
-            font-size: 1em;
-            border: 1px solid #d4af37;
-            border-radius: 5px;
-            background: rgba(255, 255, 255, 0.1);
-            color: #ffffff;
-            box-sizing: border-box;
-        }
-
-        .consultation-form input::placeholder,
-        .consultation-form textarea::placeholder {
-            color: #cccccc;
-        }
-
-        .consultation-form select {
-            color: #000000;
-        }
-
-        .consultation-form button {
-            background: linear-gradient(45deg, #d4af37, #f4d03f);
-            color: #000000;
-            border: none;
-            padding: 1em 2em;
-            font-size: 1.1em;
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-            width: 100%;
-            margin-top: 1em;
-        }
-
-        .consultation-form button:hover {
-            background: linear-gradient(45deg, #f4d03f, #d4af37);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-
-        .modal-content {
-            background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
-            margin: 5% auto;
-            padding: 2em;
-            border: 2px solid #d4af37;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 500px;
-            color: #ffffff;
-        }
-
-        .close {
-            color: #d4af37;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .close:hover {
-            color: #f4d03f;
-        }
-
-        .auth-buttons {
-            display: flex;
-            gap: 1em;
-            margin-top: 1em;
-        }
-
-        .auth-buttons button {
-            flex: 1;
-            padding: 1em;
-            border: 2px solid #d4af37;
-            background: transparent;
-            color: #d4af37;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .auth-buttons button:hover {
-            background: #d4af37;
-            color: #000000;
-        }
-
-        .file-upload {
-            position: relative;
-            display: inline-block;
-            width: 100%;
-        }
-
-        .file-upload input[type="file"] {
-            position: absolute;
-            opacity: 0;
-            width: 100%;
-            height: 100%;
-            cursor: pointer;
-        }
-
-        .file-upload-label {
-            display: block;
-            padding: 0.8em;
-            border: 2px dashed #d4af37;
-            border-radius: 5px;
-            text-align: center;
-            color: #d4af37;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .file-upload-label:hover {
-            background: rgba(212, 175, 55, 0.1);
-        }
-
-        @media (max-width: 768px) {
-            .consultation-types {
-                grid-template-columns: 1fr;
-            }
-            
-            .consultation-container {
-                margin: 1em;
-                padding: 1em;
-            }
-        }
-    </style>
+    <title>Консультации | Argus</title>
+    
+    <!-- === EXTERNAL DEPENDENCIES === -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- === FONTS === -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- === CUSTOM STYLES === -->
+    <link rel="stylesheet" href="css/consultation.css">
 </head>
 <body>
-    <div class="consultation-container">
-        <!-- Disclaimer Text -->
-        <div class="disclaimer-text">
-            Адвокаты Адвокатской консультации «Аргус» оказывают услуги только по отраслям права, указанным в разделе «Практики»
+    <!-- Navigation Button -->
+    <a href="index.html" class="nav-button">
+        <i class="fas fa-arrow-left"></i>
+        Вернуться на главную
+    </a>
+
+    <!-- Main Content -->
+    <main class="consultation-container">
+        <!-- Header Section -->
+        <header class="consultation-header">
+            <div class="header-decoration">
+                <div class="decoration-line decoration-line--1"></div>
+                <div class="decoration-line decoration-line--2"></div>
+            </div>
+            <h1 class="main-title">Консультации</h1>
+            <p class="subtitle">Профессиональная юридическая помощь от адвокатов АК «Аргус»</p>
+            <div class="header-accent"></div>
+        </header>
+
+        <!-- Content Section -->
+        <div class="content-wrapper">
+            <!-- Main CTA Section -->
+            <section class="main-cta-section" data-animate="fade-up" data-delay="0">
+                <div class="cta-card">
+                    <div class="cta-header">
+                        <div class="cta-icon">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                        <h2>Получить консультацию</h2>
+                        <p>Узнайте о наших услугах, ценах и форматах консультаций</p>
+                    </div>
+                    
+                    <div class="cta-actions">
+                        <button class="consultation-info-btn" id="consultationInfoBtn">
+                            <i class="fas fa-info-circle"></i>
+                            Информация о консультациях
+                        </button>
+                    </div>
+                    
+                    <div class="disclaimer">
+                        <p>Адвокаты Адвокатской консультации «Аргус» оказывают услуги только по отраслям права, указанным в разделе «Практики»</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section class="features-section" data-animate="fade-up" data-delay="200">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h2>Преимущества наших консультаций</h2>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-item" data-animate="slide-left" data-delay="300">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <h3>Опытные адвокаты</h3>
+                        <p>Более 25 лет успешной практики в различных отраслях права</p>
+                    </div>
+
+                    <div class="feature-item" data-animate="slide-left" data-delay="400">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Конфиденциальность</h3>
+                        <p>Полная защита персональных данных и соблюдение адвокатской тайны</p>
+                    </div>
+
+                    <div class="feature-item" data-animate="slide-left" data-delay="500">
+                        <div class="feature-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>Гибкий график</h3>
+                        <p>Очные и дистанционные консультации в удобное для вас время</p>
+                    </div>
+
+                    <div class="feature-item" data-animate="slide-left" data-delay="600">
+                        <div class="feature-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>Индивидуальный подход</h3>
+                        <p>Детальный анализ вашей ситуации и персональные рекомендации</p>
+                    </div>
+
+                    <div class="feature-item" data-animate="slide-left" data-delay="700">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Оценка перспектив дела</h3>
+                        <p>Профессиональная оценка шансов на успех и возможных рисков</p>
+                    </div>
+
+                    <div class="feature-item" data-animate="slide-left" data-delay="800">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-signature"></i>
+                        </div>
+                        <h3>Помощь в подготовке документов</h3>
+                        <p>Консультации по составлению и проверке правовых документов</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section - ИСПРАВЛЕННАЯ ВЕРСИЯ -->
+            <section class="contact-section" data-animate="fade-up" data-delay="700">
+                <div class="contact-card">
+                    <div class="contact-header">
+                        <h3>Готовы к консультации?</h3>
+                        <p>Свяжитесь с нами удобным способом</p>
+                    </div>
+                    <div class="contact-actions">
+                        <a href="tel:+78121234567" class="contact-button contact-button--phone">
+                            <i class="fas fa-phone"></i>
+                            +7 (812) 123-45-67
+                        </a>
+                        <a href="mailto:info@argus-law.ru" class="contact-button contact-button--email">
+                            <i class="fas fa-envelope"></i>
+                            info@argus-law.ru
+                        </a>
+                    </div>
+                </div>
+            </section>
         </div>
 
-        <!-- Consultation Type Selection -->
-        <h2>Выберите вид консультации:</h2>
-        <div class="consultation-types">
-            <div class="consultation-card" data-type="personal">
-                <div class="consultation-title">Личная встреча с адвокатом</div>
-                <div class="consultation-price">15 000,00 руб./час</div>
-            </div>
-            
-            <div class="consultation-card" data-type="phone">
-                <div class="consultation-title">Консультация по телефону</div>
-                <div class="consultation-price">15 000,00 руб./час</div>
-            </div>
-            
-            <div class="consultation-card special" data-type="written">
-                <div class="consultation-title">Письменная консультация</div>
-                <div class="consultation-price">Цена по запросу</div>
-                <div class="special-note">Услуга включает ознакомление с документами Клиента</div>
-            </div>
+        <!-- Background Decorations -->
+        <div class="background-decorations">
+            <div class="decoration-circle decoration-circle--1"></div>
+            <div class="decoration-circle decoration-circle--2"></div>
+            <div class="decoration-circle decoration-circle--3"></div>
+            <div class="floating-shape floating-shape--1"></div>
+            <div class="floating-shape floating-shape--2"></div>
         </div>
+    </main>
 
-        <!-- Personal Meeting Form -->
-        <form id="form-personal" class="consultation-form hidden">
-            <h3>Личная встреча с адвокатом</h3>
-            <div class="form-group">
-                <input type="text" name="full_name" placeholder="ФИО" required>
-            </div>
-            <div class="form-group">
-                <input type="email" name="email" placeholder="Электронная почта" required>
-            </div>
-            <div class="form-group">
-                <input type="tel" name="phone" placeholder="Номер телефона">
-            </div>
-            <div class="form-group">
-                <label>Выберите дату и время:</label>
-                <input type="datetime-local" name="datetime" required>
-            </div>
-            <div class="form-group">
-                <div class="file-upload">
-                    <input type="file" name="documents" multiple id="personal-docs">
-                    <label for="personal-docs" class="file-upload-label">
-                        Прикрепить документы (необязательно)
-                    </label>
-                </div>
-            </div>
-            <button type="submit">Записаться на встречу</button>
-        </form>
-
-        <!-- Phone/Written Consultation Form (shown after login) -->
-        <form id="form-consultation" class="consultation-form hidden">
-            <h3 id="consultation-title">Консультация</h3>
-            <div class="form-group">
-                <label>Выберите дату и время:</label>
-                <input type="datetime-local" name="datetime" required>
-            </div>
-            <div class="form-group" id="phone-method-group" class="hidden">
-                <label>Предпочитаемый способ связи:</label>
-                <select name="contact_method">
-                    <option value="">Выберите способ связи</option>
-                    <option value="zoom">Видеозвонок (Zoom)</option>
-                    <option value="whatsapp">WhatsApp</option>
-                    <option value="telegram">Telegram</option>
-                    <option value="phone">Телефонный звонок</option>
-                </select>
-            </div>
-            <div class="form-group" id="written-description-group" class="hidden">
-                <label>Описание вопроса:</label>
-                <textarea name="description" rows="5" placeholder="Опишите ваш вопрос подробно"></textarea>
-            </div>
-            <div class="form-group">
-                <div class="file-upload">
-                    <input type="file" name="documents" multiple id="consultation-docs">
-                    <label for="consultation-docs" class="file-upload-label">
-                        Прикрепить необходимые документы
-                    </label>
-                </div>
-            </div>
-            <button type="submit">Отправить заявку</button>
-        </form>
-    </div>
-
-    <!-- Authentication Modal -->
-    <div id="auth-modal" class="modal">
+    <!-- Consultation Info Modal -->
+    <div class="consultation-modal" id="consultationModal">
+        <div class="modal-overlay" id="modalOverlay"></div>
         <div class="modal-content">
-            <span class="close">&times;</span>
-            <h3>Для продолжения необходимо войти в систему</h3>
-            <p>Пожалуйста, войдите в свой аккаунт или зарегистрируйтесь для записи на консультацию.</p>
-            <div class="auth-buttons">
-                <button onclick="handleLogin()">Войти</button>
-                <button onclick="handleRegister()">Регистрация</button>
+            <div class="modal-header">
+                <h2>Информация о консультациях</h2>
+                <button class="modal-close" id="modalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <!-- Oral Consultation -->
+                <div class="consultation-type">
+                    <div class="type-header">
+                        <div class="type-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="type-info">
+                            <h3>Устная консультация</h3>
+                            <div class="price">15 000 руб./час</div>
+                        </div>
+                    </div>
+                    
+                    <div class="type-formats">
+                        <div class="format-item">
+                            <div class="format-icon">
+                                <i class="fas fa-user-friends"></i>
+                            </div>
+                            <div class="format-details">
+                                <h4>Личная встреча</h4>
+                                <p>В офисе адвоката по адресу: Санкт-Петербург, Московский пр., д.109, лит.А, оф.401</p>
+                            </div>
+                        </div>
+                        
+                        <div class="format-item">
+                            <div class="format-icon">
+                                <i class="fas fa-video"></i>
+                            </div>
+                            <div class="format-details">
+                                <h4>Дистанционная консультация</h4>
+                                <p>По телефону, WhatsApp, Telegram, Zoom или Skype</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Written Consultation -->
+                <div class="consultation-type">
+                    <div class="type-header">
+                        <div class="type-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="type-info">
+                            <h3>Письменная консультация</h3>
+                            <div class="price">Цена по запросу</div>
+                        </div>
+                    </div>
+                    
+                    <div class="written-details">
+                        <div class="detail-item">
+                            <i class="fas fa-clock"></i>
+                            <span><strong>Обычная:</strong> 3-5 рабочих дней</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-bolt"></i>
+                            <span><strong>Срочная:</strong> 1-2 рабочих дня</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-fire"></i>
+                            <span><strong>Очень срочная:</strong> в течение дня</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="modal-contact">
+                    <h4>Для записи на консультацию:</h4>
+                    <div class="contact-methods">
+                        <a href="tel:+78121234567" class="contact-method">
+                            <i class="fas fa-phone"></i>
+                            <span>+7 (812) 123-45-67</span>
+                        </a>
+                        <a href="mailto:info@argus-law.ru" class="contact-method">
+                            <i class="fas fa-envelope"></i>
+                            <span>info@argus-law.ru</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
+    <!-- Footer -->
+    <footer class="consultation-footer">
+        <div class="footer-content">
+            <p>© Адвокатская консультация «<span class="company-name">Аргус</span>» Санкт-Петербургской городской коллегии адвокатов, <span class="year">2025</span>. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <!-- Include JavaScript -->
+    <script src="js/consultation.js"></script>
+
+    <!-- ДОПОЛНИТЕЛЬНЫЙ СКРИПТ ДЛЯ ИНИЦИАЛИЗАЦИИ КНОПКИ -->
     <script>
-        // Simulate user authentication status
-        let isUserLoggedIn = false; // Change to true to test logged-in state
-
-        // DOM elements
-        const consultationCards = document.querySelectorAll('.consultation-card');
-        const personalForm = document.getElementById('form-personal');
-        const consultationForm = document.getElementById('form-consultation');
-        const authModal = document.getElementById('auth-modal');
-        const closeModal = document.querySelector('.close');
-        const consultationTitle = document.getElementById('consultation-title');
-        const phoneMethodGroup = document.getElementById('phone-method-group');
-        const writtenDescriptionGroup = document.getElementById('written-description-group');
-
-        // Event listeners
-        consultationCards.forEach(card => {
-            card.addEventListener('click', () => handleConsultationSelection(card));
-        });
-
-        closeModal.addEventListener('click', () => {
-            authModal.style.display = 'none';
-        });
-
-        window.addEventListener('click', (event) => {
-            if (event.target === authModal) {
-                authModal.style.display = 'none';
-            }
-        });
-
-        // Form submissions
-        personalForm.addEventListener('submit', handlePersonalFormSubmit);
-        consultationForm.addEventListener('submit', handleConsultationFormSubmit);
-
-        function handleConsultationSelection(selectedCard) {
-            // Remove active class from all cards
-            consultationCards.forEach(card => card.classList.remove('active'));
+    // Дополнительная инициализация кнопки навигации к контактам
+    document.addEventListener('DOMContentLoaded', function() {
+        // Находим кнопку по ID
+        const contactsBtn = document.getElementById('contactsNavigationBtn');
+        
+        if (contactsBtn) {
+            console.log('✅ Found contacts navigation button');
             
-            // Add active class to selected card
-            selectedCard.classList.add('active');
+            // Удаляем все существующие обработчики событий
+            contactsBtn.removeAttribute('onclick');
             
-            // Hide all forms
-            hideAllForms();
-            
-            const consultationType = selectedCard.dataset.type;
-            
-            if (consultationType === 'personal') {
-                // Show personal meeting form immediately
-                personalForm.classList.remove('hidden');
-            } else if (consultationType === 'phone' || consultationType === 'written') {
-                // Check if user is logged in
-                if (isUserLoggedIn) {
-                    showConsultationForm(consultationType);
+            // Добавляем новый обработчик
+            contactsBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                console.log('🎯 Contacts button clicked - enhanced navigation');
+                
+                // Вызываем улучшенную функцию навигации
+                if (typeof navigateToContacts === 'function') {
+                    navigateToContacts(e);
                 } else {
-                    // Show authentication modal
-                    authModal.style.display = 'block';
-                    // Store the selected type for after login
-                    authModal.dataset.selectedType = consultationType;
-                }
-            }
-        }
-
-        function showConsultationForm(type) {
-            consultationForm.classList.remove('hidden');
-            
-            if (type === 'phone') {
-                consultationTitle.textContent = 'Консультация по телефону';
-                phoneMethodGroup.classList.remove('hidden');
-                writtenDescriptionGroup.classList.add('hidden');
-                consultationForm.querySelector('select[name="contact_method"]').required = true;
-                consultationForm.querySelector('textarea[name="description"]').required = false;
-            } else if (type === 'written') {
-                consultationTitle.textContent = 'Письменная консультация';
-                phoneMethodGroup.classList.add('hidden');
-                writtenDescriptionGroup.classList.remove('hidden');
-                consultationForm.querySelector('select[name="contact_method"]').required = false;
-                consultationForm.querySelector('textarea[name="description"]').required = true;
-            }
-        }
-
-        function hideAllForms() {
-            personalForm.classList.add('hidden');
-            consultationForm.classList.add('hidden');
-        }
-
-        function handleLogin() {
-            // Simulate login process
-            console.log('Login process initiated');
-            isUserLoggedIn = true;
-            authModal.style.display = 'none';
-            
-            // Show the form for the selected consultation type
-            const selectedType = authModal.dataset.selectedType;
-            if (selectedType) {
-                showConsultationForm(selectedType);
-            }
-        }
-
-        function handleRegister() {
-            // Simulate registration process
-            console.log('Registration process initiated');
-            isUserLoggedIn = true;
-            authModal.style.display = 'none';
-            
-            // Show the form for the selected consultation type
-            const selectedType = authModal.dataset.selectedType;
-            if (selectedType) {
-                showConsultationForm(selectedType);
-            }
-        }
-
-        function handlePersonalFormSubmit(event) {
-            event.preventDefault();
-            const formData = new FormData(event.target);
-            
-            console.log('Personal consultation form submitted:', {
-                fullName: formData.get('full_name'),
-                email: formData.get('email'),
-                phone: formData.get('phone'),
-                datetime: formData.get('datetime'),
-                documents: formData.getAll('documents')
-            });
-            
-            alert('Заявка на личную встречу отправлена! Мы свяжемся с вами в ближайшее время.');
-            event.target.reset();
-        }
-
-        function handleConsultationFormSubmit(event) {
-            event.preventDefault();
-            const formData = new FormData(event.target);
-            
-            const submissionData = {
-                datetime: formData.get('datetime'),
-                documents: formData.getAll('documents')
-            };
-
-            // Add type-specific data
-            const consultationType = document.querySelector('.consultation-card.active').dataset.type;
-            if (consultationType === 'phone') {
-                submissionData.contactMethod = formData.get('contact_method');
-            } else if (consultationType === 'written') {
-                submissionData.description = formData.get('description');
-            }
-            
-            console.log('Consultation form submitted:', submissionData);
-            
-            alert('Заявка на консультацию отправлена! Мы свяжемся с вами в ближайшее время.');
-            event.target.reset();
-        }
-
-        // File upload label update
-        document.querySelectorAll('input[type="file"]').forEach(input => {
-            input.addEventListener('change', function() {
-                const label = this.nextElementSibling;
-                const fileCount = this.files.length;
-                if (fileCount > 0) {
-                    label.textContent = `Выбрано файлов: ${fileCount}`;
-                } else {
-                    label.textContent = 'Прикрепить документы (необязательно)';
+                    console.warn('⚠️ navigateToContacts function not found, using fallback');
+                    
+                    // Fallback navigation
+                    sessionStorage.setItem('navigate_to', 'contacts');
+                    sessionStorage.setItem('external_navigation', 'true');
+                    window.location.href = 'index.html#contacts';
                 }
             });
-        });
+            
+            // Добавляем visual feedback при клике
+            contactsBtn.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                this.style.transition = 'transform 0.1s ease';
+                
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 100);
+            });
+            
+            console.log('✅ Enhanced contacts navigation button initialized');
+        } else {
+            console.error('❌ Contacts navigation button not found');
+        }
+        
+        // Дополнительная проверка через небольшой интервал
+        setTimeout(() => {
+            const btn = document.getElementById('contactsNavigationBtn');
+            if (btn && !btn.hasAttribute('data-enhanced')) {
+                btn.setAttribute('data-enhanced', 'true');
+                console.log('🔧 Applied enhanced attribute to contacts button');
+            }
+        }, 500);
+    });
+
+    // Функция для тестирования навигации (для отладки)
+    window.testContactsNavigation = function() {
+        console.log('🧪 Testing contacts navigation...');
+        const btn = document.getElementById('contactsNavigationBtn');
+        if (btn) {
+            btn.click();
+        } else {
+            console.error('❌ Button not found for testing');
+        }
+    };
     </script>
 </body>
 </html>

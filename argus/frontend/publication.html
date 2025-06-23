@@ -4,772 +4,109 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Публикации | Argus</title>
+    
+    <!-- === EXTERNAL DEPENDENCIES === -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <style>
-        /* Font Face Declarations */
-        @font-face {
-            font-family: 'Cormorant';
-            src: url('../fonts/CormorantGaramond-Regular.woff2') format('woff2');
-            font-weight: 400;
-            font-style: normal;
-        }
-
-        @font-face {
-            font-family: 'Cormorant';
-            src: url('../fonts/CormorantGaramond-SemiBold.woff2') format('woff2');
-            font-weight: 600;
-            font-style: normal;
-        }
-
-        @font-face {
-            font-family: 'Cormorant';
-            src: url('../fonts/CormorantGaramond-Bold.woff2') format('woff2');
-            font-weight: 700;
-            font-style: normal;
-        }
-
-        /* Global Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Cormorant', Georgia, serif;
-            background-image: url('img/bcg.png');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-            background-attachment: fixed;
-            line-height: 1.6;
-            color: #f1f1f1;
-            background-color: #0a0a0a;
-            overflow-x: hidden;
-        }
-
-        /* Container */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header Section */
-        .publications-hero {
-            background: transparent;
-            padding: 50px 0 60px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .publications-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(ellipse at center, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-title {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 700;
-            background: linear-gradient(135deg, #d4af37, #f4d03f, #d4af37);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 20px;
-            animation: shimmer 3s ease-in-out infinite;
-        }
-
-        @keyframes shimmer {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        .hero-subtitle {
-            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-            color: #a6cae7;
-            font-weight: 400;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* Filter Section */
-        .filter-section {
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 20px;
-            padding: 30px;
-            margin: -30px auto 60px;
-            max-width: 800px;
-            position: relative;
-            z-index: 10;
-        }
-
-        .filter-controls {
-            display: grid;
-            grid-template-columns: 1fr auto auto;
-            gap: 20px;
-            align-items: center;
-        }
-
-        .search-wrapper {
-            position: relative;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 15px 50px 15px 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid rgba(212, 175, 55, 0.3);
-            border-radius: 50px;
-            color: #f1f1f1;
-            font-size: 1rem;
-            font-family: inherit;
-            transition: all 0.3s ease;
-        }
-
-        .search-input:focus {
-            outline: none;
-            border-color: #d4af37;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .search-input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        .search-icon {
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #d4af37;
-            font-size: 1.1rem;
-        }
-
-        .filter-select {
-            padding: 15px 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid rgba(212, 175, 55, 0.3);
-            border-radius: 50px;
-            color: #f1f1f1;
-            font-size: 1rem;
-            font-family: inherit;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            min-width: 150px;
-        }
-
-        .filter-select:focus {
-            outline: none;
-            border-color: #d4af37;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
-        }
-
-        .filter-select option {
-            background: #1a1a1a;
-            color: #f1f1f1;
-        }
-
-        .results-count {
-            color: #d4af37;
-            font-size: 0.95rem;
-            font-weight: 600;
-        }
-
-        /* Publications Grid */
-        .publications-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 30px;
-            margin-bottom: 80px;
-        }
-
-        /* Publication Card */
-        .publication-card {
-            background: linear-gradient(145deg, rgba(0, 0, 0, 0.6), rgba(20, 20, 20, 0.4));
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 20px;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            cursor: pointer;
-        }
-
-        .publication-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
-        }
-
-        .publication-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(212, 175, 55, 0.2);
-            border-color: rgba(212, 175, 55, 0.5);
-        }
-
-        .publication-card:hover::before {
-            opacity: 1;
-        }
-
-        .card-header {
-            padding: 25px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .publication-date {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(212, 175, 55, 0.15);
-            color: #d4af37;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-        }
-
-        .publication-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #f1f1f1;
-            line-height: 1.4;
-            margin-bottom: 15px;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .publication-excerpt {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.95rem;
-            line-height: 1.5;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            margin-bottom: 20px;
-        }
-
-        .card-footer {
-            padding: 0 25px 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .read-more-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: linear-gradient(135deg, #d4af37, #f4d03f);
-            color: #000;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-
-        .read-more-btn:hover {
-            background: linear-gradient(135deg, #f4d03f, #d4af37);
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
-        }
-
-        .expand-icon {
-            transition: transform 0.3s ease;
-        }
-
-        .publication-card.expanded .expand-icon {
-            transform: rotate(180deg);
-        }
-
-        /* Expanded Content */
-        .publication-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            background: rgba(0, 0, 0, 0.2);
-        }
-
-        .publication-content.expanded {
-            max-height: 2000px;
-        }
-
-        .content-inner {
-            padding: 25px;
-            border-top: 1px solid rgba(212, 175, 55, 0.2);
-        }
-
-        .content-inner p {
-            text-align: justify;
-            text-indent: 2em;
-            margin-bottom: 15px;
-            line-height: 1.6;
-            color: rgba(255, 255, 255, 0.85);
-        }
-
-        /* No Results */
-        .no-results {
-            text-align: center;
-            padding: 80px 20px;
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 1.2rem;
-        }
-
-        .no-results i {
-            font-size: 4rem;
-            color: #d4af37;
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        /* Loading Animation */
-        .loading {
-            display: none;
-            text-align: center;
-            padding: 40px;
-        }
-
-        .loading.active {
-            display: block;
-        }
-
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 3px solid rgba(212, 175, 55, 0.3);
-            border-top: 3px solid #d4af37;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Footer */
-        .site-footer {
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(20, 20, 20, 0.6));
-            backdrop-filter: blur(15px);
-            border-top: 1px solid rgba(212, 175, 55, 0.2);
-            padding: 40px 0;
-            text-align: center;
-            margin-top: 60px;
-        }
-
-        .footer-content {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 1rem;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .publications-grid {
-                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-                gap: 25px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .filter-controls {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-
-            .publications-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .filter-section {
-                margin: -20px 20px 40px;
-                padding: 20px;
-            }
-
-            .publications-hero {
-                padding: 60px 0 40px;
-            }
-
-            .card-footer {
-                flex-direction: column;
-                gap: 15px;
-                align-items: stretch;
-            }
-
-            .read-more-btn {
-                justify-content: center;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 15px;
-            }
-
-            .publication-card {
-                border-radius: 15px;
-            }
-
-            .card-header,
-            .card-footer {
-                padding: 20px;
-            }
-
-            .content-inner {
-                padding: 20px;
-            }
-        }
-
-        /* Accessibility */
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-
-        /* Focus States */
-        .publication-card:focus-within {
-            outline: 2px solid #d4af37;
-            outline-offset: 2px;
-        }
-
-        .read-more-btn:focus {
-            outline: 2px solid #d4af37;
-            outline-offset: 2px;
-        }
-    </style>
+    
+    <!-- === FONTS === -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- === CUSTOM STYLES === -->
+    <link rel="stylesheet" href="css/publication.css">
 </head>
 <body>
-    <!-- Hero Section -->
-    <section class="publications-hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title">Обзоры профессиональных достижений практик</h1>
-                <p class="hero-subtitle">Последние исследования, статьи и идеи нашей команды экспертов</p>
-            </div>
-        </div>
-    </section>
+    <!-- Navigation Button -->
+    <a href="index.html" class="nav-button">
+        <i class="fas fa-arrow-left"></i>
+        Вернуться на главную
+    </a>
 
     <!-- Main Content -->
-    <main class="container">
-        <!-- Filter Section -->
-        <section class="filter-section">
-            <div class="filter-controls">
-                <div class="search-wrapper">
-                    <input type="text" id="searchInput" class="search-input" placeholder="Поиск по публикациям...">
-                    <i class="fas fa-search search-icon"></i>
-                </div>
-                <select id="yearFilter" class="filter-select">
-                    <option value="">За все время</option>
-                </select>
-                <div class="results-count" id="resultsCount">
-                    Найдено: <span id="countNumber">0</span>
-                </div>
+    <main class="publication-container">
+        <!-- Header Section -->
+        <header class="publication-header">
+            <div class="header-decoration">
+                <div class="decoration-line decoration-line--1"></div>
+                <div class="decoration-line decoration-line--2"></div>
             </div>
-        </section>
+            <h1 class="main-title">Обзоры профессиональных достижений практик</h1>
+            <p class="subtitle">Последние исследования, статьи и идеи нашей команды экспертов</p>
+            <div class="header-accent"></div>
+        </header>
 
-        <!-- Loading Indicator -->
-        <div class="loading" id="loadingIndicator">
-            <div class="spinner"></div>
-            <p>Загрузка публикаций...</p>
+        <!-- Content Wrapper -->
+        <div class="content-wrapper">
+            <!-- Filter Section -->
+            <section class="filter-section" data-animate="fade-up" data-delay="0">
+                <div class="filter-card">
+                    <div class="filter-header">
+                        <div class="filter-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h2>Поиск и фильтрация</h2>
+                    </div>
+                    <div class="filter-controls">
+                        <div class="search-group">
+                            <input type="text" id="searchInput" placeholder="Поиск по публикациям...">
+                            <div class="search-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                        </div>
+                        <div class="select-group">
+                            <select id="yearFilter">
+                                <option value="">За все время</option>
+                            </select>
+                            <div class="select-icon">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Publications Section -->
+            <section class="publications-section" data-animate="fade-up" data-delay="200">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h2>Профессиональные достижения</h2>
+                </div>
+                
+                <!-- Publications List -->
+                <div class="publication-list" id="publicationList">
+                    <!-- Publications will be dynamically loaded here -->
+                </div>
+                
+                <!-- No Results -->
+                <div class="no-results" id="noResults" style="display: none;">
+                    <div class="no-results-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Публикации не найдены</h3>
+                    <p>Попробуйте изменить критерии поиска или фильтры</p>
+                </div>
+            </section>
         </div>
 
-        <!-- Publications Grid -->
-        <section class="publications-grid" id="publicationsList">
-            <!-- Publications will be dynamically loaded here -->
-        </section>
+        <!-- Background Decorations -->
+        <div class="background-decorations">
+            <div class="decoration-circle decoration-circle--1"></div>
+            <div class="decoration-circle decoration-circle--2"></div>
+            <div class="decoration-circle decoration-circle--3"></div>
+            <div class="floating-shape floating-shape--1"></div>
+            <div class="floating-shape floating-shape--2"></div>
+        </div>
     </main>
 
     <!-- Footer -->
-    <footer class="site-footer">
-        <div class="container">
-            <div class="footer-content">
-                <p>© Адвокатская консультация «Аргус» Санкт-Петербургской городской коллегии адвокатов, 2025. Все права защищены. Запрещается копирование, распространение или любое иное использование.</p>
-            </div>
+    <footer class="publication-footer">
+        <div class="footer-content">
+            <p>© Адвокатская консультация «<span class="company-name">Аргус</span>» Санкт-Петербургской городской коллегии адвокатов, <span class="year">2025</span>. Все права защищены.</p>
         </div>
     </footer>
 
-    <script>
-        // Sample data - this will be replaced with Django backend API calls
-        const publications = [
-            {
-                id: 1,
-                title: "Адвокаты АК «АРГУС» добились применения принципа Res Judicata арбитражным судом",
-                date: "2025-05-15",
-                excerpt: "При участии адвокатов АК АРГУС было отменено решение третейского суда (МКАС при ТПП РФ) о взыскании долга в размере более трехсот пятидесяти миллионов рублей...",
-                content: `<p>При участии адвокатов АК АРГУС было отменено решение третейского суда (МКАС при ТПП РФ) о взыскании долга в размере более трехсот пятидесяти миллионов рублей. По результатам рассмотрения дела в Верховном Суде РФ аргументы наших адвокатов были признаны обоснованными, дело направлено на новое рассмотрение.</p>
-                <p>Основанием для отмены судебных актов послужило то, что по рассмотренным судами спорным обстоятельствам уже было принято решение международного коммерческого арбитража. Адвокатам удалось доказать, что приведение в исполнение данного решения нарушило бы такие принципы публичного порядка РФ, как принцип законной силы судебного акта, в части его окончательности и неопровержимости (res judicata), принцип правовой определенности.</p>
-                <p>При новом рассмотрении дела решение МКАС было отменено как противоречащее публичному порядку РФ, в выдаче исполнительного листа было отказано.</p>`
-            },
-            {
-                id: 2,
-                title: "Адвокаты АК «АРГУС» доказали необходимость применения тарифов «для населения» исходя из назначения помещения",
-                date: "2024-03-22",
-                excerpt: "При участии адвокатов АК АРГУС (pro bono) был выигран спор, связанный с разногласиями сторон по варианту тарифа, подлежащего применению при расчете стоимости тепловой энергии...",
-                content: `<p>При участии адвокатов АК АРГУС (pro bono) был выигран спор, связанный с разногласиями сторон (теплоснабжающая организация и юридическое лицо, владеющее административно-бытовым зданием с общежитием) по варианту тарифа, подлежащего применению при расчете стоимости тепловой энергии для здания, не переведенного в муниципальную собственность при приватизации в 1994г.</p>
-                <p>Верховный Суд РФ неоднократно разъяснял, что если спорные помещения являются жилыми и поставляемые ресурсы используются исключительно на коммунально-бытовые нужды, то при расчете стоимости коммунальных услуг следует применять тариф, установленный для населения.</p>`
-            },
-            {
-                id: 3,
-                title: "Скрыть реального владельца акционерного общества все сложнее",
-                date: "2023-11-10",
-                excerpt: "Компания обратилась в Арбитражный суд с заявлением о признании общества банкротом. При участии адвокатов АК «АРГУС» суд субординировал требование аффилированного с должником кредитора...",
-                content: `<p>Компания обратилась в Арбитражный суд с заявлением о признании общества банкротом. Решением суда первой инстанции в отношении должника была введена процедура наблюдения. Однако Апелляционный суд не согласился с выводами суда первой инстанции в части установления очередности удовлетворения требований кредитора и назначения кандидатуры временного управляющего.</p>
-                <p>Установив действительную корпоративную структуру владения акциями должника, наличие между должником и кредитором признаков аффилированности, осуществление Компанией компенсационного финансирования деятельности должника, апелляционный суд субординировал заявленное требование.</p>`
-            },
-            {
-                id: 4,
-                title: "Успешная защита по административному иску к МИФНС по Санкт-Петербургу",
-                date: "2022-08-05",
-                excerpt: "Адвокатам АК «АРГУС» удалось отстоять административный иск о признании безнадежной к взысканию задолженности по НДФЛ за 2017 год, а также начисленных пеней...",
-                content: `<p>Суд установил, что налоговый орган был не вправе включать задолженность налогоплательщика по уплате налога на доходы физических лиц за 2017 год в ЕНС (единый налоговый счет), а в дальнейшем, списывать произведенные налогоплательщиком оплаты и имеющиеся у него переплаты в счет погашения данной задолженности.</p>
-                <p>Одновременно суд установил, что неверное определение налоговым органом сальдо ЕНС налогоплательщика повлекло принятие ошибочного решения МИФНС, последующие произведенные оплаты налогоплательщиком также повлекли за собой неверное распределение денежных средств.</p>`
-            }
-        ];
-
-        // DOM elements
-        const searchInput = document.getElementById('searchInput');
-        const yearFilter = document.getElementById('yearFilter');
-        const publicationsList = document.getElementById('publicationsList');
-        const loadingIndicator = document.getElementById('loadingIndicator');
-        const resultsCount = document.getElementById('resultsCount');
-        const countNumber = document.getElementById('countNumber');
-
-        // Initialize the page
-        document.addEventListener('DOMContentLoaded', function() {
-            populateYearFilter();
-            renderPublications(publications);
-            setupEventListeners();
-        });
-
-        // Populate year filter with available years
-        function populateYearFilter() {
-            const years = [...new Set(publications.map(pub => 
-                new Date(pub.date).getFullYear()
-            ))].sort((a, b) => b - a);
-            
-            years.forEach(year => {
-                const option = document.createElement('option');
-                option.value = year;
-                option.textContent = year;
-                yearFilter.appendChild(option);
-            });
-        }
-
-        // Render publications
-        function renderPublications(pubsToRender) {
-            showLoading();
-            
-            // Simulate loading delay
-            setTimeout(() => {
-                hideLoading();
-                publicationsList.innerHTML = '';
-                
-                if (pubsToRender.length === 0) {
-                    showNoResults();
-                    return;
-                }
-
-                pubsToRender.forEach(pub => {
-                    const pubElement = createPublicationCard(pub);
-                    publicationsList.appendChild(pubElement);
-                });
-
-                updateResultsCount(pubsToRender.length);
-            }, 300);
-        }
-
-        // Create publication card element
-        function createPublicationCard(pub) {
-            const pubDate = new Date(pub.date);
-            const formattedDate = pubDate.toLocaleDateString('ru-RU', {
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric'
-            });
-
-            const card = document.createElement('article');
-            card.className = 'publication-card';
-            card.innerHTML = `
-                <div class="card-header">
-                    <div class="publication-date">
-                        <i class="fas fa-calendar-alt"></i>
-                        ${formattedDate}
-                    </div>
-                    <h2 class="publication-title">${pub.title}</h2>
-                    <p class="publication-excerpt">${pub.excerpt}</p>
-                </div>
-                <div class="card-footer">
-                    <button class="read-more-btn" onclick="toggleContent(this)">
-                        <span class="btn-text">Читать полностью</span>
-                        <i class="fas fa-chevron-down expand-icon"></i>
-                    </button>
-                </div>
-                <div class="publication-content">
-                    <div class="content-inner">
-                        ${pub.content}
-                    </div>
-                </div>
-            `;
-
-            return card;
-        }
-
-        // Toggle publication content
-        function toggleContent(button) {
-            const card = button.closest('.publication-card');
-            const content = card.querySelector('.publication-content');
-            const btnText = button.querySelector('.btn-text');
-            const isExpanded = card.classList.contains('expanded');
-
-            // Close other expanded cards
-            document.querySelectorAll('.publication-card.expanded').forEach(expandedCard => {
-                if (expandedCard !== card) {
-                    expandedCard.classList.remove('expanded');
-                    expandedCard.querySelector('.publication-content').classList.remove('expanded');
-                    const otherBtn = expandedCard.querySelector('.read-more-btn .btn-text');
-                    otherBtn.textContent = 'Читать полностью';
-                }
-            });
-
-            // Toggle current card
-            if (isExpanded) {
-                card.classList.remove('expanded');
-                content.classList.remove('expanded');
-                btnText.textContent = 'Читать полностью';
-            } else {
-                card.classList.add('expanded');
-                content.classList.add('expanded');
-                btnText.textContent = 'Свернуть';
-                
-                // Smooth scroll to card
-                setTimeout(() => {
-                    card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 300);
-            }
-        }
-
-        // Filter publications
-        function filterPublications() {
-            const searchTerm = searchInput.value.toLowerCase().trim();
-            const selectedYear = yearFilter.value;
-
-            const filtered = publications.filter(pub => {
-                const matchesSearch = !searchTerm || 
-                    pub.title.toLowerCase().includes(searchTerm) ||
-                    pub.content.toLowerCase().includes(searchTerm) ||
-                    pub.excerpt.toLowerCase().includes(searchTerm);
-
-                const pubYear = new Date(pub.date).getFullYear().toString();
-                const matchesYear = !selectedYear || pubYear === selectedYear;
-
-                return matchesSearch && matchesYear;
-            });
-
-            renderPublications(filtered);
-        }
-
-        // Setup event listeners
-        function setupEventListeners() {
-            searchInput.addEventListener('input', debounce(filterPublications, 300));
-            yearFilter.addEventListener('change', filterPublications);
-        }
-
-        // Utility functions
-        function showLoading() {
-            loadingIndicator.classList.add('active');
-            publicationsList.style.opacity = '0.5';
-        }
-
-        function hideLoading() {
-            loadingIndicator.classList.remove('active');
-            publicationsList.style.opacity = '1';
-        }
-
-        function showNoResults() {
-            publicationsList.innerHTML = `
-                <div class="no-results">
-                    <i class="fas fa-search"></i>
-                    <p>Публикации не найдены</p>
-                    <p style="font-size: 0.9rem; margin-top: 10px;">Попробуйте изменить параметры поиска</p>
-                </div>
-            `;
-            updateResultsCount(0);
-        }
-
-        function updateResultsCount(count) {
-            countNumber.textContent = count;
-        }
-
-        function debounce(func, wait) {
-            let timeout;
-            return function executedFunction(...args) {
-                const later = () => {
-                    clearTimeout(timeout);
-                    func(...args);
-                };
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-            };
-        }
-
-        // For future Django integration
-        async function loadPublicationsFromAPI(page = 1, search = '', year = '') {
-            try {
-                const params = new URLSearchParams({
-                    page: page,
-                    search: search,
-                    year: year
-                });
-                
-                const response = await fetch(`/api/publications/?${params}`);
-                if (!response.ok) throw new Error('Network response was not ok');
-                
-                const data = await response.json();
-                return data;
-            } catch (error) {
-                console.error('Error loading publications:', error);
-                return { results: [], count: 0 };
-            }
-        }
-    </script>
+    <!-- Include JavaScript -->
+    <script src="js/publication.js"></script>
 </body>
 </html>
