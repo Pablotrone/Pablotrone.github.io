@@ -600,13 +600,16 @@ const ArgusApp = {
     setupHorizontalSwiperEvents(horizontalEl) {
         if (!horizontalEl || !verticalSwiper) return;
 
+        // Проверяем, мобильное ли устройство
+        const isMobile = window.innerWidth <= 968;
+
         // ИСПРАВЛЕНО: Полная настройка событий для горизонтального свайпера
         horizontalEl.addEventListener('mouseenter', () => {
             console.log('🖱️ Мышь над горизонтальным свайпером');
             isMouseOverHorizontal = true;
             
-            // Отключаем вертикальный свайпер
-            if (verticalSwiper) {
+            // На мобильных устройствах НЕ отключаем вертикальный свайпер
+            if (!isMobile && verticalSwiper) {
                 verticalSwiper.mousewheel.disable();
             }
             
@@ -625,8 +628,8 @@ const ArgusApp = {
             console.log('🖱️ Мышь покинула горизонтальный свайпер');
             isMouseOverHorizontal = false;
             
-            // Включаем вертикальный свайпер
-            if (verticalSwiper) {
+            // Включаем вертикальный свайпер только на десктопе
+            if (!isMobile && verticalSwiper) {
                 verticalSwiper.mousewheel.enable();
             }
             
@@ -643,7 +646,7 @@ const ArgusApp = {
 
         // ИСПРАВЛЕНО: Дополнительные события для надежности
         horizontalEl.addEventListener('wheel', (e) => {
-            if (isMouseOverHorizontal) {
+            if (isMouseOverHorizontal && !isMobile) {
                 e.stopPropagation();
             }
         });
@@ -653,6 +656,34 @@ const ArgusApp = {
                 e.stopPropagation();
             }
         });
+
+        // НОВОЕ: Обработка touch событий для мобильных устройств
+        if (isMobile) {
+            let touchStartY = 0;
+            let touchStartX = 0;
+            
+            horizontalEl.addEventListener('touchstart', (e) => {
+                touchStartY = e.touches[0].clientY;
+                touchStartX = e.touches[0].clientX;
+            });
+            
+            horizontalEl.addEventListener('touchmove', (e) => {
+                if (!touchStartY || !touchStartX) return;
+                
+                const touchEndY = e.touches[0].clientY;
+                const touchEndX = e.touches[0].clientX;
+                
+                const diffY = touchStartY - touchEndY;
+                const diffX = touchStartX - touchEndX;
+                
+                // Если вертикальный свайп больше горизонтального - разрешаем
+                if (Math.abs(diffY) > Math.abs(diffX) && Math.abs(diffY) > 50) {
+                    // Не препятствуем вертикальному свайпу
+                    console.log('📱 Вертикальный свайп обнаружен, разрешаем навигацию');
+                    return;
+                }
+            });
+        }
     },
 
     updateURLHash(activeIndex) {
