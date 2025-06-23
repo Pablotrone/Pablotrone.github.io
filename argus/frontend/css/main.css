@@ -656,7 +656,7 @@ body {
     pointer-events: auto;
 }
 
-/* === ABOUT SECTION - УЛУЧШЕННАЯ ВЕРСИЯ БЕЗ СКРОЛЛА === */
+/* === ABOUT SECTION - ИСПРАВЛЕННАЯ МОБИЛЬНАЯ ВЕРСИЯ === */
 .about-section {
     position: absolute;
     top: 0;
@@ -696,7 +696,7 @@ body {
 .about-header h2 {
     font-family: cormorant-g, serif;
     color: var(--green-color, #d4af37);
-    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    font-size: clamp(1.2rem, 4vw, 2.2rem);
     margin: 0;
     text-align: center;
     text-shadow: 0 2px 10px rgba(212, 175, 55, 0.5);
@@ -720,7 +720,7 @@ body {
 .about-content {
     display: grid;
     grid-template-columns: 1fr;
-    gap: clamp(0.8rem, 1.5vw, 1.2rem);
+    gap: clamp(0.5rem, 1vw, 0.8rem); /* ИСПРАВЛЕНО: Уменьшили gap */
     align-items: start;
     min-height: 0;
     overflow: hidden;
@@ -729,7 +729,7 @@ body {
 .about-main-content {
     display: flex;
     flex-direction: column;
-    gap: clamp(0.6rem, 1.2vw, 1rem);
+    gap: clamp(0.3rem, 0.8vw, 0.6rem); /* ИСПРАВЛЕНО: Уменьшили gap */
 }
 
 .about-text-block p {
@@ -746,7 +746,7 @@ body {
 .about-principles {
     background: rgba(255, 255, 255, 0.05);
     border-radius: 12px;
-    padding: clamp(1rem, 2.5vw, 1.5rem);
+    padding: clamp(0.8rem, 2vw, 1.2rem); /* ИСПРАВЛЕНО: Уменьшили padding */
     border: 1px solid rgba(212, 175, 55, 0.2);
     position: relative;
     overflow: hidden;
@@ -764,7 +764,7 @@ body {
 
 .about-principles h3 {
     font-size: clamp(1rem, 2.5vw, 1.3rem);
-    margin-bottom: clamp(0.8rem, 1.5vw, 1rem);
+    margin-bottom: clamp(0.5rem, 1vw, 0.8rem); /* ИСПРАВЛЕНО: Уменьшили margin */
     text-align: center;
     color: var(--green-color, #d4af37);
     font-weight: 600;
@@ -773,13 +773,13 @@ body {
 .principles-list {
     display: flex;
     flex-direction: column;
-    gap: clamp(0.4rem, 0.8vw, 0.6rem);
-    margin-bottom: clamp(0.6rem, 1.2vw, 0.8rem);
+    gap: clamp(0.2rem, 0.5vw, 0.4rem); /* ИСПРАВЛЕНО: Уменьшили gap */
+    margin-bottom: clamp(0.4rem, 0.8vw, 0.6rem); /* ИСПРАВЛЕНО: Уменьшили margin */
 }
 
 .principle-item {
     position: relative;
-    padding: clamp(0.4rem, 0.8vw, 0.6rem);
+    padding: clamp(0.3rem, 0.6vw, 0.5rem); /* ИСПРАВЛЕНО: Уменьшили padding */
     background: rgba(212, 175, 55, 0.05);
     border-radius: 6px;
     border: 1px solid rgba(212, 175, 55, 0.1);
@@ -810,7 +810,7 @@ body {
     font-size: clamp(0.7rem, 1.5vw, 0.85rem);
     color: var(--green-color, #d4af37);
     text-align: center;
-    padding: clamp(0.4rem, 0.8vw, 0.6rem);
+    padding: clamp(0.3rem, 0.6vw, 0.5rem); /* ИСПРАВЛЕНО: Уменьшили padding */
     background: rgba(212, 175, 55, 0.1);
     border-radius: 6px;
     font-weight: 500;
@@ -823,10 +823,10 @@ body {
 .director-signature {
     display: flex;
     align-items: center;
-    gap: clamp(1rem, 2vw, 1.5rem);
+    gap: clamp(0.8rem, 1.5vw, 1.2rem); /* ИСПРАВЛЕНО: Уменьшили gap */
     background: rgba(0, 0, 0, 0.2);
     border-radius: 12px;
-    padding: clamp(1rem, 2vw, 1.5rem);
+    padding: clamp(0.8rem, 1.5vw, 1.2rem); /* ИСПРАВЛЕНО: Уменьшили padding */
     border: 1px solid rgba(212, 175, 55, 0.1);
     transition: all 0.3s var(--ease-out-expo, ease-out);
     justify-content: flex-end;
@@ -893,30 +893,34 @@ body {
     font-size: clamp(0.85rem, 1.9vw, 1.1rem);
 }
 
-/* === МОБИЛЬНАЯ АДАПТАЦИЯ === */
+/* === ИСПРАВЛЕННАЯ МОБИЛЬНАЯ АДАПТАЦИЯ === */
 @media (max-width: 968px) {
     .about-section {
-        padding: 2px;
+        padding: 10px;
     }
     
     .about-section__inner {
         width: 100%;
-        height: 92vh;
-        padding: 0.2rem;
-        gap: 0.2rem;
+        height: 85vh; /* ИСПРАВЛЕНО: Уменьшили высоту для лучшего размещения */
+        padding: 1rem;
+        gap: 0.5rem; /* ИСПРАВЛЕНО: Уменьшили gap */
     }
     
     .about-content {
-        gap: 0.2rem;
+        gap: 0.4rem; /* ИСПРАВЛЕНО: Уменьшили gap */
+    }
+    
+    .about-main-content {
+        gap: 0.3rem; /* ИСПРАВЛЕНО: Уменьшили gap */
     }
     
     .principles-list {
-        gap: 0.2rem;
+        gap: 0.2rem; /* ИСПРАВЛЕНО: Уменьшили gap */
     }
     
     .director-signature {
-        gap: 0.2rem;
-        padding: 0.2rem;
+        gap: 0.8rem;
+        padding: 0.8rem;
         justify-content: center;
         align-self: center;
         margin-left: 0;
@@ -931,13 +935,13 @@ body {
 
 @media (max-width: 768px) {
     .about-section__inner {
-        height: 90vh;
-        padding: 0.2rem;
-        gap: 0.2rem;
+        height: 80vh; /* ИСПРАВЛЕНО: Еще больше уменьшили высоту */
+        padding: 0.8rem;
+        gap: 0.4rem; /* ИСПРАВЛЕНО: Еще меньше gap */
     }
     
     .about-main-content {
-        gap: 0.2rem;
+        gap: 0.2rem; /* ИСПРАВЛЕНО: Минимальный gap */
     }
     
     .about-text-block p {
@@ -947,11 +951,11 @@ body {
     }
     
     .about-content {
-        gap: 0.2rem;
+        gap: 0.3rem; /* ИСПРАВЛЕНО: Минимальный gap */
     }
     
     .about-principles {
-        padding: 0.2rem;
+        padding: 0.6rem;
     }
     
     .principles-list {
@@ -959,16 +963,16 @@ body {
     }
     
     .director-signature {
-        gap: 0.2rem;
-        padding: 0.2rem;
+        gap: 0.6rem;
+        padding: 0.6rem;
     }
 }
 
 @media (max-width: 640px) {
     .about-section__inner {
-        height: 95vh;
-        padding: 1rem;
-        gap: 0.2rem;
+        height: 90vh; /* ИСПРАВЛЕНО: Адаптировали под меньшие экраны */
+        padding: 0.8rem;
+        gap: 0.3rem; /* ИСПРАВЛЕНО: Минимальные отступы */
     }
     
     .about-main-content {
@@ -982,27 +986,23 @@ body {
     }
     
     .about-principles {
-        padding: 0.2rem;
+        padding: 0.5rem;
     }
     
     .principles-list {
-        gap: 0.2rem;
+        gap: 0.15rem; /* ИСПРАВЛЕНО: Минимальные отступы */
     }
     
     .director-signature {
         flex-direction: column;
         text-align: center;
-        gap: 0.2rem;
-        padding: 0.2rem;
+        gap: 0.5rem;
+        padding: 0.5rem;
     }
     
     .director-info {
         text-align: center;
-    }
-    
-    .director-info {
         order: 2;
-        text-align: center;
     }
     
     .director-photo {
@@ -1017,13 +1017,13 @@ body {
 
 @media (max-width: 480px) {
     .about-section__inner {
-        height: 98vh;
-        padding: 0.2rem;
-        gap: 0.2rem;
+        height: 95vh; /* ИСПРАВЛЕНО: Максимально используем экран */
+        padding: 0.6rem;
+        gap: 0.2rem; /* ИСПРАВЛЕНО: Минимальные отступы */
     }
     
     .about-main-content {
-        gap: 0.2rem;
+        gap: 0.15rem; /* ИСПРАВЛЕНО: Минимальные отступы */
     }
     
     .about-text-block p {
@@ -1033,11 +1033,11 @@ body {
     }
     
     .about-principles {
-        padding: 0.2rem;
+        padding: 0.4rem;
     }
     
     .principles-list {
-        gap: 0.2rem;
+        gap: 0.1rem; /* ИСПРАВЛЕНО: Минимальные отступы */
     }
     
     .director-image {
@@ -1047,17 +1047,22 @@ body {
 }
 
 @media (max-width: 375px) {
+    .about-header {
+        font-size: 0.9rem;
+    }
+
     .about-section__inner {
-        padding: 0.2rem;
-        gap: 0.2rem;
+        padding: 0.5rem;
+        gap: 0.15rem; /* ИСПРАВЛЕНО: Минимальные отступы */
+        height: 98vh; /* ИСПРАВЛЕНО: Максимальное использование экрана */
     }
     
     .about-main-content {
-        gap: 0.2rem;
+        gap: 0.1rem; /* ИСПРАВЛЕНО: Минимальные отступы */
     }
     
     .about-text-block p {
-        font-size: clamp(0.6rem, 1.3vw, 0.75rem);
+        font-size: clamp(0.75rem, 1.3vw, 0.9rem);
         line-height: 1.15;
     }
     
@@ -1071,22 +1076,6 @@ body {
     .director-image {
         width: clamp(100px, 20vw, 120px);
         height: clamp(100px, 20vw, 120px);
-    }
-}
-
-/* === ACCESSIBILITY & PERFORMANCE === */
-@media (prefers-reduced-motion: reduce) {
-    .principle-item,
-    .director-signature,
-    .director-image {
-        transition: none;
-    }
-}
-
-@media (prefers-contrast: high) {
-    .about-section__inner,
-    .about-principles {
-        border: 2px solid var(--green-color, #d4af37);
     }
 }
 
@@ -2076,64 +2065,6 @@ body {
         right: 15px;
     }
 
-    /* === МОБИЛЬНАЯ АДАПТАЦИЯ ABOUT === */
-    .about-section {
-        padding: 10px;
-    }
-    
-    .about-section__inner {
-        width: 100%;
-        height: 92vh;
-        padding: 1rem;
-        gap: 0.2rem;
-    }
-    
-    .about-section h2 {
-        font-size: clamp(1.3rem, 4vw, 1.8rem);
-        margin-bottom: 0.8rem;
-    }
-    
-    .about-main-content {
-        gap: 0.2rem;
-    }
-    
-    .about-main-content p {
-        font-size: clamp(0.8rem, 3vw, 0.95rem);
-        line-height: 1.4;
-        text-indent: 1em;
-    }
-    
-    .about-principles {
-        padding: 1rem;
-    }
-    
-    .about-principles h2 {
-        font-size: clamp(0.95rem, 3.2vw, 1.2rem);
-        margin-bottom: 0.6rem;
-    }
-    
-    .principles-text {
-        gap: 0.5rem;
-    }
-    
-    .principles-text p {
-        font-size: clamp(0.7rem, 2.5vw, 0.85rem);
-        padding-left: 0.8rem;
-        line-height: 1.3;
-    }
-    
-    .principles-text p.latin-quote {
-        font-size: clamp(0.65rem, 2.2vw, 0.75rem);
-        padding: 0.5rem;
-        margin-top: 0.2rem;
-    }
-    
-    .director-signature {
-        text-align: center;
-        padding: 0.6rem;
-        font-size: clamp(0.7rem, 2.3vw, 0.8rem);
-    }
-
     .col--lead {
         justify-content: flex-end;
         padding-right: 60px;
@@ -2260,41 +2191,6 @@ body {
   .contact-link {
     font-size: 0.9rem;
   }
-
-  /* === ПЛАНШЕТНАЯ АДАПТАЦИЯ ABOUT === */
-  .about-section__inner {
-    height: 90vh;
-    padding: 1rem;
-    gap: 0.6rem;
-  }
-  
-  .about-section h2 {
-    font-size: clamp(1.2rem, 4vw, 1.6rem);
-    margin-bottom: 0.6rem;
-  }
-  
-  .about-main-content p {
-    font-size: clamp(0.75rem, 2.8vw, 0.9rem);
-    line-height: 1.3;
-  }
-  
-  .about-principles {
-    padding: 0.8rem;
-  }
-  
-  .about-principles h2 {
-    font-size: clamp(0.9rem, 3vw, 1.1rem);
-  }
-  
-  .principles-text p {
-    font-size: clamp(0.65rem, 2.3vw, 0.8rem);
-    line-height: 1.2;
-  }
-  
-  .director-signature {
-    padding: 0.5rem;
-    font-size: clamp(0.65rem, 2.2vw, 0.75rem);
-  }
 }
 
 @media (max-width: 640px) {
@@ -2338,71 +2234,6 @@ body {
     .floating-logo .logo-image {
         width: 25px;
         height: 25px;
-    }
-
-    /* === КОМПАКТНАЯ МОБИЛЬНАЯ ABOUT === */
-    .about-section__inner {
-        width: 99vw;
-        height: 96vh;
-        padding: 1rem;
-        gap: 0.6rem;
-        border-radius: 10px;
-    }
-    
-    .about-section__inner > h2:first-child {
-        font-size: clamp(1.3rem, 4.5vw, 1.8rem);
-    }
-    
-    .about-main-content {
-        gap: 0.6rem;
-    }
-    
-    .about-main-content p {
-        font-size: clamp(0.75rem, 2.8vw, 0.9rem);
-        line-height: 1.3;
-        text-indent: 0.8em;
-    }
-    
-    .about-principles {
-        padding: 0.8rem;
-    }
-    
-    .about-principles h2 {
-        font-size: clamp(0.9rem, 3.5vw, 1.2rem);
-        margin-bottom: 0.6rem;
-    }
-    
-    .principles-text {
-        gap: 0.4rem;
-    }
-    
-    .principles-text p {
-        font-size: clamp(0.65rem, 2.3vw, 0.8rem);
-        line-height: 1.2;
-        padding-left: 0.6rem;
-    }
-    
-    .principles-text p.latin-quote {
-        font-size: clamp(0.6rem, 2vw, 0.75rem);
-        padding: 0.4rem;
-        margin-top: 0.2rem;
-    }
-    
-    .director-signature {
-        flex-direction: row;
-        gap: 0.8rem;
-        padding: 0.6rem;
-        font-size: clamp(0.65rem, 2.2vw, 0.8rem);
-    }
-    
-    .signature-photo {
-        width: 45px;
-        height: 45px;
-    }
-    
-    .signature-text {
-        text-align: right;
-        line-height: 1.2;
     }
 
     .horizontal-swiper-container {
@@ -2525,41 +2356,6 @@ body {
         height: 22px;
     }
 
-    /* === ЭКСТРА КОМПАКТНАЯ ABOUT === */
-    .about-section__inner {
-        height: 98vh;
-        padding: 0.8rem;
-        gap: 0.4rem;
-    }
-    
-    .about-section__inner > h2:first-child {
-        font-size: clamp(1.2rem, 4vw, 1.6rem);
-    }
-    
-    .about-main-content p {
-        font-size: clamp(0.7rem, 2.5vw, 0.85rem);
-        line-height: 1.2;
-    }
-    
-    .about-principles {
-        padding: 0.6rem;
-    }
-    
-    .principles-text p {
-        font-size: clamp(0.6rem, 2vw, 0.75rem);
-        line-height: 1.1;
-    }
-    
-    .director-signature {
-        gap: 0.6rem;
-        padding: 0.4rem;
-    }
-    
-    .signature-photo {
-        width: 35px;
-        height: 35px;
-    }
-
     .contacts-container {
         padding: clamp(8px, 2.5vw, 15px) clamp(5px, 2vw, 10px);
         margin: 0;
@@ -2598,29 +2394,6 @@ body {
 
     .contact-item {
         min-height: auto;
-    }
-
-    /* === ЭКСТРЕМАЛЬНО КОМПАКТНАЯ ABOUT === */
-    .about-section__inner {
-        padding: 0.6rem;
-        gap: 0.3rem;
-    }
-    
-    .about-main-content p {
-        font-size: clamp(0.65rem, 2.2vw, 0.8rem);
-    }
-    
-    .principles-text p {
-        font-size: clamp(0.55rem, 1.8vw, 0.7rem);
-    }
-    
-    .director-signature {
-        font-size: clamp(0.6rem, 2vw, 0.75rem);
-    }
-    
-    .signature-photo {
-        width: 30px;
-        height: 30px;
     }
 }
 
