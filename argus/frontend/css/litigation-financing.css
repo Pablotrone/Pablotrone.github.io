@@ -347,8 +347,8 @@ body {
     content: '';
     position: absolute;
     left: 30px;
-    top: 0;
-    bottom: 0;
+    top: 30px; /* Начинаем от центра первого кружка */
+    height: 650px; /* Фиксированная высота до последнего элемента */
     width: 2px;
     background: linear-gradient(180deg, var(--gold-color), var(--gold-light), var(--gold-color));
     border-radius: 1px;
