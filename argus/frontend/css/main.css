@@ -770,6 +770,16 @@ body {
     font-weight: 600;
 }
 
+.latin-phrase {
+    display: block;
+    text-align: center;
+    font-style: italic;
+    font-family: 'Georgia', serif;
+    color: #d4af37;
+    margin: 0.3em 0;
+    font-size: clamp(0.7rem, 2.5vw, 1rem);
+}
+
 .principles-list {
     display: flex;
     flex-direction: column;
