@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Консультации | Argus</title>
+    
+    <!-- === EXTERNAL DEPENDENCIES === -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- === FONTS === -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- === CUSTOM STYLES === -->
+    <link rel="stylesheet" href="css/consultation.css">
+</head>
+<body>
+    <!-- Navigation Button -->
+    <a href="index.html" class="nav-button">
+        <i class="fas fa-arrow-left"></i>
+        Вернуться на главную
+    </a>
+
+    <!-- Main Content -->
+    <main class="consultation-container">
+        <!-- Header Section -->
+        <header class="consultation-header">
+            <div class="header-decoration">
+                <div class="decoration-line decoration-line--1"></div>
+                <div class="decoration-line decoration-line--2"></div>
+            </div>
+            <h1 class="main-title">Консультации</h1>
+            <p class="subtitle">Профессиональная юридическая помощь от адвокатов АК «Аргус»</p>
+            <div class="header-accent"></div>
+        </header>
+
+        <!-- Content Section -->
+        <div class="content-wrapper">
+            <!-- Main CTA Section -->
+            <section class="main-cta-section" data-animate="fade-up" data-delay="0">
+                <div class="cta-card">
+                    <div class="cta-header">
+                        <div class="cta-icon">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                        <h2>Получить консультацию</h2>
+                        <p>Узнайте о наших услугах, ценах и форматах консультаций</p>
+                    </div>
+                    
+                    <div class="cta-actions">
+                        <button class="consultation-info-btn" id="consultationInfoBtn">
+                            <i class="fas fa-info-circle"></i>
+                            Информация о консультациях
+                        </button>
+                    </div>
+                    
+                    <div class="disclaimer">
+                        <p>Адвокаты Адвокатской консультации «Аргус» оказывают услуги только по отраслям права, указанным в разделе «Практики»</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section class="features-section" data-animate="fade-up" data-delay="200">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h2>Преимущества наших консультаций</h2>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-item" data-animate="slide-left" data-delay="300">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <h3>Опытные адвокаты</h3>
+                        <p>Более 25 лет успешной практики в различных отраслях права</p>
+                    </div>
+
+                    <div class="feature-item" data-animate="slide-left" data-delay="400">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Конфиденциальность</h3>
+                        <p>Полное соблюдение адвокатской тайны</p>
+                    </div>
+
+                    <div class="feature-item" data-animate="slide-left" data-delay="500">
+                        <div class="feature-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>Гибкий график</h3>
+                        <p>Очные и дистанционные консультации в удобное для вас время</p>
+                    </div>
+
+                    <div class="feature-item" data-animate="slide-left" data-delay="600">
+                        <div class="feature-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>Индивидуальный подход</h3>
+                        <p>Детальный анализ вашей ситуации и персональные рекомендации</p>
+                    </div>
+
+                    <div class="feature-item" data-animate="slide-left" data-delay="700">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Оценка перспектив дела</h3>
+                        <p>Профессиональная оценка шансов на успех и возможных рисков</p>
+                    </div>
+
+                    <div class="feature-item" data-animate="slide-left" data-delay="800">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-signature"></i>
+                        </div>
+                        <h3>Помощь в подготовке документов</h3>
+                        <p>Консультации по составлению и проверке правовых документов</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section - ИСПРАВЛЕННАЯ ВЕРСИЯ -->
+            <section class="contact-section" data-animate="fade-up" data-delay="700">
+                <div class="contact-card">
+                    <div class="contact-header">
+                        <h3>Готовы к консультации?</h3>
+                        <p>Свяжитесь с нами удобным способом</p>
+                    </div>
+                    <div class="contact-actions">
+                        <a href="tel:+78121234567" class="contact-button contact-button--phone">
+                            <i class="fas fa-phone"></i>
+                            +7 (812) 937-34-16
+                        </a>
+                        <a href="mailto:info@argus-law.ru" class="contact-button contact-button--email">
+                            <i class="fas fa-envelope"></i>
+                            info@lawco.ru
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Background Decorations -->
+        <div class="background-decorations">
+            <div class="decoration-circle decoration-circle--1"></div>
+            <div class="decoration-circle decoration-circle--2"></div>
+            <div class="decoration-circle decoration-circle--3"></div>
+            <div class="floating-shape floating-shape--1"></div>
+            <div class="floating-shape floating-shape--2"></div>
+        </div>
+    </main>
+
+    <!-- Consultation Info Modal -->
+    <div class="consultation-modal" id="consultationModal">
+        <div class="modal-overlay" id="modalOverlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Информация о консультациях</h2>
+                <button class="modal-close" id="modalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <!-- Oral Consultation -->
+                <div class="consultation-type">
+                    <div class="type-header">
+                        <div class="type-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="type-info">
+                            <h3>Устная консультация</h3>
+                            <div class="price">15 000 руб./час</div>
+                        </div>
+                    </div>
+                    
+                    <div class="type-formats">
+                        <div class="format-item">
+                            <div class="format-icon">
+                                <i class="fas fa-user-friends"></i>
+                            </div>
+                            <div class="format-details">
+                                <h4>Личная встреча</h4>
+                                <p>В офисе адвоката</p>
+                            </div>
+                        </div>
+                        
+                        <div class="format-item">
+                            <div class="format-icon">
+                                <i class="fas fa-video"></i>
+                            </div>
+                            <div class="format-details">
+                                <h4>Дистанционная консультация</h4>
+                                <p>По телефону, WhatsApp, Telegram, Zoom или Skype</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Written Consultation -->
+                <div class="consultation-type">
+                    <div class="type-header">
+                        <div class="type-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="type-info">
+                            <h3>Письменная консультация</h3>
+                            <div class="price">Цена по запросу</div>
+                        </div>
+                    </div>
+                    
+                    <div class="written-details">
+                        <div class="detail-item">
+                            <i class="fas fa-clock"></i>
+                            <span><strong>Обычная:</strong> 3-5 рабочих дней</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-bolt"></i>
+                            <span><strong>Срочная:</strong> 1-2 рабочих дня</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-fire"></i>
+                            <span><strong>Очень срочная:</strong> в течение дня</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="modal-contact">
+                    <h4>Для записи на консультацию:</h4>
+                    <div class="contact-methods">
+                        <a href="tel:+78121234567" class="contact-method">
+                            <i class="fas fa-phone"></i>
+                            <span>+7 (812) 937-34-16</span>
+                        </a>
+                        <a href="mailto:info@argus-law.ru" class="contact-method">
+                            <i class="fas fa-envelope"></i>
+                            <span>info@lawco.ru</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="consultation-footer">
+        <div class="footer-content">
+            <p>© Адвокатская консультация «<span class="company-name">Аргус</span>» Санкт-Петербургской городской коллегии адвокатов, <span class="year">1999-2025</span>. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <!-- Include JavaScript -->
+    <script src="js/consultation.js"></script>
+
+    <!-- ДОПОЛНИТЕЛЬНЫЙ СКРИПТ ДЛЯ ИНИЦИАЛИЗАЦИИ КНОПКИ -->
+    <script>
+    // Дополнительная инициализация кнопки навигации к контактам
+    document.addEventListener('DOMContentLoaded', function() {
+        // Находим кнопку по ID
+        const contactsBtn = document.getElementById('contactsNavigationBtn');
+        
+        if (contactsBtn) {
+            console.log('✅ Found contacts navigation button');
+            
+            // Удаляем все существующие обработчики событий
+            contactsBtn.removeAttribute('onclick');
+            
+            // Добавляем новый обработчик
+            contactsBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                console.log('🎯 Contacts button clicked - enhanced navigation');
+                
+                // Вызываем улучшенную функцию навигации
+                if (typeof navigateToContacts === 'function') {
+                    navigateToContacts(e);
+                } else {
+                    console.warn('⚠️ navigateToContacts function not found, using fallback');
+                    
+                    // Fallback navigation
+                    sessionStorage.setItem('navigate_to', 'contacts');
+                    sessionStorage.setItem('external_navigation', 'true');
+                    window.location.href = 'index.html#contacts';
+                }
+            });
+            
+            // Добавляем visual feedback при клике
+            contactsBtn.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                this.style.transition = 'transform 0.1s ease';
+                
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 100);
+            });
+            
+            console.log('✅ Enhanced contacts navigation button initialized');
+        } else {
+            console.error('❌ Contacts navigation button not found');
+        }
+        
+        // Дополнительная проверка через небольшой интервал
+        setTimeout(() => {
+            const btn = document.getElementById('contactsNavigationBtn');
+            if (btn && !btn.hasAttribute('data-enhanced')) {
+                btn.setAttribute('data-enhanced', 'true');
+                console.log('🔧 Applied enhanced attribute to contacts button');
+            }
+        }, 500);
+    });
+
+    // Функция для тестирования навигации (для отладки)
+    window.testContactsNavigation = function() {
+        console.log('🧪 Testing contacts navigation...');
+        const btn = document.getElementById('contactsNavigationBtn');
+        if (btn) {
+            btn.click();
+        } else {
+            console.error('❌ Button not found for testing');
+        }
+    };
+    </script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Публикации | Argus</title>
+    
+    <!-- === EXTERNAL DEPENDENCIES === -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- === FONTS === -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- === CUSTOM STYLES === -->
+    <link rel="stylesheet" href="css/publication.css">
+</head>
+<body>
+    <!-- Navigation Button -->
+    <a href="index.html" class="nav-button">
+        <i class="fas fa-arrow-left"></i>
+        Вернуться на главную
+    </a>
+
+    <!-- Main Content -->
+    <main class="publication-container">
+        <!-- Header Section -->
+        <header class="publication-header">
+            <div class="header-decoration">
+                <div class="decoration-line decoration-line--1"></div>
+                <div class="decoration-line decoration-line--2"></div>
+            </div>
+            <h1 class="main-title">Обзоры профессиональных достижений практик</h1>
+            <p class="subtitle">Последние достижения, статьи и идеи</p>
+            <div class="header-accent"></div>
+        </header>
+
+        <!-- Content Wrapper -->
+        <div class="content-wrapper">
+            <!-- Filter Section -->
+            <section class="filter-section" data-animate="fade-up" data-delay="0">
+                <div class="filter-card">
+                    <div class="filter-header">
+                        <div class="filter-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h2>Поиск и фильтрация</h2>
+                    </div>
+                    <div class="filter-controls">
+                        <div class="search-group">
+                            <input type="text" id="searchInput" placeholder="Поиск по публикациям...">
+                            <div class="search-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                        </div>
+                        <div class="select-group">
+                            <select id="yearFilter">
+                                <option value="">За все время</option>
+                            </select>
+                            <div class="select-icon">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Publications Section -->
+            <section class="publications-section" data-animate="fade-up" data-delay="200">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h2>Профессиональные достижения</h2>
+                </div>
+                
+                <!-- Publications List -->
+                <div class="publication-list" id="publicationList">
+                    <!-- Publications will be dynamically loaded here -->
+                </div>
+                
+                <!-- No Results -->
+                <div class="no-results" id="noResults" style="display: none;">
+                    <div class="no-results-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Публикации не найдены</h3>
+                    <p>Попробуйте изменить критерии поиска или фильтры</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- Background Decorations -->
+        <div class="background-decorations">
+            <div class="decoration-circle decoration-circle--1"></div>
+            <div class="decoration-circle decoration-circle--2"></div>
+            <div class="decoration-circle decoration-circle--3"></div>
+            <div class="floating-shape floating-shape--1"></div>
+            <div class="floating-shape floating-shape--2"></div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="publication-footer">
+        <div class="footer-content">
+            <p>© Адвокатская консультация «<span class="company-name">Аргус</span>» Санкт-Петербургской городской коллегии адвокатов, <span class="year">1999-2025</span>. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <!-- Include JavaScript -->
+    <script src="js/publication.js"></script>
+</body>
+</html>

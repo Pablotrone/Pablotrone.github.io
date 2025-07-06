@@ -1,0 +1,303 @@
+/* ===================================================================
+   MOBILE RESPONSIVE BACKGROUND IMAGES
+   File: css/mobile-backgrounds.css
+   Purpose: Optimized background images for mobile devices
+   
+   Usage: Link after your main CSS files in HTML <head>
+   ================================================================== */
+
+/* === ENHANCED BACKGROUND LOADING STATES === */
+.slider__layer {
+    /* Enhanced transition for smooth image switching */
+    transition: background-image 0.4s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.background-loading {
+    opacity: 0.8;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.image-loaded {
+    opacity: 1;
+}
+
+/* === MOBILE BACKGROUND OVERRIDES === */
+/* Switch to mobile-optimized images on smaller screens */
+@media (max-width: 968px) {
+    /* Home Section - Mobile Background */
+    .slider__item#home .slider__layer {
+        background-image: url('../img/bcg4-m.jpg');
+    }
+
+    /* About Section - Mobile Background */
+    .slider__item#about .slider__layer {
+        background-image: url('../img/bcg1-m.jpg');
+    }
+
+    /* Practices Section - Mobile Background */
+    .slider__item#practices .slider__layer {
+        background-image: url('../img/bcg4-m.jpg');
+    }
+
+    /* Contacts Section - Mobile Background */
+    .slider__item#contacts .slider__layer {
+        background-image: url('../img/bcg2-m.jpg');
+    }
+    
+    /* === MOBILE-SPECIFIC OPTIMIZATIONS === */
+    .slider__layer {
+        /* Better performance on mobile devices */
+        background-attachment: scroll; /* Prevents iOS scroll issues */
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        
+        /* GPU acceleration for smoother performance */
+        will-change: transform;
+        transform: translateZ(0);
+        backface-visibility: hidden;
+        
+        /* Slightly enhanced contrast for mobile viewing */
+        filter: brightness(1.05) contrast(1.02);
+        
+        /* Optimized image rendering */
+        image-rendering: -webkit-optimize-contrast;
+    }
+}
+
+/* === WEBP SUPPORT WITH AUTOMATIC FALLBACK === */
+/* Modern browsers that support WebP will use it, others fallback to JPEG */
+@supports (background-image: url('image.webp')) {
+    @media (max-width: 968px) {
+        .slider__item#home .slider__layer {
+            background-image: url('../img/bcg4-m.webp'), url('../img/bcg4-m.jpg');
+        }
+
+        .slider__item#about .slider__layer {
+            background-image: url('../img/bcg1-m.webp'), url('../img/bcg1-m.jpg');
+        }
+
+        .slider__item#practices .slider__layer {
+            background-image: url('../img/bcg4-m.webp'), url('../img/bcg4-m.jpg');
+        }
+
+        .slider__item#contacts .slider__layer {
+            background-image: url('../img/bcg2-m.webp'), url('../img/bcg2-m.jpg');
+        }
+    }
+}
+
+/* === HIGH-DPI DISPLAYS OPTIMIZATION === */
+/* Retina and high-DPI mobile screens */
+@media (max-width: 968px) and (-webkit-min-device-pixel-ratio: 2),
+       (max-width: 968px) and (min-resolution: 192dpi),
+       (max-width: 968px) and (min-resolution: 2dppx) {
+    .slider__layer {
+        /* Optimize image rendering for retina displays */
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+        image-rendering: pixelated; /* Fallback */
+    }
+}
+
+/* === TABLET-SPECIFIC OPTIMIZATION === */
+/* Optional: Different images for tablet sizes */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .slider__layer {
+        /* Tablet-specific optimizations */
+        background-size: cover;
+        filter: brightness(1.03) contrast(1.01);
+    }
+}
+
+/* === VERY SMALL SCREENS OPTIMIZATION === */
+/* Phones in portrait mode */
+@media (max-width: 480px) {
+    .slider__layer {
+        /* Further optimize for very small screens */
+        filter: brightness(1.1) contrast(1.05) saturate(0.98);
+        
+        /* Ensure best performance on low-end devices */
+        transform: translateZ(0);
+        will-change: auto; /* Reset will-change to save memory */
+    }
+}
+
+/* === LANDSCAPE MOBILE OPTIMIZATION === */
+/* Mobile devices in landscape mode */
+@media (max-width: 968px) and (orientation: landscape) {
+    .slider__layer {
+        /* Adjust for landscape viewing */
+        background-position: center center;
+        background-size: cover;
+    }
+}
+
+/* === CONNECTION-AWARE LOADING === */
+/* Styles for slow connections - automatically applied by JavaScript */
+.slow-connection .slider__layer {
+    /* Simplified styling for slow connections */
+    background-size: contain;
+    background-color: var(--dark-bg, #1a1109);
+    filter: brightness(1.2) contrast(0.9);
+}
+
+/* === DARK MODE SUPPORT === */
+/* Automatically adjust for users who prefer dark mode */
+@media (prefers-color-scheme: dark) and (max-width: 968px) {
+    .slider__layer {
+        /* Adjust brightness for dark mode preference */
+        filter: brightness(0.9) contrast(1.1) saturate(1.05);
+    }
+}
+
+/* === ACCESSIBILITY SUPPORT === */
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .slider__layer {
+        /* Remove transitions for users who prefer reduced motion */
+        transition: none !important;
+        filter: none;
+        animation: none !important;
+    }
+    
+    .background-loading {
+        opacity: 1;
+        transition: none !important;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .slider__layer {
+        /* Increase contrast for better accessibility */
+        filter: contrast(1.5) brightness(1.1) !important;
+    }
+}
+
+/* === LOADING PERFORMANCE ENHANCEMENTS === */
+/* Smooth loading transitions */
+.slider__item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--dark-bg, #1a1109);
+    z-index: -1;
+    transition: opacity 0.3s ease;
+}
+
+.slider__item .slider__layer.image-loaded::before {
+    opacity: 0;
+}
+
+/* === PROGRESSIVE ENHANCEMENT === */
+/* Ensure functionality without JavaScript */
+.no-js .slider__layer {
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
+
+/* No-JS mobile backgrounds */
+@media (max-width: 968px) {
+    .no-js .slider__item#home .slider__layer {
+        background-image: url('../img/bcg4-m.jpg') !important;
+    }
+    
+    .no-js .slider__item#about .slider__layer {
+        background-image: url('../img/bcg1-m.jpg') !important;
+    }
+    
+    .no-js .slider__item#practices .slider__layer {
+        background-image: url('../img/bcg4-m.jpg') !important;
+    }
+    
+    .no-js .slider__item#contacts .slider__layer {
+        background-image: url('../img/bcg2-m.jpg') !important;
+    }
+}
+
+/* === PRINT STYLES === */
+/* Remove background images when printing */
+@media print {
+    .slider__layer {
+        background-image: none !important;
+        background-color: white !important;
+        filter: none !important;
+    }
+}
+
+/* === DEVELOPMENT/DEBUG STYLES === */
+/* Visual indicators for development (remove in production) */
+.dev-mode .image-loaded::after {
+    content: '✓ Loaded';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 255, 0, 0.8);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: bold;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.dev-mode .background-loading::after {
+    content: '⏳ Loading...';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 165, 0, 0.8);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: bold;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+/* === ERROR HANDLING === */
+/* Fallback styles if images fail to load */
+.slider__layer:not(.image-loaded) {
+    /* Gradient fallback if image doesn't load */
+    background: linear-gradient(
+        135deg,
+        var(--dark-bg, #1a1109) 0%,
+        rgba(212, 175, 55, 0.1) 50%,
+        var(--dark-bg, #1a1109) 100%
+    );
+}
+
+/* === PERFORMANCE HINTS === */
+/* Browser hints for better performance */
+.slider__item {
+    /* Hint to browser that transforms will be used */
+    will-change: transform;
+}
+
+.slider__layer {
+    /* Optimize for compositing */
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+}
+
+/* === FUTURE-PROOFING === */
+/* Ready for new image formats */
+@supports (background-image: url('image.avif')) {
+    @media (max-width: 968px) {
+        /* AVIF support - will be enabled when browser support improves */
+        /*
+        .slider__item#home .slider__layer {
+            background-image: url('../img/bcg4-m.avif'), url('../img/bcg4-m.webp'), url('../img/bcg4-m.jpg');
+        }
+        */
+    }
+}
+
+/* === END OF MOBILE BACKGROUNDS === */
