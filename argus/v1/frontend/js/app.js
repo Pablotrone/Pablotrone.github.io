@@ -204,7 +204,7 @@ const ArgusApp = {
                     
                     // Применяем правильные стили
                     if (slide.classList.contains('swiper-slide-active')) {
-                        layer.style.transform = 'scale(1.1)';
+                        layer.style.transform = 'scale(1)';
                     } else {
                         layer.style.transform = 'scale(1)';
                     }

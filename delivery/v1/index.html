@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zubdah Wa Qashda - Cloud Kitchen Brands</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #0a0a0a;
+            min-height: 100vh;
+            color: #ffffff;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Neon background overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 128, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, rgba(255, 107, 0, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Navigation with Neon Style */
+        nav {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+            padding: 1.5rem 2rem;
+            border-bottom: 2px solid #00ffff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            position: relative;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            z-index: 1001;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: #0a0a0a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #00ffff;
+            position: relative;
+            overflow: hidden;
+            background-image: url('assets/logo/logo.png');
+            background-size: 80%;
+            background-position: center;
+            background-repeat: no-repeat;
+            box-shadow: 
+                0 0 10px #00ffff,
+                inset 0 0 10px rgba(0, 255, 255, 0.1);
+        }
+
+        .logo-icon::after {
+            display: none;
+        }
+
+        .logo-text {
+            color: #00ffff;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 
+                0 0 5px #00ffff,
+                0 0 10px #00ffff;
+            animation: logoGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes logoGlow {
+            from { 
+                text-shadow: 
+                    0 0 5px #00ffff,
+                    0 0 10px #00ffff;
+            }
+            to { 
+                text-shadow: 
+                    0 0 8px #00ffff,
+                    0 0 15px #00ffff,
+                    0 0 20px #0080ff;
+            }
+        }
+
+        .logo-section:hover .logo-icon {
+            transform: scale(1.1);
+            box-shadow: 
+                0 0 15px #00ffff,
+                0 0 25px #0080ff,
+                inset 0 0 15px rgba(0, 255, 255, 0.2);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.7rem 1.2rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .nav-links a:hover {
+            color: #00ffff;
+            border-color: #00ffff;
+            text-shadow: 0 0 8px #00ffff;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Burger Menu */
+        .burger-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+            z-index: 1001;
+        }
+
+        .burger-line {
+            width: 25px;
+            height: 3px;
+            background: #00ffff;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 5px #00ffff;
+        }
+
+        .burger-menu.active .burger-line:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .burger-menu.active .burger-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .burger-menu.active .burger-line:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.95), rgba(26, 26, 26, 0.95));
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        .mobile-menu a {
+            color: #ffffff;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .mobile-menu a:hover {
+            color: #00ffff;
+            border-color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 1rem;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+            border-radius: 0 0 50px 50px;
+            margin-bottom: 3rem;
+            position: relative;
+            border: 2px solid #00ffff;
+            border-top: none;
+            box-shadow: 
+                0 0 30px rgba(0, 255, 255, 0.2),
+                0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .brand-logo-main {
+            width: 120px;
+            height: 120px;
+            background: #0a0a0a;
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid #4CAF50; /* ЗЕЛЕНАЯ ОБВОДКА как просили */
+            box-shadow: 
+                0 0 20px #4CAF50,
+                0 0 40px rgba(76, 175, 80, 0.3);
+            position: relative;
+            overflow: hidden;
+            background-image: url('assets/logo/logo.png');
+            background-size: 80%;
+            background-position: center;
+            background-repeat: no-repeat;
+            animation: mainLogoGlow 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes mainLogoGlow {
+            from { 
+                box-shadow: 
+                    0 0 20px #4CAF50,
+                    0 0 40px rgba(76, 175, 80, 0.3);
+            }
+            to { 
+                box-shadow: 
+                    0 0 30px #4CAF50,
+                    0 0 60px rgba(76, 175, 80, 0.5),
+                    0 0 80px rgba(76, 175, 80, 0.2);
+            }
+        }
+
+        .brand-logo-main::after {
+            display: none;
+        }
+
+        .brand-logo-main:hover {
+            transform: scale(1.05);
+            box-shadow: 
+                0 0 40px #4CAF50,
+                0 0 80px rgba(76, 175, 80, 0.4);
+        }
+
+        .food-truck-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            color: #ffffff;
+            margin-bottom: 1rem;
+            text-shadow: 
+                0 0 5px #00ffff,
+                0 0 10px #00ffff,
+                0 0 20px #00ffff,
+                0 0 40px #0080ff;
+            line-height: 1.1;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: neonFlicker 4s infinite;
+        }
+
+        .kitchen-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            color: #ffffff;
+            margin-bottom: 1rem;
+            text-shadow: 
+                0 0 3px #00ffff,
+                0 0 6px #00ffff,
+                0 0 12px #0080ff;
+            font-weight: 600;
+            letter-spacing: 1px;
+            animation: subtitleGlitch 3s infinite;
+        }
+
+        .divider {
+            width: 200px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00ffff, transparent);
+            margin: 30px auto;
+            box-shadow: 0 0 10px #00ffff;
+        }
+
+        .chalkboard {
+            background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+            border: 2px solid #ff6b00;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 600px;
+            position: relative;
+            box-shadow: 
+                0 0 20px rgba(255, 107, 0, 0.3),
+                inset 0 0 20px rgba(255, 107, 0, 0.1);
+        }
+
+        .chalk-text {
+            color: #ff6b00;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-shadow: 
+                0 0 5px #ff6b00,
+                0 0 10px #ff6b00;
+            animation: brandCountSpark 5s infinite;
+        }
+
+        /* Neon Animations */
+        @keyframes neonFlicker {
+            0%, 18%, 22%, 25%, 53%, 57%, 100% {
+                text-shadow: 
+                    0 0 5px #00ffff,
+                    0 0 10px #00ffff,
+                    0 0 20px #00ffff,
+                    0 0 40px #0080ff;
+                opacity: 1;
+            }
+            4%, 19%, 23%, 54% {
+                text-shadow: none;
+                opacity: 0.1;
+            }
+            5%, 20%, 24%, 55% {
+                text-shadow: 
+                    0 0 2px #00ffff,
+                    0 0 4px #00ffff;
+                opacity: 0.3;
+            }
+            21%, 56% {
+                text-shadow: 
+                    0 0 8px #00ffff,
+                    0 0 16px #00ffff,
+                    0 0 32px #0080ff;
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes subtitleGlitch {
+            0%, 96%, 100% {
+                text-shadow: 
+                    0 0 3px #00ffff,
+                    0 0 6px #00ffff,
+                    0 0 12px #0080ff;
+                opacity: 0.9;
+            }
+            97% {
+                text-shadow: none;
+                opacity: 0.2;
+            }
+            98% {
+                text-shadow: 
+                    0 0 5px #00ffff,
+                    0 0 10px #00ffff;
+                opacity: 0.6;
+            }
+            99% {
+                text-shadow: 
+                    0 0 2px #00ffff;
+                opacity: 0.4;
+            }
+        }
+
+        @keyframes brandCountSpark {
+            0%, 85%, 100% {
+                text-shadow: 
+                    0 0 5px #ff6b00,
+                    0 0 10px #ff6b00,
+                    0 0 20px #ff4500;
+                opacity: 1;
+            }
+            86%, 87% {
+                text-shadow: 
+                    0 0 10px #ff6b00,
+                    0 0 20px #ff6b00,
+                    0 0 40px #ff4500,
+                    0 0 60px #ff0000;
+                opacity: 1;
+            }
+            88% {
+                text-shadow: none;
+                opacity: 0.3;
+            }
+            89% {
+                text-shadow: 
+                    0 0 3px #ff6b00;
+                opacity: 0.7;
+            }
+        }
+
+        /* Stats Section */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+            border: 2px solid #00ffff;
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            box-shadow: 
+                0 0 20px rgba(0, 255, 255, 0.2),
+                0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            min-width: 160px;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 0 30px rgba(0, 255, 255, 0.4),
+                0 15px 35px rgba(0, 0, 0, 0.4);
+            border-color: #0080ff;
+        }
+
+        .stat-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            color: #00ffff;
+            text-shadow: 
+                0 0 10px #00ffff,
+                0 0 20px #0080ff;
+            transition: all 0.3s ease;
+            font-weight: 800;
+        }
+
+        .stat-number:hover {
+            color: #0080ff;
+            transform: scale(1.1);
+            text-shadow: 
+                0 0 15px #00ffff,
+                0 0 30px #0080ff;
+        }
+
+        .stat-label {
+            font-weight: 600;
+            color: #ffffff;
+            margin-top: 0.5rem;
+            font-size: 1rem;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+            border: 2px solid #00ffff;
+            border-radius: 25px;
+            margin: 2rem 1rem;
+            padding: 3rem 2rem;
+            box-shadow: 
+                0 0 30px rgba(0, 255, 255, 0.2),
+                0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .filter-title {
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2rem;
+            color: #00ffff;
+            margin-bottom: 2rem;
+            text-shadow: 
+                0 0 10px #00ffff,
+                0 0 20px #0080ff;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .filter-dropdown-container {
+            text-align: center;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .filter-label {
+            display: block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .filter-select {
+            width: 100%;
+            padding: 1.2rem 1.5rem;
+            border: 2px solid #00ffff;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+            color: #ffffff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 
+                0 0 15px rgba(0, 255, 255, 0.2),
+                0 5px 15px rgba(0, 0, 0, 0.3);
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300ffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1.2rem;
+            padding-right: 3rem;
+        }
+
+        .filter-select:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 255, 0.4),
+                0 10px 25px rgba(0, 0, 0, 0.4);
+            border-color: #0080ff;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: #0080ff;
+            box-shadow: 
+                0 0 25px rgba(0, 255, 255, 0.4),
+                0 10px 25px rgba(0, 0, 0, 0.4),
+                0 0 0 3px rgba(0, 255, 255, 0.1);
+        }
+
+        .filter-select option {
+            background: #1a1a1a;
+            color: #ffffff;
+            padding: 0.5rem;
+            font-weight: 600;
+        }
+
+        /* Brands Grid */
+        .brands-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin: 2rem 0;
+            padding: 0 1rem;
+        }
+
+        .brand-card {
+            background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+            border: 2px solid #333333;
+            border-radius: 20px;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 
+                0 8px 25px rgba(0, 0, 0, 0.3),
+                0 0 10px rgba(51, 51, 51, 0.2);
+            position: relative;
+            overflow: visible;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .brand-card:hover {
+            transform: translateY(-10px);
+            border-color: #00ffff;
+            box-shadow: 
+                0 0 30px rgba(0, 255, 255, 0.3),
+                0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .brand-logo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            font-weight: bold;
+            border: 3px solid #333333;
+            box-shadow: 
+                0 0 15px rgba(51, 51, 51, 0.3),
+                0 8px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .brand-logo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.2), transparent);
+            transition: all 0.5s;
+        }
+
+        .brand-card:hover .brand-logo::before {
+            left: 100%;
+        }
+
+        .brand-card:hover .brand-logo {
+            transform: scale(1.1);
+            border-color: #00ffff;
+            box-shadow: 
+                0 0 25px rgba(0, 255, 255, 0.4),
+                0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .brand-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .cuisine-tag {
+            background: linear-gradient(45deg, #ff6b00, #ff4500);
+            color: #ffffff;
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            box-shadow: 
+                0 0 15px rgba(255, 107, 0, 0.3),
+                0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .platform-links {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(70px, 100px));
+            gap: 0.6rem;
+            justify-content: center;
+        }
+
+        .platform-btn {
+            border: 2px solid #333333;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+            box-shadow: 
+                0 4px 15px rgba(0, 0, 0, 0.2),
+                0 0 10px rgba(51, 51, 51, 0.1);
+            position: relative;
+            overflow: hidden;
+            min-height: 35px;
+            width: 100%;
+            background-size: 100% 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .platform-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: all 0.5s;
+        }
+
+        .platform-btn:hover::before {
+            left: 100%;
+        }
+
+        .platform-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            border-color: #00ffff;
+            box-shadow: 
+                0 0 20px rgba(0, 255, 255, 0.3),
+                0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Platform Button Colors */
+        .talabat {
+            background-image: url('assets/platforms/talabat.png');
+            background-color: #ff6900;
+            color: white;
+        }
+
+        .noon {
+            background-image: url('assets/platforms/noon.png');
+            background-color: #fedd00;
+            color: #333;
+        }
+
+        .careem {
+            background-image: url('assets/platforms/careem.png');
+            background-color: #00c853;
+            color: white;
+        }
+
+        .deliveroo {
+            background-image: url('assets/platforms/deliveroo.png');
+            background-color: #00ccbc;
+            color: white;
+        }
+
+        /* Logo Classes - Real Images */
+        .logo-bronx { 
+            background-image: url('assets/logos/bronx_burger.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .logo-patty { 
+            background-image: url('assets/logos/patty_pit.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .logo-bigdawg { 
+            background-image: url('assets/logos/big_dawg.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .logo-smashville { 
+            background-image: url('assets/logos/smashville.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .logo-redginger { 
+            background-image: url('assets/logos/red_ginger.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .logo-shanghai { 
+            background-image: url('assets/logos/shanghai_spice.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .logo-wokstreet { 
+            background-image: url('assets/logos/wok_street.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .logo-casadelqueso { 
+            background-image: url('assets/logos/casa_del_queso.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .logo-mexigo { 
+            background-image: url('assets/logos/mexi_go.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .logo-locotaco { 
+            background-image: url('assets/logos/loco-taco.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .logo-fiesta { 
+            background-image: url('assets/logos/fiesta.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .logo-picante { 
+            background-image: url('assets/logos/picante.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .logo-curryclub { 
+            background-image: url('assets/logos/the_curry_club.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .logo-patiala { 
+            background-image: url('assets/logos/patiala.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .logo-zaika { 
+            background-image: url('assets/logos/zaika_punjab.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .logo-juicybuns { 
+            background-image: url('assets/logos/juicy_buns.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .logo-slidershack { 
+            background-image: url('assets/logos/slider_shack.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .logo-smokytandoor { 
+            background-image: url('assets/logos/smoky_tandoor.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .logo-tandooritribe { 
+            background-image: url('assets/logos/tandoori_tandoori_tribe.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .logo-wingingit { 
+            background-image: url('assets/logos/winging_it.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .logo-wingsoffury { 
+            background-image: url('assets/logos/wings_of_fury.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* Hide emoji fallback to show real logos */
+        .brand-logo::after {
+            display: none;
+        }
+
+        /* QR Section */
+        .qr-section {
+            background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+            border: 2px solid #ff6b00;
+            border-radius: 25px;
+            margin: 4rem 1rem;
+            padding: 3rem 2rem;
+            text-align: center;
+            color: #ffffff;
+            box-shadow: 
+                0 0 30px rgba(255, 107, 0, 0.2),
+                0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .qr-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            color: #ff6b00;
+            margin-bottom: 1.5rem;
+            text-shadow: 
+                0 0 10px #ff6b00,
+                0 0 20px #ff4500;
+            font-weight: 800;
+        }
+
+        .qr-text {
+            font-size: 1.2rem;
+            font-weight: 500;
+            line-height: 1.6;
+        }
+
+        /* Mobile Optimizations */
+        @media (max-width: 1024px) {
+            .brands-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.5rem;
+            }
+            
+            .brand-logo {
+                width: 160px;
+                height: 160px;
+                font-size: 2.8rem;
+            }
+
+            .platform-links {
+                width: 140px;
+                gap: 0.6rem;
+            }
+
+            .platform-btn {
+                min-height: 35px;
+                border-radius: 20px;
+            }
+
+            /* Reduce neon effects on tablets */
+            .food-truck-title {
+                text-shadow: 
+                    0 0 3px #00ffff,
+                    0 0 6px #00ffff,
+                    0 0 12px #0080ff;
+            }
+            
+            .kitchen-subtitle {
+                text-shadow: 
+                    0 0 2px #00ffff,
+                    0 0 4px #0080ff;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .burger-menu {
+                display: flex;
+            }
+
+            .nav-container {
+                justify-content: space-between;
+            }
+
+            .hero {
+                padding: 3rem 1rem;
+            }
+
+            .stats {
+                flex-direction: column;
+                align-items: center;
+                gap: 1.5rem;
+            }
+
+            .brands-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+                padding: 0 0.5rem;
+            }
+
+            .brand-logo {
+                width: 140px;
+                height: 140px;
+                font-size: 2.5rem;
+            }
+
+            .platform-links {
+                width: 120px;
+                gap: 0.5rem;
+            }
+
+            .platform-btn {
+                min-height: 32px;
+                border-radius: 16px;
+            }
+
+            .filter-select {
+                font-size: 1rem;
+                padding: 1rem 1.2rem;
+                padding-right: 2.5rem;
+            }
+
+            .filter-section {
+                margin: 2rem 0.5rem;
+                padding: 2rem 1.5rem;
+            }
+
+            .qr-section {
+                margin: 3rem 0.5rem;
+                padding: 2rem 1.5rem;
+            }
+
+            .logo-icon {
+                width: 45px;
+                height: 45px;
+            }
+
+            .brand-logo-main {
+                width: 100px;
+                height: 100px;
+            }
+
+            /* Mobile neon optimizations */
+            .food-truck-title {
+                text-shadow: 
+                    0 0 3px #00ffff,
+                    0 0 6px #00ffff;
+                letter-spacing: 1px;
+            }
+            
+            .kitchen-subtitle {
+                text-shadow: 
+                    0 0 2px #00ffff,
+                    0 0 4px #0080ff;
+                letter-spacing: 1px;
+            }
+            
+            .chalk-text {
+                text-shadow: 
+                    0 0 3px #ff6b00,
+                    0 0 6px #ff4500;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 2rem 1rem;
+            }
+
+            .food-truck-title {
+                font-size: 2rem;
+            }
+
+            .kitchen-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .brands-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+                padding: 0 0.3rem;
+            }
+
+            .brand-logo {
+                width: 120px;
+                height: 120px;
+                font-size: 2rem;
+            }
+
+            .platform-links {
+                width: 100px;
+                gap: 0.4rem;
+            }
+
+            .platform-btn {
+                min-height: 28px;
+                border-radius: 14px;
+            }
+
+            .filter-select {
+                font-size: 0.9rem;
+                padding: 0.7rem 1rem;
+                padding-right: 2.2rem;
+            }
+
+            .logo-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            .brand-logo-main {
+                width: 90px;
+                height: 90px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .brands-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.6rem;
+                padding: 0 0.2rem;
+            }
+
+            .brand-logo {
+                width: 100px;
+                height: 100px;
+            }
+
+            .platform-links {
+                width: 85px;
+                gap: 0.3rem;
+            }
+
+            .platform-btn {
+                min-height: 24px;
+                border-radius: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo-section">
+                <div class="logo-icon"></div>
+                <div class="logo-text">ZUBDAH WA QASHDA</div>
+            </div>
+            <div class="nav-links">
+                <a href="#home">HOME</a>
+                <a href="#brands">BRANDS</a>
+                <a href="#about">ABOUT</a>
+                <a href="#contact">CONTACT</a>
+            </div>
+            <div class="burger-menu" id="burger-menu">
+                <div class="burger-line"></div>
+                <div class="burger-line"></div>
+                <div class="burger-line"></div>
+            </div>
+        </div>
+        
+        <div class="mobile-menu" id="mobile-menu">
+            <a href="#home" onclick="closeMobileMenu()">HOME</a>
+            <a href="#brands" onclick="closeMobileMenu()">BRANDS</a>
+            <a href="#about" onclick="closeMobileMenu()">ABOUT</a>
+            <a href="#contact" onclick="closeMobileMenu()">CONTACT</a>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="brand-logo-main"></div>
+            <h1 class="food-truck-title">ZUBDAH WA QASHDA</h1>
+            <div class="divider"></div>
+            <h2 class="kitchen-subtitle">DIVERSE CUISINES • ONE KITCHEN</h2>
+            
+            <div class="chalkboard">
+                <div class="chalk-text">🔥 21 VIRTUAL BRANDS</div>
+            </div>
+            
+            <p style="font-size: 1.2rem; font-weight: 600; color: #ffffff; margin-top: 1rem; opacity: 0.8;">
+                🌟 Order now on Talabat, Careem, Noon & Deliveroo 🌟
+            </p>
+        </section>
+
+        <section class="stats">
+            <div class="stat-item">
+                <div class="stat-number" id="visible-brands">21</div>
+                <div class="stat-label">Showing Brands</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">21</div>
+                <div class="stat-label">Total Brands</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">7</div>
+                <div class="stat-label">Cuisine Types</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">4</div>
+                <div class="stat-label">Delivery Apps</div>
+            </div>
+        </section>
+
+        <section class="filter-section" id="brands">
+            <h3 class="filter-title">🍴 CHOOSE YOUR CRAVING</h3>
+            
+            <div class="filter-dropdown-container">
+                <label for="cuisine-filter" class="filter-label">🌟 SELECT YOUR CUISINE:</label>
+                <select id="cuisine-filter" class="filter-select">
+                    <option value="all">🌍 ALL CUISINES (21 brands)</option>
+                    <option value="Burgers">🍔 BURGERS (4 brands)</option>
+                    <option value="Chinese">🥢 CHINESE (3 brands)</option>
+                    <option value="Mexican">🌮 MEXICAN (5 brands)</option>
+                    <option value="North Indian">🍛 NORTH INDIAN (3 brands)</option>
+                    <option value="Sliders">🍞 SLIDERS (2 brands)</option>
+                    <option value="Tandoori">🔥 TANDOORI (2 brands)</option>
+                    <option value="Wings">🍗 WINGS (2 brands)</option>
+                </select>
+            </div>
+        </section>
+
+        <div class="brands-grid" id="brands-grid">
+            <!-- Brands will be populated by JavaScript -->
+        </div>
+
+        <section class="qr-section">
+            <h3 class="qr-title">📱 FOUND US VIA QR CODE?</h3>
+            <p class="qr-text">
+                🎯 Scan our codes on delivery bags, business cards & flyers to discover ALL our amazing brands!<br>
+                <strong>Welcome to the flavor revolution - 21 professional brands, one kitchen! 🌟</strong>
+            </p>
+            <div style="margin-top: 1.5rem; font-size: 1rem; opacity: 0.9;">
+                <strong>📍 Serving:</strong> JLT, Dubai Marina, JVC, Al Barsha & surrounding areas
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Brand data
+        const brands = [
+            // Burgers (4 brands)
+            { name: "BRONX BURGER HOUSE", cuisine: "Burgers", logoClass: "logo-bronx" },
+            { name: "THE PATTY PIT", cuisine: "Burgers", logoClass: "logo-patty" },
+            { name: "BIG DAWG'S BURGER", cuisine: "Burgers", logoClass: "logo-bigdawg" },
+            { name: "SMASHVILLE", cuisine: "Burgers", logoClass: "logo-smashville" },
+            
+            // Chinese (3 brands)
+            { name: "RED GINGER", cuisine: "Chinese", logoClass: "logo-redginger" },
+            { name: "SHANGHAI SPICE", cuisine: "Chinese", logoClass: "logo-shanghai" },
+            { name: "WOK STREET", cuisine: "Chinese", logoClass: "logo-wokstreet" },
+            
+            // Mexican (5 brands)
+            { name: "CASA DEL QUESO", cuisine: "Mexican", logoClass: "logo-casadelqueso" },
+            { name: "MEXIGO!", cuisine: "Mexican", logoClass: "logo-mexigo" },
+            { name: "LOCO TACO", cuisine: "Mexican", logoClass: "logo-locotaco" },
+            { name: "FIESTA", cuisine: "Mexican", logoClass: "logo-fiesta" },
+            { name: "PICANTE", cuisine: "Mexican", logoClass: "logo-picante" },
+            
+            // North Indian (3 brands)
+            { name: "THE CURRY CLUB", cuisine: "North Indian", logoClass: "logo-curryclub" },
+            { name: "PATIALA PLATE", cuisine: "North Indian", logoClass: "logo-patiala" },
+            { name: "ZAIKA PUNJAB", cuisine: "North Indian", logoClass: "logo-zaika" },
+            
+            // Sliders (2 brands)
+            { name: "JUICY BUNS", cuisine: "Sliders", logoClass: "logo-juicybuns" },
+            { name: "THE SLIDER SHACK", cuisine: "Sliders", logoClass: "logo-slidershack" },
+            
+            // Tandoori (2 brands)
+            { name: "THE SMOKY TANDOOR", cuisine: "Tandoori", logoClass: "logo-smokytandoor" },
+            { name: "THE TANDOORI TRIBE", cuisine: "Tandoori", logoClass: "logo-tandooritribe" },
+            
+            // Wings (2 brands)
+            { name: "WINGING IT", cuisine: "Wings", logoClass: "logo-wingingit" },
+            { name: "WINGS OF FURY", cuisine: "Wings", logoClass: "logo-wingsoffury" }
+        ];
+
+        // Platform links
+        const platformLinks = {
+            talabat: "https://www.talabat.com/uae",
+            noon: "https://sell.withnoon.com/en/noon-food",
+            careem: "https://www.careem.com/en-AE/food/",
+            deliveroo: "https://deliveroo.ae/"
+        };
+
+        function createBrandCard(brand) {
+            return `
+                <div class="brand-card" data-cuisine="${brand.cuisine}">
+                    <div class="brand-logo ${brand.logoClass}"></div>
+                    <div class="platform-links">
+                        <a href="${platformLinks.talabat}" class="platform-btn talabat" onclick="trackClick('${brand.name}', 'Talabat')">
+                        </a>
+                        <a href="${platformLinks.noon}" class="platform-btn noon" onclick="trackClick('${brand.name}', 'Noon')">
+                        </a>
+                        <a href="${platformLinks.deliveroo}" class="platform-btn deliveroo" onclick="trackClick('${brand.name}', 'Deliveroo')">
+                        </a>
+                        <a href="${platformLinks.careem}" class="platform-btn careem" onclick="trackClick('${brand.name}', 'Careem')">
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderBrands(filteredBrands = brands) {
+            const grid = document.getElementById('brands-grid');
+            grid.innerHTML = filteredBrands.map(createBrandCard).join('');
+            
+            // Update visible count with neon animation
+            const visibleCount = document.getElementById('visible-brands');
+            if (visibleCount) {
+                visibleCount.style.transform = 'scale(1.2)';
+                visibleCount.style.color = '#0080ff';
+                visibleCount.textContent = filteredBrands.length;
+                
+                setTimeout(() => {
+                    visibleCount.style.transform = '';
+                    visibleCount.style.color = '';
+                }, 300);
+            }
+        }
+
+        function trackClick(brandName, platform) {
+            console.log(`📊 Click tracked: ${brandName} → ${platform}`);
+            return true;
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            renderBrands();
+            
+            // Dropdown filter
+            const cuisineFilter = document.getElementById('cuisine-filter');
+            cuisineFilter.addEventListener('change', function() {
+                const selectedCuisine = this.value;
+                const filteredBrands = selectedCuisine === 'all' ? brands : brands.filter(brand => brand.cuisine === selectedCuisine);
+                renderBrands(filteredBrands);
+                
+                // Neon glow animation feedback
+                this.style.transform = 'scale(1.02)';
+                this.style.boxShadow = '0 0 30px rgba(0, 255, 255, 0.5)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                    this.style.boxShadow = '';
+                }, 150);
+            });
+
+            // Burger menu functionality
+            const burgerMenu = document.getElementById('burger-menu');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            burgerMenu.addEventListener('click', function() {
+                this.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+                document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+            });
+        });
+
+        // Close mobile menu function
+        function closeMobileMenu() {
+            const burgerMenu = document.getElementById('burger-menu');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            burgerMenu.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
