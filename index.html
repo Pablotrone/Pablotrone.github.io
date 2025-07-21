@@ -366,7 +366,7 @@
     </header>
 
     <main class="container">
-        <form class="form-container" id="questionnaire-form" action="https://formspree.io/f/mpwlqebv" method="POST">
+        <form class="form-container" id="questionnaire-form" action="https://formspree.io/f/mpwlqebv" method="POST" novalidate>
             <!-- Basic Project Information -->
             <section class="section">
                 <h2 class="section-title">Basic Project Information</h2>
@@ -434,9 +434,9 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="current-website-url">If redesigning, please provide current website URL:</label>
-                    <input type="url" id="current-website-url" name="current_website_url" class="form-control">
+                <div class="form-group" id="website-url-group" style="display: none;">
+                    <label for="current-website-url">Current website URL:</label>
+                    <input type="text" id="current-website-url" name="current_website_url" class="form-control" placeholder="example: yoursite.com or https://yoursite.com">
                 </div>
 
                 <div class="form-group">
@@ -1003,6 +1003,11 @@
         document.getElementById('questionnaire-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             
+            // Custom validation
+            if (!validateForm()) {
+                return;
+            }
+            
             const form = this;
             const submitBtn = form.querySelector('.submit-btn');
             const originalText = submitBtn.textContent;
@@ -1046,6 +1051,122 @@
             }
         });
 
+        // Custom form validation
+        function validateForm() {
+            const requiredFields = [
+                { name: 'business_name', message: 'Please enter your business name' },
+                { name: 'industry', message: 'Please enter your industry' },
+                { name: 'website_type', message: 'Please select a website type' },
+                { name: 'current_website', message: 'Please indicate if you have a current website' },
+                { name: 'target_audience', message: 'Please describe your target audience' },
+                { name: 'page_count', message: 'Please select estimated page count' },
+                { name: 'content_updates', message: 'Please indicate your preference for content updates' },
+                { name: 'design_style', message: 'Please select a design style' },
+                { name: 'branding', message: 'Please indicate your branding status' },
+                { name: 'content_status', message: 'Please indicate your content status' },
+                { name: 'photos_status', message: 'Please indicate your photo status' },
+                { name: 'timeline', message: 'Please select your timeline' },
+                { name: 'budget', message: 'Please select your budget range' },
+                { name: 'importance_speed', message: 'Please rate the importance of website speed' },
+                { name: 'importance_mobile', message: 'Please rate the importance of mobile compatibility' },
+                { name: 'importance_easy', message: 'Please rate the importance of easy updates' },
+                { name: 'importance_seo', message: 'Please rate the importance of SEO' },
+                { name: 'importance_professional', message: 'Please rate the importance of professional appearance' },
+                { name: '_replyto', message: 'Please enter a valid email address' }
+            ];
+
+            // Check if current website URL is required
+            const currentWebsiteSelection = document.querySelector('input[name="current_website"]:checked');
+            if (currentWebsiteSelection && currentWebsiteSelection.value === 'redesigning') {
+                requiredFields.push({ name: 'current_website_url', message: 'Please enter your current website URL' });
+            }
+
+            // Check goals (at least one must be selected)
+            const goalsChecked = document.querySelectorAll('input[name="goals"]:checked');
+            if (goalsChecked.length === 0) {
+                showError('Please select at least one main goal for your website');
+                return false;
+            }
+
+            // Check required pages (at least one must be selected)
+            const pagesChecked = document.querySelectorAll('input[name="required_pages"]:checked');
+            if (pagesChecked.length === 0) {
+                showError('Please select at least one required page/section');
+                return false;
+            }
+
+            // Validate each required field
+            for (const field of requiredFields) {
+                const element = document.querySelector(`[name="${field.name}"]`);
+                
+                if (!element) continue;
+                
+                if (element.type === 'radio') {
+                    const checked = document.querySelector(`input[name="${field.name}"]:checked`);
+                    if (!checked) {
+                        showError(field.message);
+                        scrollToElement(element);
+                        return false;
+                    }
+                } else {
+                    if (!element.value.trim()) {
+                        showError(field.message);
+                        element.focus();
+                        scrollToElement(element);
+                        return false;
+                    }
+                    
+                    // Email validation
+                    if (field.name === '_replyto') {
+                        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                        if (!emailRegex.test(element.value)) {
+                            showError('Please enter a valid email address');
+                            element.focus();
+                            scrollToElement(element);
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        function showError(message) {
+            // Remove existing error messages
+            const existingError = document.querySelector('.error-message');
+            if (existingError) {
+                existingError.remove();
+            }
+
+            // Create error message
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.innerHTML = `
+                <div style="background: #ff4444; color: white; padding: 15px; border-radius: 8px; margin: 20px 0; text-align: center; font-weight: 500;">
+                    ${message}
+                </div>
+            `;
+
+            // Insert at top of form
+            const form = document.getElementById('questionnaire-form');
+            form.insertBefore(errorDiv, form.firstChild);
+
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (errorDiv.parentNode) {
+                    errorDiv.remove();
+                }
+            }, 5000);
+        }
+
+        function scrollToElement(element) {
+            element.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'center' 
+            });
+        }
+
         // Update progress bar on input
         document.addEventListener('input', updateProgressBar);
         document.addEventListener('change', updateProgressBar);
@@ -1072,6 +1193,24 @@
                     }
                     updateProgressBar();
                 }
+            });
+        });
+
+        // Show/hide current website URL field based on selection
+        document.querySelectorAll('input[name="current_website"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const urlGroup = document.getElementById('website-url-group');
+                const urlInput = document.getElementById('current-website-url');
+                
+                if (this.value === 'redesigning') {
+                    urlGroup.style.display = 'block';
+                    urlInput.required = true;
+                } else {
+                    urlGroup.style.display = 'none';
+                    urlInput.required = false;
+                    urlInput.value = ''; // Clear the field when hiding
+                }
+                updateProgressBar();
             });
         });
 
