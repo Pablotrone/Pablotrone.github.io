@@ -3,1375 +3,1079 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Fullstack Developer Roadmap - BEAST MODE</title>
+    <title>Website Project Questionnaire | Professional Web Development</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        :root {
+            --primary-bg: #0a0a0a;
+            --secondary-bg: #1a1a1a;
+            --accent-bg: #2a2a2a;
+            --primary-text: #ffffff;
+            --secondary-text: #b0b0b0;
+            --accent-color: #00d4ff;
+            --gradient: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+            --border-color: #333;
+        }
+
         body {
-            font-family: 'Rajdhani', sans-serif;
-            background: #0a0a0a;
-            background-image: 
-                radial-gradient(circle at 20% 80%, #ff0040 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, #00ff88 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, #ff6600 0%, transparent 50%),
-                linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
-            min-height: 100vh;
-            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--primary-bg);
+            color: var(--primary-text);
+            line-height: 1.6;
             overflow-x: hidden;
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 20px;
         }
 
+        /* Header Animation */
         .header {
+            background: var(--secondary-bg);
+            padding: 60px 0;
             text-align: center;
-            margin-bottom: 50px;
             position: relative;
+            overflow: hidden;
         }
 
         .header::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(ellipse, rgba(255, 0, 64, 0.3) 0%, transparent 70%);
-            z-index: -1;
-            animation: pulse 3s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
-            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.6; }
-        }
-
-        .header h1 {
-            font-family: 'Orbitron', monospace;
-            font-size: 4rem;
-            font-weight: 900;
-            background: linear-gradient(45deg, #ff0040, #00ff88, #ff6600, #40e0d0);
-            background-size: 400% 400%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradientShift 3s ease infinite;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            text-shadow: 0 0 30px rgba(255, 0, 64, 0.5);
-            margin-bottom: 20px;
-        }
-
-        .header .subtitle {
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: #00ff88;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 0 20px rgba(0, 255, 136, 0.6);
-            margin-bottom: 10px;
-        }
-
-        .header .tagline {
-            font-size: 1.2rem;
-            color: #ff6600;
-            font-weight: 400;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .overview {
-            background: linear-gradient(135deg, rgba(255, 0, 64, 0.1), rgba(0, 255, 136, 0.1));
-            border: 2px solid #ff0040;
-            padding: 30px;
-            border-radius: 20px;
-            margin-bottom: 40px;
-            box-shadow: 
-                0 0 50px rgba(255, 0, 64, 0.3),
-                inset 0 0 50px rgba(0, 255, 136, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .overview::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 0, 64, 0.1), transparent);
-            animation: scanline 4s linear infinite;
-        }
-
-        @keyframes scanline {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-        }
-
-        .overview h2 {
-            font-family: 'Orbitron', monospace;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #ff0040;
-            text-transform: uppercase;
-            margin-bottom: 25px;
-            text-shadow: 0 0 20px rgba(255, 0, 64, 0.8);
-            position: relative;
-            z-index: 1;
-        }
-
-        .overview-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 20px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .overview-item {
-            background: linear-gradient(135deg, #ff0040, #ff6600);
-            color: #fff;
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
-            border: 2px solid #00ff88;
-            box-shadow: 
-                0 10px 30px rgba(255, 0, 64, 0.4),
-                0 0 50px rgba(0, 255, 136, 0.2);
-            transform: translateY(0) rotateY(0);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .overview-item::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
+            background: var(--gradient);
+            transform: skewX(-15deg);
+            animation: slideIn 2s ease-out;
+            opacity: 0.1;
         }
 
-        .overview-item:hover {
-            transform: translateY(-10px) rotateY(5deg) scale(1.05);
-            box-shadow: 
-                0 20px 50px rgba(255, 0, 64, 0.6),
-                0 0 80px rgba(0, 255, 136, 0.4);
+        @keyframes slideIn {
+            0% { left: -100%; }
+            100% { left: 100%; }
         }
 
-        .overview-item:hover::before {
-            left: 100%;
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out 0.3s both;
         }
 
-        .overview-item h3 {
-            font-family: 'Orbitron', monospace;
+        .header p {
+            font-size: 1.2rem;
+            color: var(--secondary-text);
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Form Styles */
+        .form-container {
+            background: var(--secondary-bg);
+            margin: 40px 0;
+            border-radius: 15px;
+            padding: 40px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.1);
+            animation: fadeIn 1s ease-out 0.9s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .section-title {
             font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .overview-item p {
-            font-size: 1.4rem;
-            font-weight: 600;
-        }
-
-        .timeline {
-            display: grid;
-            gap: 40px;
-        }
-
-        .phase {
-            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(255, 102, 0, 0.1));
-            border: 2px solid #00ff88;
-            border-radius: 20px;
-            padding: 35px;
-            box-shadow: 
-                0 0 60px rgba(0, 255, 136, 0.3),
-                inset 0 0 60px rgba(255, 102, 0, 0.1);
-            position: relative;
-            overflow: hidden;
-            transform: perspective(1000px) rotateX(0);
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
-        }
-
-        .phase::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 6px;
-            background: linear-gradient(90deg, #ff0040, #00ff88, #ff6600, #40e0d0, #ff0040);
-            background-size: 400% 100%;
-            animation: gradientShift 2s ease infinite;
-        }
-
-        .phase::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(from 0deg, transparent, rgba(0, 255, 136, 0.1), transparent, rgba(255, 0, 64, 0.1), transparent);
-            animation: rotate 10s linear infinite;
-            pointer-events: none;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .phase:hover {
-            transform: perspective(1000px) rotateX(5deg) translateY(-15px);
-            box-shadow: 
-                0 20px 80px rgba(0, 255, 136, 0.5),
-                inset 0 0 80px rgba(255, 102, 0, 0.2);
-            border-color: #ff0040;
-        }
-
-        .phase-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            color: var(--accent-color);
             margin-bottom: 25px;
-            flex-wrap: wrap;
-            gap: 15px;
+            font-weight: 600;
             position: relative;
-            z-index: 1;
+            padding-left: 20px;
         }
 
-        .phase-title {
-            font-family: 'Orbitron', monospace;
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: #00ff88;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 0 25px rgba(0, 255, 136, 0.8);
-        }
-
-        .phase-duration {
-            background: linear-gradient(135deg, #ff0040, #ff6600);
-            color: #fff;
-            padding: 12px 24px;
-            border-radius: 25px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border: 2px solid #00ff88;
-            box-shadow: 0 0 30px rgba(255, 0, 64, 0.6);
-        }
-
-        .phase-goal {
-            background: linear-gradient(135deg, rgba(255, 0, 64, 0.2), rgba(0, 255, 136, 0.2));
-            border: 2px solid #ff6600;
-            padding: 20px;
-            margin-bottom: 25px;
-            border-radius: 15px;
-            position: relative;
-            z-index: 1;
-            box-shadow: 0 0 30px rgba(255, 102, 0, 0.3);
-        }
-
-        .phase-goal strong {
-            color: #ff6600;
-            font-size: 1.2rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .months-grid {
-            display: grid;
-            gap: 25px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .month {
-            background: linear-gradient(135deg, rgba(255, 102, 0, 0.1), rgba(64, 224, 208, 0.1));
-            border: 2px solid #ff6600;
-            border-radius: 15px;
-            padding: 25px;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .month::before {
+        .section-title::before {
             content: '';
             position: absolute;
-            top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
-            transform: translateX(-100%);
-            transition: transform 0.6s;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 30px;
+            background: var(--gradient);
+            border-radius: 2px;
         }
 
-        .month:hover {
-            border-color: #00ff88;
-            transform: scale(1.02);
-            box-shadow: 0 10px 40px rgba(255, 102, 0, 0.4);
+        .form-group {
+            margin-bottom: 25px;
         }
 
-        .month:hover::before {
-            transform: translateX(100%);
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--primary-text);
         }
 
-        .month-title {
-            font-family: 'Orbitron', monospace;
-            font-size: 1.6rem;
-            font-weight: 600;
-            color: #ff6600;
-            margin-bottom: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .daily-time {
-            background: linear-gradient(135deg, #ff0040, #ff6600);
-            color: #fff;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 700;
-            border: 1px solid #00ff88;
-            box-shadow: 0 0 20px rgba(255, 0, 64, 0.5);
-        }
-
-        .weeks {
-            display: grid;
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .week {
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(255, 255, 255, 0.05));
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid #40e0d0;
-            box-shadow: 0 0 25px rgba(64, 224, 208, 0.2);
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--accent-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--primary-text);
+            font-size: 16px;
             transition: all 0.3s ease;
         }
 
-        .week:hover {
-            border-color: #ff0040;
-            box-shadow: 0 0 35px rgba(255, 0, 64, 0.3);
-            transform: translateX(10px);
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.2);
+            transform: translateY(-2px);
         }
 
-        .week-title {
-            font-family: 'Orbitron', monospace;
-            font-weight: 700;
-            color: #40e0d0;
-            margin-bottom: 12px;
-            font-size: 1.3rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
         }
 
-        .week-content {
-            display: grid;
-            gap: 8px;
+        /* Checkbox and Radio Styles */
+        .checkbox-group, .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
 
-        .topic {
-            padding: 8px 0;
-            color: #fff;
-            position: relative;
-            padding-left: 25px;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-        }
-
-        .topic::before {
-            content: '⚡';
-            position: absolute;
-            left: 0;
-            color: #ff6600;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .topic:hover {
-            color: #00ff88;
-            transform: translateX(5px);
-        }
-
-        .achievement {
-            background: linear-gradient(135deg, #00ff88, #40e0d0);
-            color: #000;
-            padding: 15px 20px;
-            border-radius: 12px;
-            margin-top: 15px;
-            font-weight: 700;
+        .checkbox-item, .radio-item {
             display: flex;
             align-items: center;
             gap: 12px;
-            border: 2px solid #ff0040;
-            box-shadow: 0 0 30px rgba(0, 255, 136, 0.5);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            padding: 12px;
+            background: var(--accent-bg);
+            border-radius: 8px;
             transition: all 0.3s ease;
-        }
-
-        .achievement::before {
-            content: '🔥';
-            font-size: 1.5rem;
-        }
-
-        .achievement:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 50px rgba(0, 255, 136, 0.8);
-        }
-
-        .progress-tracker {
-            background: linear-gradient(135deg, rgba(255, 0, 64, 0.1), rgba(0, 255, 136, 0.1));
-            border: 2px solid #ff0040;
-            padding: 35px;
-            border-radius: 20px;
-            margin-top: 40px;
-            box-shadow: 
-                0 0 60px rgba(255, 0, 64, 0.3),
-                inset 0 0 60px rgba(0, 255, 136, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .progress-title {
-            font-family: 'Orbitron', monospace;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #ff0040;
-            margin-bottom: 30px;
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 0 30px rgba(255, 0, 64, 0.8);
-        }
-
-        .milestones {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-        }
-
-        .milestone {
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0.1));
-            padding: 25px;
-            border-radius: 15px;
-            border: 2px solid #ff6600;
-            text-align: center;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
-            position: relative;
-            overflow: hidden;
+            border: 1px solid transparent;
+            user-select: none;
         }
 
-        .milestone::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: radial-gradient(circle, rgba(0, 255, 136, 0.3), transparent);
-            transition: all 0.4s ease;
-            transform: translate(-50%, -50%);
-        }
-
-        .milestone:hover {
-            border-color: #00ff88;
-            transform: translateY(-10px) scale(1.05);
-            box-shadow: 0 15px 50px rgba(255, 102, 0, 0.5);
-        }
-
-        .milestone:hover::before {
-            width: 200%;
-            height: 200%;
-        }
-
-        .milestone.completed {
-            border-color: #00ff88;
-            background: linear-gradient(135deg, rgba(0, 255, 136, 0.2), rgba(64, 224, 208, 0.2));
-            box-shadow: 0 0 40px rgba(0, 255, 136, 0.6);
-        }
-
-        .milestone-month {
-            font-family: 'Orbitron', monospace;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #ff6600;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .milestone.completed .milestone-month {
-            color: #00ff88;
-        }
-
-        .milestone-desc {
-            color: #fff;
-            font-size: 1.1rem;
-            font-weight: 400;
-            position: relative;
-            z-index: 1;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 25px;
-        }
-
-        .skill {
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(255, 255, 255, 0.1));
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid #40e0d0;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            transition: all 0.3s ease;
-            font-size: 1.1rem;
-            font-weight: 600;
-        }
-
-        .skill:hover {
-            transform: translateX(10px) scale(1.02);
-            border-color: #ff0040;
-            box-shadow: 0 0 30px rgba(255, 0, 64, 0.4);
-        }
-
-        .skill::before {
-            content: '⚡';
-            color: #00ff88;
-            font-weight: bold;
-            font-size: 1.5rem;
-        }
-
-        .resources {
-            background: linear-gradient(135deg, rgba(255, 102, 0, 0.1), rgba(64, 224, 208, 0.1));
-            border: 2px solid #ff6600;
-            padding: 35px;
-            border-radius: 20px;
-            margin-top: 40px;
-            box-shadow: 
-                0 0 60px rgba(255, 102, 0, 0.3),
-                inset 0 0 60px rgba(64, 224, 208, 0.1);
-        }
-
-        .resources h2 {
-            font-family: 'Orbitron', monospace;
-            color: #ff6600;
-            margin-bottom: 25px;
-            font-size: 2.5rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 0 30px rgba(255, 102, 0, 0.8);
-        }
-
-        .resources-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 25px;
-        }
-
-        .resource-category {
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(255, 255, 255, 0.1));
-            padding: 25px;
-            border-radius: 15px;
-            border: 2px solid #40e0d0;
-            transition: all 0.3s ease;
-        }
-
-        .resource-category:hover {
-            border-color: #ff0040;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 40px rgba(64, 224, 208, 0.3);
-        }
-
-        .resource-category h3 {
-            font-family: 'Orbitron', monospace;
-            color: #40e0d0;
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .resource-item {
-            padding: 12px 0;
-            color: #fff;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-        }
-
-        .resource-item:last-child {
-            border-bottom: none;
-        }
-
-        .resource-item:hover {
-            color: #00ff88;
+        .checkbox-item:hover, .radio-item:hover {
+            background: #3a3a3a;
+            border-color: var(--accent-color);
             transform: translateX(5px);
         }
 
-        .resource-item strong {
-            color: #ff6600;
+        .checkbox-item label, .radio-item label {
+            cursor: pointer;
+            margin: 0;
+            flex: 1;
         }
 
-        .final-message {
+        .checkbox-item input, .radio-item input {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--accent-color);
+        }
+
+        /* Rating Scale */
+        .rating-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .rating-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            min-width: 300px;
+        }
+
+        .rating-scale {
+            display: flex;
+            gap: 8px;
+        }
+
+        .rating-scale input {
+            accent-color: var(--accent-color);
+        }
+
+        .rating-scale label {
+            margin: 0;
+            font-size: 14px;
+            color: var(--secondary-text);
+        }
+
+        /* Submit Button */
+        .submit-container {
             text-align: center;
-            margin-top: 50px;
-            padding: 40px;
-            background: linear-gradient(135deg, rgba(255, 0, 64, 0.1), rgba(0, 255, 136, 0.1));
-            border: 2px solid #ff0040;
-            border-radius: 20px;
-            color: #fff;
-            box-shadow: 0 0 60px rgba(255, 0, 64, 0.3);
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .submit-btn {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            min-width: 200px;
         }
 
-        .final-message::before {
+        .submit-btn::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(from 0deg, transparent, rgba(0, 255, 136, 0.1), transparent, rgba(255, 0, 64, 0.1), transparent);
-            animation: rotate 15s linear infinite;
-            pointer-events: none;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: all 0.5s ease;
         }
 
-        .final-message h3 {
-            font-family: 'Orbitron', monospace;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #00ff88;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 1;
+        .submit-btn:hover::before {
+            left: 100%;
         }
 
-        .final-message p {
-            font-size: 1.4rem;
-            font-style: italic;
-            margin-top: 20px;
-            color: #ff6600;
-            font-weight: 600;
-            position: relative;
-            z-index: 1;
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.3);
         }
 
-        #progress-indicator {
+        /* Progress Bar */
+        .progress-container {
             position: fixed;
-            top: 30px;
-            right: 30px;
-            background: linear-gradient(135deg, #00ff88, #40e0d0);
-            color: #000;
-            padding: 15px 25px;
-            border-radius: 30px;
-            font-family: 'Orbitron', monospace;
-            font-weight: 700;
-            box-shadow: 0 0 40px rgba(0, 255, 136, 0.6);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--secondary-bg);
             z-index: 1000;
-            transition: all 0.3s ease;
-            border: 2px solid #ff0040;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
+        .progress-bar {
+            height: 100%;
+            background: var(--gradient);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .container {
-                padding: 15px;
-            }
-            
             .header h1 {
                 font-size: 2.5rem;
             }
             
-            .phase-header {
-                flex-direction: column;
-                align-items: flex-start;
+            .form-container {
+                padding: 25px;
+                margin: 20px 0;
             }
             
-            .month-title {
+            .rating-item {
+                min-width: 100%;
                 flex-direction: column;
-                align-items: flex-start;
-                gap: 15px;
+                gap: 10px;
             }
+            
+            .rating-scale {
+                justify-content: center;
+            }
+        }
 
-            #progress-indicator {
-                top: 15px;
-                right: 15px;
-                padding: 12px 20px;
-                font-size: 0.9rem;
-            }
+        /* Loading Animation */
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .loading .submit-btn {
+            background: #666;
+        }
+
+        .loading .submit-btn::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border: 2px solid transparent;
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>💀 DEATH MODE ROADMAP 💀</h1>
-            <div class="subtitle">3D FULLSTACK DOMINATION</div>
-            <div class="tagline">ZERO TO HERO • BEAST MODE ACTIVATED</div>
-        </div>
-
-        <div class="overview">
-            <h2>⚡ BATTLE STATS ⚡</h2>
-            <div class="overview-grid">
-                <div class="overview-item">
-                    <h3>🔥 TOTAL WAR</h3>
-                    <p>12-18 MONTHS</p>
-                </div>
-                <div class="overview-item">
-                    <h3>⚔️ DAILY GRIND</h3>
-                    <p>2-4 HOURS</p>
-                </div>
-                <div class="overview-item">
-                    <h3>💪 WEEKLY BEAST</h3>
-                    <p>15-25 HOURS</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="timeline">
-            <!-- Phase 1 -->
-            <div class="phase">
-                <div class="phase-header">
-                    <div class="phase-title">🚀 PHASE 1: FOUNDATION APOCALYPSE</div>
-                    <div class="phase-duration">MONTHS 1-3</div>
-                </div>
-                <div class="phase-goal">
-                    <strong>MISSION:</strong> CRUSH WEB DEVELOPMENT FUNDAMENTALS AND BASIC 3D CONCEPTS
-                </div>
-                <div class="months-grid">
-                    <div class="month">
-                        <div class="month-title">
-                            MONTH 1: WEB DEV BOOTCAMP
-                            <span class="daily-time">2-3 HOURS</span>
-                        </div>
-                        <div class="weeks">
-                            <div class="week">
-                                <div class="week-title">WEEK 1-2: HTML/CSS MASTERY</div>
-                                <div class="week-content">
-                                    <div class="topic">Modern HTML5 semantic elements</div>
-                                    <div class="topic">CSS Grid and Flexbox domination</div>
-                                    <div class="topic">Responsive design principles</div>
-                                    <div class="topic">CSS animations and transitions</div>
-                                </div>
-                                <div class="achievement">BUILD 3 KILLER LANDING PAGES</div>
-                            </div>
-                            <div class="week">
-                                <div class="week-title">WEEK 3-4: JAVASCRIPT FUNDAMENTALS</div>
-                                <div class="week-content">
-                                    <div class="topic">ES6+ syntax warfare</div>
-                                    <div class="topic">DOM manipulation mastery</div>
-                                    <div class="topic">Event handling destruction</div>
-                                    <div class="topic">Async/await and Promises</div>
-                                </div>
-                                <div class="achievement">CREATE INTERACTIVE WEB COMPONENTS</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="month">
-                        <div class="month-title">
-                            MONTH 2: MODERN JS & TOOLS
-                            <span class="daily-time">2-3 HOURS</span>
-                        </div>
-                        <div class="weeks">
-                            <div class="week">
-                                <div class="week-title">WEEK 1-2: ADVANCED JAVASCRIPT</div>
-                                <div class="week-content">
-                                    <div class="topic">Object-oriented programming power</div>
-                                    <div class="topic">Functional programming concepts</div>
-                                    <div class="topic">JavaScript design patterns</div>
-                                    <div class="topic">Error handling and debugging</div>
-                                </div>
-                                <div class="achievement">BUILD COMPLEX INTERACTIVE APPLICATION</div>
-                            </div>
-                            <div class="week">
-                                <div class="week-title">WEEK 3-4: DEVELOPMENT TOOLS</div>
-                                <div class="week-content">
-                                    <div class="topic">Git version control mastery</div>
-                                    <div class="topic">Package managers (npm/yarn)</div>
-                                    <div class="topic">Build tools (Vite/Webpack)</div>
-                                    <div class="topic">Browser developer tools</div>
-                                </div>
-                                <div class="achievement">PROFESSIONAL DEV WORKFLOW SETUP</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="month">
-                        <div class="month-title">
-                            MONTH 3: REACT FOUNDATION
-                            <span class="daily-time">3 HOURS</span>
-                        </div>
-                        <div class="weeks">
-                            <div class="week">
-                                <div class="week-title">WEEK 1-2: REACT BASICS</div>
-                                <div class="week-content">
-                                    <div class="topic">Components and JSX domination</div>
-                                    <div class="topic">Props and state management</div>
-                                    <div class="topic">Event handling in React</div>
-                                    <div class="topic">Component lifecycle</div>
-                                </div>
-                                <div class="achievement">BUILD 3 REACT APPLICATIONS</div>
-                            </div>
-                            <div class="week">
-                                <div class="week-title">WEEK 3-4: ADVANCED REACT</div>
-                                <div class="week-content">
-                                    <div class="topic">Hooks (useState, useEffect, custom)</div>
-                                    <div class="topic">Context API power</div>
-                                    <div class="topic">React Router navigation</div>
-                                    <div class="topic">State management patterns</div>
-                                </div>
-                                <div class="achievement">CREATE MULTI-PAGE REACT APP</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Phase 2 -->
-            <div class="phase">
-                <div class="phase-header">
-                    <div class="phase-title">🔥 PHASE 2: 3D GRAPHICS INVASION</div>
-                    <div class="phase-duration">MONTHS 4-6</div>
-                </div>
-                <div class="phase-goal">
-                    <strong>MISSION:</strong> CONQUER 3D CONCEPTS AND DEMOLISH THREE.JS
-                </div>
-                <div class="months-grid">
-                    <div class="month">
-                        <div class="month-title">
-                            MONTH 4: 3D THEORY & THREE.JS
-                            <span class="daily-time">3-4 HOURS</span>
-                        </div>
-                        <div class="weeks">
-                            <div class="week">
-                                <div class="week-title">WEEK 1: 3D MATHEMATICS FOUNDATION</div>
-                                <div class="week-content">
-                                    <div class="topic">Vectors and matrices warfare</div>
-                                    <div class="topic">3D coordinate systems</div>
-                                    <div class="topic">Transformations (translate, rotate, scale)</div>
-                                    <div class="topic">Camera concepts and projections</div>
-                                </div>
-                                <div class="achievement">MASTER CORE 3D MATH CONCEPTS</div>
-                            </div>
-                            <div class="week">
-                                <div class="week-title">WEEK 2-3: THREE.JS FUNDAMENTALS</div>
-                                <div class="week-content">
-                                    <div class="topic">Scene, camera, renderer setup</div>
-                                    <div class="topic">Basic geometries and materials</div>
-                                    <div class="topic">Lighting systems destruction</div>
-                                    <div class="topic">Animation loops mastery</div>
-                                </div>
-                                <div class="achievement">CREATE ROTATING 3D OBJECTS</div>
-                            </div>
-                            <div class="week">
-                                <div class="week-title">WEEK 4: INTERMEDIATE THREE.JS</div>
-                                <div class="week-content">
-                                    <div class="topic">Texture mapping domination</div>
-                                    <div class="topic">Model loading (GLTF/GLB)</div>
-                                    <div class="topic">Shadow systems mastery</div>
-                                </div>
-                                <div class="achievement">BUILD INTERACTIVE 3D SCENE</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="month">
-                        <div class="month-title">
-                            MONTH 5: ADVANCED THREE.JS
-                            <span class="daily-time">3-4 HOURS</span>
-                        </div>
-                        <div class="weeks">
-                            <div class="week">
-                                <div class="week-title">WEEK 1-2: COMPLEX INTERACTIONS</div>
-                                <div class="week-content">
-                                    <div class="topic">Raycasting for object selection</div>
-                                    <div class="topic">Mouse and touch controls</div>
-                                    <div class="topic">Camera controls (OrbitControls)</div>
-                                </div>
-                                <div class="achievement">CREATE CLICKABLE 3D INTERFACES</div>
-                            </div>
-                            <div class="week">
-                                <div class="week-title">WEEK 3-4: PERFORMANCE & OPTIMIZATION</div>
-                                <div class="week-content">
-                                    <div class="topic">Geometry optimization warfare</div>
-                                    <div class="topic">Texture optimization mastery</div>
-                                    <div class="topic">Level of detail (LOD)</div>
-                                    <div class="topic">Frustum culling concepts</div>
-                                </div>
-                                <div class="achievement">OPTIMIZE COMPLEX 3D SCENE</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="month">
-                        <div class="month-title">
-                            MONTH 6: REACT THREE FIBER
-                            <span class="daily-time">3-4 HOURS</span>
-                        </div>
-                        <div class="weeks">
-                            <div class="week">
-                                <div class="week-title">WEEK 1-2: R3F FUNDAMENTALS</div>
-                                <div class="week-content">
-                                    <div class="topic">React Three Fiber setup</div>
-                                    <div class="topic">Declarative 3D with JSX</div>
-                                    <div class="topic">React ecosystem integration</div>
-                                </div>
-                                <div class="achievement">CONVERT THREE.JS TO R3F</div>
-                            </div>
-                            <div class="week">
-                                <div class="week-title">WEEK 3-4: R3F ECOSYSTEM</div>
-                                <div class="week-content">
-                                    <div class="topic">Drei helpers and components</div>
-                                    <div class="topic">Zustand for 3D state management</div>
-                                    <div class="topic">React Spring animations</div>
-                                </div>
-                                <div class="achievement">BUILD INTERACTIVE 3D REACT COMPONENTS</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Phase 3 -->
-            <div class="phase">
-                <div class="phase-header">
-                    <div class="phase-title">💀 PHASE 3: BACKEND ANNIHILATION</div>
-                    <div class="phase-duration">MONTHS 7-9</div>
-                </div>
-                <div class="phase-goal">
-                    <strong>MISSION:</strong> OBLITERATE BACKEND CHALLENGES AND FULLSTACK INTEGRATION
-                </div>
-                <div class="months-grid">
-                    <div class="month">
-                        <div class="month-title">
-                            MONTH 7: BACKEND FUNDAMENTALS
-                            <span class="daily-time">3-4 HOURS</span>
-                        </div>
-                        <div class="weeks">
-                            <div class="week">
-                                <div class="week-title">WEEK 1-2: NODE.JS & EXPRESS</div>
-                                <div class="week-content">
-                                    <div class="topic">Server setup and routing</div>
-                                    <div class="topic">Middleware concepts mastery</div>
-                                    <div class="topic">RESTful API design warfare</div>
-                                    <div class="topic">Authentication basics</div>
-                                </div>
-                                <div class="achievement">BUILD KILLER REST APIS</div>
-                            </div>
-                            <div class="week">
-                                <div class="week-title">WEEK 3-4: DATABASE INTEGRATION</div>
-                                <div class="week-content">
-                                    <div class="topic">Database design principles</div>
-                                    <div class="topic">SQL fundamentals (PostgreSQL)</div>
-                                    <div class="topic">ORM usage (Prisma/Sequelize)</div>
-                                </div>
-                                <div class="achievement">CREATE DATA-DRIVEN APIS</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="month">
-                        <div class="month-title">
-                            MONTH 8: ADVANCED BACKEND
-                            <span class="daily-time">3-4 HOURS</span>
-                        </div>
-                        <div class="weeks">
-                            <div class="week">
-                                <div class="week-title">WEEK 1-2: REAL-TIME FEATURES</div>
-                                <div class="week-content">
-                                    <div class="topic">WebSocket implementation</div>
-                                    <div class="topic">Socket.io for real-time 3D</div>
-                                    <div class="topic">Multi-user 3D experiences</div>
-                                </div>
-                                <div class="achievement">BUILD COLLABORATIVE 3D APP</div>
-                            </div>
-                            <div class="week">
-                                <div class="week-title">WEEK 3-4: CLOUD & DEPLOYMENT</div>
-                                <div class="week-content">
-                                    <div class="topic">Cloud platforms mastery</div>
-                                    <div class="topic">Environment management</div>
-                                    <div class="topic">CI/CD basics warfare</div>
-                                </div>
-                                <div class="achievement">DEPLOY FULLSTACK 3D APPS</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="month">
-                        <div class="month-title">
-                            MONTH 9: 3D-SPECIFIC BACKEND
-                            <span class="daily-time">3-4 HOURS</span>
-                        </div>
-                        <div class="weeks">
-                            <div class="week">
-                                <div class="week-title">WEEK 1-2: 3D ASSET MANAGEMENT</div>
-                                <div class="week-content">
-                                    <div class="topic">File upload handling</div>
-                                    <div class="topic">3D model processing</div>
-                                    <div class="topic">CDN integration for assets</div>
-                                </div>
-                                <div class="achievement">BUILD 3D ASSET MANAGEMENT SYSTEM</div>
-                            </div>
-                            <div class="week">
-                                <div class="week-title">WEEK 3-4: PERFORMANCE & SCALING</div>
-                                <div class="week-content">
-                                    <div class="topic">Caching strategies warfare</div>
-                                    <div class="topic">Database optimization</div>
-                                    <div class="topic">API rate limiting</div>
-                                </div>
-                                <div class="achievement">OPTIMIZE FOR PRODUCTION</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Phase 4 -->
-            <div class="phase">
-                <div class="phase-header">
-                    <div class="phase-title">⚡ PHASE 4: ADVANCED TECHNIQUES MASSACRE</div>
-                    <div class="phase-duration">MONTHS 10-12</div>
-                </div>
-                <div class="phase-goal">
-                    <strong>MISSION:</strong> MASTER ADVANCED 3D TECHNIQUES AND MODERN WEB TECH
-                </div>
-                <div class="months-grid">
-                    <div class="month">
-                        <div class="month-title">
-                            MONTH 10: ADVANCED 3D GRAPHICS
-                            <span class="daily-time">4 HOURS</span>
-                        </div>
-                        <div class="weeks">
-                            <div class="week">
-                                <div class="week-title">WEEK 1-2: SHADERS & MATERIALS</div>
-                                <div class="week-content">
-                                    <div class="topic">GLSL shader domination</div>
-                                    <div class="topic">Custom materials in Three.js</div>
-                                    <div class="topic">Post-processing effects</div>
-                                </div>
-                                <div class="achievement">CREATE CUSTOM VISUAL EFFECTS</div>
-                            </div>
-                            <div class="week">
-                                <div class="week-title">WEEK 3-4: ADVANCED RENDERING</div>
-                                <div class="week-content">
-                                    <div class="topic">PBR (Physically Based Rendering)</div>
-                                    <div class="topic">Environment mapping mastery</div>
-                                    <div class="topic">Advanced lighting techniques</div>
-                                </div>
-                                <div class="achievement">CREATE PHOTOREALISTIC 3D SCENES</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="month">
-                        <div class="month-title">
-                            MONTH 11: MODERN WEB TECH
-                            <span class="daily-time">4 HOURS</span>
-                        </div>
-                        <div class="weeks">
-                            <div class="week">
-                                <div class="week-title">WEEK 1-2: WEBGL & WEBGPU</div>
-                                <div class="week-content">
-                                    <div class="topic">Direct WebGL programming</div>
-                                    <div class="topic">WebGPU introduction warfare</div>
-                                    <div class="topic">Performance comparison</div>
-                                </div>
-                                <div class="achievement">BUILD CUSTOM WEBGL APPLICATION</div>
-                            </div>
-                            <div class="week">
-                                <div class="week-title">WEEK 3-4: PROGRESSIVE WEB APPS</div>
-                                <div class="week-content">
-                                    <div class="topic">Service workers mastery</div>
-                                    <div class="topic">Offline 3D experiences</div>
-                                    <div class="topic">Performance optimization</div>
-                                </div>
-                                <div class="achievement">CREATE INSTALLABLE 3D PWA</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="month">
-                        <div class="month-title">
-                            MONTH 12: SPECIALIZED 3D APPS
-                            <span class="daily-time">4 HOURS</span>
-                        </div>
-                        <div class="weeks">
-                            <div class="week">
-                                <div class="week-title">WEEK 1-2: VR/AR INTEGRATION</div>
-                                <div class="week-content">
-                                    <div class="topic">WebXR basics mastery</div>
-                                    <div class="topic">VR scene development</div>
-                                    <div class="topic">AR overlays warfare</div>
-                                </div>
-                                <div class="achievement">BUILD WEBXR EXPERIENCE</div>
-                            </div>
-                            <div class="week">
-                                <div class="week-title">WEEK 3-4: GAME DEVELOPMENT</div>
-                                <div class="week-content">
-                                    <div class="topic">Physics integration (Cannon.js)</div>
-                                    <div class="topic">Game mechanics domination</div>
-                                    <div class="topic">Performance optimization</div>
-                                </div>
-                                <div class="achievement">CREATE 3D WEB GAME</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Phase 5 -->
-            <div class="phase">
-                <div class="phase-header">
-                    <div class="phase-title">🏆 PHASE 5: PORTFOLIO DOMINATION</div>
-                    <div class="phase-duration">MONTHS 13-18</div>
-                </div>
-                <div class="phase-goal">
-                    <strong>MISSION:</strong> SPECIALIZE AND BUILD LEGENDARY PORTFOLIO
-                </div>
-                <div class="months-grid">
-                    <div class="month">
-                        <div class="month-title">
-                            MONTHS 13-15: SPECIALIZATION
-                            <span class="daily-time">4-5 HOURS</span>
-                        </div>
-                        <div class="weeks">
-                            <div class="week">
-                                <div class="week-title">OPTION A: E-COMMERCE 3D</div>
-                                <div class="week-content">
-                                    <div class="topic">Product visualization mastery</div>
-                                    <div class="topic">AR try-on experiences</div>
-                                    <div class="topic">3D configurators warfare</div>
-                                </div>
-                            </div>
-                            <div class="week">
-                                <div class="week-title">OPTION B: DATA VISUALIZATION</div>
-                                <div class="week-content">
-                                    <div class="topic">3D charts and graphs domination</div>
-                                    <div class="topic">Interactive dashboards</div>
-                                    <div class="topic">Scientific visualization</div>
-                                </div>
-                            </div>
-                            <div class="week">
-                                <div class="week-title">OPTION C: CREATIVE/INTERACTIVE</div>
-                                <div class="week-content">
-                                    <div class="topic">Digital art installations</div>
-                                    <div class="topic">Interactive storytelling</div>
-                                    <div class="topic">Experimental interfaces</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="month">
-                        <div class="month-title">
-                            MONTHS 16-18: PORTFOLIO BUILD
-                            <span class="daily-time">4-5 HOURS</span>
-                        </div>
-                        <div class="weeks">
-                            <div class="week">
-                                <div class="week-title">PROJECT 1: COMPLEX 3D WEB APP</div>
-                                <div class="week-content">
-                                    <div class="topic">Full-featured 3D experience</div>
-                                    <div class="topic">Backend integration mastery</div>
-                                    <div class="topic">User authentication warfare</div>
-                                    <div class="topic">Real-time features</div>
-                                </div>
-                            </div>
-                            <div class="week">
-                                <div class="week-title">PROJECT 2: INNOVATION PROJECT</div>
-                                <div class="week-content">
-                                    <div class="topic">Cutting-edge implementation</div>
-                                    <div class="topic">Original concept domination</div>
-                                    <div class="topic">Performance showcase</div>
-                                </div>
-                            </div>
-                            <div class="week">
-                                <div class="week-title">PROJECT 3: OPEN SOURCE</div>
-                                <div class="week-content">
-                                    <div class="topic">Three.js/R3F ecosystem contribution</div>
-                                    <div class="topic">Build useful 3D tools/libraries</div>
-                                    <div class="topic">Community engagement</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="progress-tracker">
-            <h2 class="progress-title">🎯 MILESTONE DESTRUCTION</h2>
-            <div class="milestones">
-                <div class="milestone" onclick="toggleMilestone(this)">
-                    <div class="milestone-month">MONTH 3</div>
-                    <div class="milestone-desc">BUILT 5+ REACT APPLICATIONS</div>
-                </div>
-                <div class="milestone" onclick="toggleMilestone(this)">
-                    <div class="milestone-month">MONTH 6</div>
-                    <div class="milestone-desc">CREATED 3 INTERACTIVE 3D EXPERIENCES</div>
-                </div>
-                <div class="milestone" onclick="toggleMilestone(this)">
-                    <div class="milestone-month">MONTH 9</div>
-                    <div class="milestone-desc">DEPLOYED 2 FULLSTACK 3D APPLICATIONS</div>
-                </div>
-                <div class="milestone" onclick="toggleMilestone(this)">
-                    <div class="milestone-month">MONTH 12</div>
-                    <div class="milestone-desc">MASTERED ADVANCED 3D TECHNIQUES</div>
-                </div>
-                <div class="milestone" onclick="toggleMilestone(this)">
-                    <div class="milestone-month">MONTH 15</div>
-                    <div class="milestone-desc">COMPLETED SPECIALIZATION PROJECTS</div>
-                </div>
-                <div class="milestone" onclick="toggleMilestone(this)">
-                    <div class="milestone-month">MONTH 18</div>
-                    <div class="milestone-desc">PROFESSIONAL-QUALITY PORTFOLIO</div>
-                </div>
-            </div>
-
-            <h3 style="margin-top: 30px; color: #00ff88; font-family: 'Orbitron', monospace; font-size: 2rem; text-transform: uppercase; letter-spacing: 1px;">⚡ SKILLS ACQUIRED ⚡</h3>
-            <div class="skills-grid">
-                <div class="skill">MODERN JAVASCRIPT/TYPESCRIPT</div>
-                <div class="skill">REACT ECOSYSTEM MASTERY</div>
-                <div class="skill">THREE.JS/WEBGL EXPERTISE</div>
-                <div class="skill">NODE.JS/EXPRESS BACKEND</div>
-                <div class="skill">DATABASE DESIGN & OPTIMIZATION</div>
-                <div class="skill">3D MATHEMATICS & GRAPHICS THEORY</div>
-                <div class="skill">PERFORMANCE OPTIMIZATION</div>
-                <div class="skill">MODERN DEPLOYMENT PRACTICES</div>
-            </div>
-        </div>
-
-        <div class="resources">
-            <h2>🛠️ ARSENAL & RESOURCES</h2>
-            <div class="resources-grid">
-                <div class="resource-category">
-                    <h3>⚔️ ESSENTIAL WEAPONS</h3>
-                    <div class="resource-item"><strong>Code Editor:</strong> VS Code with extensions</div>
-                    <div class="resource-item"><strong>3D Software:</strong> Blender (for asset creation)</div>
-                    <div class="resource-item"><strong>Version Control:</strong> Git/GitHub</div>
-                    <div class="resource-item"><strong>Design:</strong> Figma for UI/UX planning</div>
-                    <div class="resource-item"><strong>Testing:</strong> Browser dev tools, performance monitors</div>
-                </div>
-                <div class="resource-category">
-                    <h3>📚 KNOWLEDGE SOURCES</h3>
-                    <div class="resource-item"><strong>Documentation:</strong> Three.js docs, MDN, React docs</div>
-                    <div class="resource-item"><strong>Video:</strong> Three.js Journey, Web Dev Simplified</div>
-                    <div class="resource-item"><strong>Books:</strong> "Learning Three.js" by Jos Dirksen</div>
-                    <div class="resource-item"><strong>Community:</strong> Three.js Discord, Reddit r/webdev</div>
-                    <div class="resource-item"><strong>Practice:</strong> CodePen, GitHub for portfolio</div>
-                </div>
-                <div class="resource-category">
-                    <h3>🔥 BEAST MODE TIPS</h3>
-                    <div class="resource-item">CONSISTENCY OVER INTENSITY: 2 hours daily beats 14 hours once weekly</div>
-                    <div class="resource-item">BUILD PROJECTS: Apply every concept immediately</div>
-                    <div class="resource-item">JOIN COMMUNITIES: Connect with other 3D developers</div>
-                    <div class="resource-item">DOCUMENT EVERYTHING: Keep a learning journal and blog</div>
-                    <div class="resource-item">STAY UPDATED: Follow 3D web development trends</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="final-message">
-            <h3>💀 FINAL BOSS MINDSET 💀</h3>
-            <p>
-                "THIS IS WAR, NOT A WALK IN THE PARK. CRUSH FUNDAMENTALS BEFORE ADVANCING. EVERY LEGEND WAS ONCE A BEGINNER WHO REFUSED TO QUIT. NOW GO DESTROY THOSE CHALLENGES!"
-            </p>
-        </div>
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
     </div>
 
+    <header class="header">
+        <div class="container">
+            <h1>Website Project Questionnaire</h1>
+            <p>Help us understand your vision and requirements for the perfect website</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <form class="form-container" id="questionnaire-form" action="https://formspree.io/f/mpwlqebv" method="POST">
+            <!-- Basic Project Information -->
+            <section class="section">
+                <h2 class="section-title">Basic Project Information</h2>
+                
+                <div class="form-group">
+                    <label for="business-name">Business Name *</label>
+                    <input type="text" id="business-name" name="business_name" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="industry">Industry *</label>
+                    <input type="text" id="industry" name="industry" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label>What type of website do you need? *</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="business-website" name="website_type" value="business" required>
+                            <label for="business-website">Business/Company website</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="ecommerce" name="website_type" value="ecommerce">
+                            <label for="ecommerce">E-commerce store</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="portfolio" name="website_type" value="portfolio">
+                            <label for="portfolio">Portfolio/Personal site</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="blog" name="website_type" value="blog">
+                            <label for="blog">Blog/Content site</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="landing" name="website_type" value="landing">
+                            <label for="landing">Landing page</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="directory" name="website_type" value="directory">
+                            <label for="directory">Directory/Listing site</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="website-type-other">If other, please specify:</label>
+                    <input type="text" id="website-type-other" name="website_type_other" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label>Do you currently have a website? *</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="no-website" name="current_website" value="no" required>
+                            <label for="no-website">No, this is a new website</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="redesigning" name="current_website" value="redesigning">
+                            <label for="redesigning">Yes, we're redesigning</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="starting-fresh" name="current_website" value="fresh">
+                            <label for="starting-fresh">Yes, but we're starting fresh</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="current-website-url">If redesigning, please provide current website URL:</label>
+                    <input type="url" id="current-website-url" name="current_website_url" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label>What is the main goal of your website? (Select all that apply) *</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="generate-leads" name="goals" value="generate_leads">
+                            <label for="generate-leads">Generate leads/inquiries</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="sell-products" name="goals" value="sell_products">
+                            <label for="sell-products">Sell products online</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="provide-info" name="goals" value="provide_info">
+                            <label for="provide-info">Provide information about services</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="brand-awareness" name="goals" value="brand_awareness">
+                            <label for="brand-awareness">Build brand awareness</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="showcase-portfolio" name="goals" value="showcase_portfolio">
+                            <label for="showcase-portfolio">Showcase portfolio/work</label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Target Audience & Scope -->
+            <section class="section">
+                <h2 class="section-title">Target Audience & Scope</h2>
+                
+                <div class="form-group">
+                    <label for="target-audience">Who is your target audience? Please describe your ideal customer/visitor (age, location, interests, etc.) *</label>
+                    <textarea id="target-audience" name="target_audience" class="form-control" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>How many pages do you estimate needing? *</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="pages-1-5" name="page_count" value="1-5" required>
+                            <label for="pages-1-5">1-5 pages (simple site)</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="pages-6-15" name="page_count" value="6-15">
+                            <label for="pages-6-15">6-15 pages (medium site)</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="pages-16-30" name="page_count" value="16-30">
+                            <label for="pages-16-30">16-30 pages (large site)</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="pages-30-plus" name="page_count" value="30+">
+                            <label for="pages-30-plus">30+ pages (very large site)</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="pages-not-sure" name="page_count" value="not_sure">
+                            <label for="pages-not-sure">Not sure</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>What key pages/sections do you definitely need? (Select all that apply) *</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="home-page" name="required_pages" value="home">
+                            <label for="home-page">Home page</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="about-page" name="required_pages" value="about">
+                            <label for="about-page">About us</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="services-page" name="required_pages" value="services">
+                            <label for="services-page">Services/Products</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="contact-page" name="required_pages" value="contact">
+                            <label for="contact-page">Contact page</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="blog-page" name="required_pages" value="blog">
+                            <label for="blog-page">Blog/News</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="portfolio-page" name="required_pages" value="portfolio">
+                            <label for="portfolio-page">Portfolio/Gallery</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="testimonials-page" name="required_pages" value="testimonials">
+                            <label for="testimonials-page">Testimonials/Reviews</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="faq-page" name="required_pages" value="faq">
+                            <label for="faq-page">FAQ</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="store-page" name="required_pages" value="store">
+                            <label for="store-page">Online store</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="accounts-page" name="required_pages" value="accounts">
+                            <label for="accounts-page">User accounts/login</label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Functionality Requirements -->
+            <section class="section">
+                <h2 class="section-title">Functionality Requirements</h2>
+                
+                <div class="form-group">
+                    <label>Do you need any of these features? (Select all that apply)</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="contact-forms" name="features" value="contact_forms">
+                            <label for="contact-forms">Contact forms</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="booking" name="features" value="booking">
+                            <label for="booking">Online appointment booking/scheduling</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="ecommerce-feature" name="features" value="ecommerce">
+                            <label for="ecommerce-feature">E-commerce (selling products online)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="user-accounts" name="features" value="user_accounts">
+                            <label for="user-accounts">User registration/accounts</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="search" name="features" value="search">
+                            <label for="search">Search functionality</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="social-media" name="features" value="social_media">
+                            <label for="social-media">Social media integration</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="newsletter" name="features" value="newsletter">
+                            <label for="newsletter">Email newsletter signup</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="payments" name="features" value="payments">
+                            <label for="payments">Online payments</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="downloads" name="features" value="downloads">
+                            <label for="downloads">File downloads</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="multilanguage" name="features" value="multilanguage">
+                            <label for="multilanguage">Multi-language support</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="cms" name="features" value="cms">
+                            <label for="cms">Blog/content management</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="integrations" name="features" value="integrations">
+                            <label for="integrations">Integration with other systems (CRM, etc.)</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Will you need to update content yourself? *</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="self-update" name="content_updates" value="self" required>
+                            <label for="self-update">Yes, I want to make updates myself</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="hire-updates" name="content_updates" value="hire">
+                            <label for="hire-updates">No, I'll hire someone to make updates</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="unsure-updates" name="content_updates" value="unsure">
+                            <label for="unsure-updates">Not sure yet</label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Design & Style Preferences -->
+            <section class="section">
+                <h2 class="section-title">Design & Style Preferences</h2>
+                
+                <div class="form-group">
+                    <label>What style best describes your preferred website look? *</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="modern-minimalist" name="design_style" value="modern_minimalist" required>
+                            <label for="modern-minimalist">Modern and minimalist</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="professional-corporate" name="design_style" value="professional_corporate">
+                            <label for="professional-corporate">Professional and corporate</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="creative-artistic" name="design_style" value="creative_artistic">
+                            <label for="creative-artistic">Creative and artistic</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="fun-colorful" name="design_style" value="fun_colorful">
+                            <label for="fun-colorful">Fun and colorful</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="traditional-classic" name="design_style" value="traditional_classic">
+                            <label for="traditional-classic">Traditional and classic</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="bold-edgy" name="design_style" value="bold_edgy">
+                            <label for="bold-edgy">Bold and edgy</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="design-not-sure" name="design_style" value="not_sure">
+                            <label for="design-not-sure">Not sure</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inspiration-websites">Are there any websites you particularly like? Please share 2-3 website URLs that you find appealing (any industry):</label>
+                    <textarea id="inspiration-websites" name="inspiration_websites" class="form-control" placeholder="Enter URLs, one per line"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Do you have existing branding materials? *</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="complete-branding" name="branding" value="complete" required>
+                            <label for="complete-branding">Yes, we have logo, colors, and brand guidelines</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="partial-branding" name="branding" value="partial">
+                            <label for="partial-branding">We have a logo but need help with colors/fonts</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="no-branding" name="branding" value="none">
+                            <label for="no-branding">We need complete branding from scratch</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="branding-not-sure" name="branding" value="not_sure">
+                            <label for="branding-not-sure">Not sure what we need</label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Content & Resources -->
+            <section class="section">
+                <h2 class="section-title">Content & Resources</h2>
+                
+                <div class="form-group">
+                    <label>Do you have content ready for the website? *</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="content-ready" name="content_status" value="ready" required>
+                            <label for="content-ready">Yes, all text and images are ready</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="content-partial" name="content_status" value="partial">
+                            <label for="content-partial">We have some content but need help finishing it</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="content-help" name="content_status" value="help">
+                            <label for="content-help">We need help writing most of the content</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="content-complete" name="content_status" value="complete_help">
+                            <label for="content-complete">We need complete copywriting services</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Do you have professional photos? *</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="photos-ready" name="photos_status" value="ready" required>
+                            <label for="photos-ready">Yes, we have all photos needed</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="photos-some" name="photos_status" value="some">
+                            <label for="photos-some">We have some photos but need more</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="photos-need" name="photos_status" value="need">
+                            <label for="photos-need">We need professional photography</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="photos-stock" name="photos_status" value="stock">
+                            <label for="photos-stock">We can use stock photos</label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Timeline & Budget -->
+            <section class="section">
+                <h2 class="section-title">Timeline & Budget</h2>
+                
+                <div class="form-group">
+                    <label>When do you need the website completed? *</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="timeline-asap" name="timeline" value="asap" required>
+                            <label for="timeline-asap">ASAP (within 2-4 weeks)</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="timeline-1-2" name="timeline" value="1-2_months">
+                            <label for="timeline-1-2">1-2 months</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="timeline-2-3" name="timeline" value="2-3_months">
+                            <label for="timeline-2-3">2-3 months</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="timeline-3-plus" name="timeline" value="3+_months">
+                            <label for="timeline-3-plus">3+ months</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="timeline-flexible" name="timeline" value="flexible">
+                            <label for="timeline-flexible">No specific deadline</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>What is your total budget range for this project? *</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="budget-under-2k" name="budget" value="under_2000" required>
+                            <label for="budget-under-2k">Under $2,000</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="budget-2-5k" name="budget" value="2000-5000">
+                            <label for="budget-2-5k">$2,000 - $5,000</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="budget-5-10k" name="budget" value="5000-10000">
+                            <label for="budget-5-10k">$5,000 - $10,000</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="budget-10-20k" name="budget" value="10000-20000">
+                            <label for="budget-10-20k">$10,000 - $20,000</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="budget-20k-plus" name="budget" value="20000+">
+                            <label for="budget-20k-plus">$20,000+</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="budget-guidance" name="budget" value="need_guidance">
+                            <label for="budget-guidance">Not sure / Need guidance</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Is this budget for: (Select all that apply)</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="budget-design" name="budget_includes" value="design_development">
+                            <label for="budget-design">Website design and development</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="budget-content" name="budget_includes" value="content_writing">
+                            <label for="budget-content">Content writing</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="budget-photography" name="budget_includes" value="photography">
+                            <label for="budget-photography">Professional photography</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="budget-branding" name="budget_includes" value="branding">
+                            <label for="budget-branding">Logo/branding design</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="budget-maintenance" name="budget_includes" value="maintenance">
+                            <label for="budget-maintenance">Ongoing maintenance</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="budget-unsure" name="budget_includes" value="unsure">
+                            <label for="budget-unsure">Not sure what's included</label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Technical & Maintenance -->
+            <section class="section">
+                <h2 class="section-title">Technical & Maintenance</h2>
+                
+                <div class="form-group">
+                    <label>How important are these to you? (Rate 1-5, with 5 being very important) *</label>
+                    <div class="rating-group">
+                        <div class="rating-item">
+                            <label>Website loads quickly:</label>
+                            <div class="rating-scale">
+                                <input type="radio" id="speed-1" name="importance_speed" value="1" required>
+                                <label for="speed-1">1</label>
+                                <input type="radio" id="speed-2" name="importance_speed" value="2">
+                                <label for="speed-2">2</label>
+                                <input type="radio" id="speed-3" name="importance_speed" value="3">
+                                <label for="speed-3">3</label>
+                                <input type="radio" id="speed-4" name="importance_speed" value="4">
+                                <label for="speed-4">4</label>
+                                <input type="radio" id="speed-5" name="importance_speed" value="5">
+                                <label for="speed-5">5</label>
+                            </div>
+                        </div>
+                        <div class="rating-item">
+                            <label>Works perfectly on mobile devices:</label>
+                            <div class="rating-scale">
+                                <input type="radio" id="mobile-1" name="importance_mobile" value="1" required>
+                                <label for="mobile-1">1</label>
+                                <input type="radio" id="mobile-2" name="importance_mobile" value="2">
+                                <label for="mobile-2">2</label>
+                                <input type="radio" id="mobile-3" name="importance_mobile" value="3">
+                                <label for="mobile-3">3</label>
+                                <input type="radio" id="mobile-4" name="importance_mobile" value="4">
+                                <label for="mobile-4">4</label>
+                                <input type="radio" id="mobile-5" name="importance_mobile" value="5">
+                                <label for="mobile-5">5</label>
+                            </div>
+                        </div>
+                        <div class="rating-item">
+                            <label>Easy for you to update:</label>
+                            <div class="rating-scale">
+                                <input type="radio" id="easy-1" name="importance_easy" value="1" required>
+                                <label for="easy-1">1</label>
+                                <input type="radio" id="easy-2" name="importance_easy" value="2">
+                                <label for="easy-2">2</label>
+                                <input type="radio" id="easy-3" name="importance_easy" value="3">
+                                <label for="easy-3">3</label>
+                                <input type="radio" id="easy-4" name="importance_easy" value="4">
+                                <label for="easy-4">4</label>
+                                <input type="radio" id="easy-5" name="importance_easy" value="5">
+                                <label for="easy-5">5</label>
+                            </div>
+                        </div>
+                        <div class="rating-item">
+                            <label>Appears high in Google search:</label>
+                            <div class="rating-scale">
+                                <input type="radio" id="seo-1" name="importance_seo" value="1" required>
+                                <label for="seo-1">1</label>
+                                <input type="radio" id="seo-2" name="importance_seo" value="2">
+                                <label for="seo-2">2</label>
+                                <input type="radio" id="seo-3" name="importance_seo" value="3">
+                                <label for="seo-3">3</label>
+                                <input type="radio" id="seo-4" name="importance_seo" value="4">
+                                <label for="seo-4">4</label>
+                                <input type="radio" id="seo-5" name="importance_seo" value="5">
+                                <label for="seo-5">5</label>
+                            </div>
+                        </div>
+                        <div class="rating-item">
+                            <label>Looks professional and polished:</label>
+                            <div class="rating-scale">
+                                <input type="radio" id="professional-1" name="importance_professional" value="1" required>
+                                <label for="professional-1">1</label>
+                                <input type="radio" id="professional-2" name="importance_professional" value="2">
+                                <label for="professional-2">2</label>
+                                <input type="radio" id="professional-3" name="importance_professional" value="3">
+                                <label for="professional-3">3</label>
+                                <input type="radio" id="professional-4" name="importance_professional" value="4">
+                                <label for="professional-4">4</label>
+                                <input type="radio" id="professional-5" name="importance_professional" value="5">
+                                <label for="professional-5">5</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>After launch, what ongoing support do you expect? (Select all that apply)</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="basic-maintenance" name="ongoing_support" value="basic_maintenance">
+                            <label for="basic-maintenance">Just basic technical maintenance</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="content-help" name="ongoing_support" value="content_help">
+                            <label for="content-help">Help with content updates</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="performance-reports" name="ongoing_support" value="performance_reports">
+                            <label for="performance-reports">Monthly performance reports</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="marketing-support" name="ongoing_support" value="marketing_support">
+                            <label for="marketing-support">Ongoing marketing support</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="training" name="ongoing_support" value="training">
+                            <label for="training">Training on how to manage the site</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="support-not-sure" name="ongoing_support" value="not_sure">
+                            <label for="support-not-sure">Not sure yet</label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Additional Information -->
+            <section class="section">
+                <h2 class="section-title">Additional Information</h2>
+                
+                <div class="form-group">
+                    <label for="additional-info">Is there anything else important we should know about your project?</label>
+                    <textarea id="additional-info" name="additional_info" class="form-control"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="questions">What questions do you have for us?</label>
+                    <textarea id="questions" name="questions" class="form-control"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Your Email Address *</label>
+                    <input type="email" id="email" name="_replyto" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number (Optional)</label>
+                    <input type="tel" id="phone" name="phone" class="form-control">
+                </div>
+            </section>
+
+            <div class="submit-container">
+                <button type="submit" class="submit-btn">Submit Questionnaire</button>
+                <p style="margin-top: 20px; color: var(--secondary-text); font-size: 14px;">
+                    This questionnaire helps us provide you with the most accurate proposal and ensures we understand your vision completely.
+                </p>
+            </div>
+        </form>
+    </main>
+
     <script>
-        // Use in-memory storage instead of localStorage
-        let progressData = {};
+        // Progress Bar
+        function updateProgressBar() {
+            const form = document.getElementById('questionnaire-form');
+            const formData = new FormData(form);
+            const totalFields = form.querySelectorAll('input[required], textarea[required], select[required]').length;
+            let filledFields = 0;
 
-        function toggleMilestone(element) {
-            element.classList.toggle('completed');
-            
-            // Save progress in memory
-            const milestones = document.querySelectorAll('.milestone');
-            progressData = {};
-            milestones.forEach((milestone, index) => {
-                progressData[index] = milestone.classList.contains('completed');
-            });
+            for (let [key, value] of formData) {
+                if (value && value.trim() !== '') {
+                    filledFields++;
+                }
+            }
 
-            // Update progress counter
-            updateProgressCounter();
+            const progress = Math.min((filledFields / totalFields) * 100, 100);
+            document.getElementById('progressBar').style.width = progress + '%';
         }
 
-        function updateProgressCounter() {
-            const completedCount = Object.values(progressData).filter(Boolean).length;
-            const totalCount = document.querySelectorAll('.milestone').length;
+        // Form validation and submission
+        document.getElementById('questionnaire-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
             
-            // Create or update progress indicator
-            let progressIndicator = document.getElementById('progress-indicator');
-            if (!progressIndicator) {
-                progressIndicator = document.createElement('div');
-                progressIndicator.id = 'progress-indicator';
-                document.body.appendChild(progressIndicator);
-            }
+            const form = this;
+            const submitBtn = form.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
             
-            if (completedCount === totalCount) {
-                progressIndicator.textContent = `🔥 DOMINATION COMPLETE! ${completedCount}/${totalCount} 🔥`;
-                progressIndicator.style.background = 'linear-gradient(135deg, #ff0040, #ff6600)';
-            } else {
-                progressIndicator.textContent = `⚡ PROGRESS: ${completedCount}/${totalCount} ⚡`;
+            // Add loading state
+            form.classList.add('loading');
+            submitBtn.textContent = 'Submitting...';
+            
+            try {
+                const formData = new FormData(form);
+                
+                // Replace with your actual Formspree endpoint
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    // Success
+                    form.innerHTML = `
+                        <div style="text-align: center; padding: 60px 20px;">
+                            <h2 style="color: var(--accent-color); margin-bottom: 20px;">Thank You!</h2>
+                            <p style="font-size: 18px; margin-bottom: 30px;">Your questionnaire has been submitted successfully. We'll review your requirements and get back to you within 24 hours.</p>
+                            <div style="width: 80px; height: 80px; border: 3px solid var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                                <svg width="40" height="40" fill="var(--accent-color)" viewBox="0 0 24 24">
+                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    throw new Error('Submission failed');
+                }
+            } catch (error) {
+                alert('There was an error submitting your form. Please try again or contact us directly.');
+                form.classList.remove('loading');
+                submitBtn.textContent = originalText;
             }
-        }
-
-        // Initialize progress counter on load
-        window.addEventListener('load', function() {
-            updateProgressCounter();
         });
 
-        // Add smooth scrolling for better navigation
-        document.querySelectorAll('.phase').forEach(phase => {
-            phase.addEventListener('click', function() {
-                this.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // Update progress bar on input
+        document.addEventListener('input', updateProgressBar);
+        document.addEventListener('change', updateProgressBar);
+
+        // Initialize progress bar
+        updateProgressBar();
+
+        // Make entire radio/checkbox items clickable
+        document.querySelectorAll('.radio-item, .checkbox-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                // Don't trigger if user clicked directly on input or label
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'LABEL') {
+                    return;
+                }
+                
+                const input = this.querySelector('input');
+                if (input) {
+                    if (input.type === 'radio') {
+                        input.checked = true;
+                        input.dispatchEvent(new Event('change', { bubbles: true }));
+                    } else if (input.type === 'checkbox') {
+                        input.checked = !input.checked;
+                        input.dispatchEvent(new Event('change', { bubbles: true }));
+                    }
+                    updateProgressBar();
+                }
             });
         });
 
-        // Add progress animation on scroll
+        // Smooth scroll animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -1386,35 +1090,12 @@
             });
         }, observerOptions);
 
-        // Observe all phases for animation
-        document.querySelectorAll('.phase').forEach(phase => {
-            phase.style.opacity = '0.8';
-            phase.style.transform = 'translateY(20px)';
-            phase.style.transition = 'all 0.6s ease';
-            observer.observe(phase);
-        });
-
-        // Add some extra visual effects
-        document.addEventListener('mousemove', function(e) {
-            const cursor = document.querySelector('.cursor');
-            if (!cursor) {
-                const newCursor = document.createElement('div');
-                newCursor.className = 'cursor';
-                newCursor.style.cssText = `
-                    position: fixed;
-                    width: 20px;
-                    height: 20px;
-                    background: radial-gradient(circle, rgba(0, 255, 136, 0.8), transparent);
-                    border-radius: 50%;
-                    pointer-events: none;
-                    z-index: 9999;
-                    mix-blend-mode: difference;
-                `;
-                document.body.appendChild(newCursor);
-            }
-            
-            document.querySelector('.cursor').style.left = e.clientX - 10 + 'px';
-            document.querySelector('.cursor').style.top = e.clientY - 10 + 'px';
+        // Observe all sections
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'all 0.6s ease-out';
+            observer.observe(section);
         });
     </script>
 </body>
