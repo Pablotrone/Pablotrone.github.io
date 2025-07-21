@@ -1053,34 +1053,8 @@
 
         // Custom form validation
         function validateForm() {
-            const requiredFields = [
-                { name: 'business_name', message: 'Please enter your business name' },
-                { name: 'industry', message: 'Please enter your industry' },
-                { name: 'website_type', message: 'Please select a website type' },
-                { name: 'current_website', message: 'Please indicate if you have a current website' },
-                { name: 'target_audience', message: 'Please describe your target audience' },
-                { name: 'page_count', message: 'Please select estimated page count' },
-                { name: 'content_updates', message: 'Please indicate your preference for content updates' },
-                { name: 'design_style', message: 'Please select a design style' },
-                { name: 'branding', message: 'Please indicate your branding status' },
-                { name: 'content_status', message: 'Please indicate your content status' },
-                { name: 'photos_status', message: 'Please indicate your photo status' },
-                { name: 'timeline', message: 'Please select your timeline' },
-                { name: 'budget', message: 'Please select your budget range' },
-                { name: 'importance_speed', message: 'Please rate the importance of website speed' },
-                { name: 'importance_mobile', message: 'Please rate the importance of mobile compatibility' },
-                { name: 'importance_easy', message: 'Please rate the importance of easy updates' },
-                { name: 'importance_seo', message: 'Please rate the importance of SEO' },
-                { name: 'importance_professional', message: 'Please rate the importance of professional appearance' },
-                { name: '_replyto', message: 'Please enter a valid email address' }
-            ];
-
-            // Check if current website URL is required
-            const currentWebsiteSelection = document.querySelector('input[name="current_website"]:checked');
-            if (currentWebsiteSelection && currentWebsiteSelection.value === 'redesigning') {
-                requiredFields.push({ name: 'current_website_url', message: 'Please enter your current website URL' });
-            }
-
+            console.log('Validating form...'); // Debug
+            
             // Check goals (at least one must be selected)
             const goalsChecked = document.querySelectorAll('input[name="goals"]:checked');
             if (goalsChecked.length === 0) {
@@ -1095,44 +1069,114 @@
                 return false;
             }
 
-            // Validate each required field
-            for (const field of requiredFields) {
-                const element = document.querySelector(`[name="${field.name}"]`);
-                
-                if (!element) continue;
-                
-                if (element.type === 'radio') {
-                    const checked = document.querySelector(`input[name="${field.name}"]:checked`);
-                    if (!checked) {
-                        showError(field.message);
-                        scrollToElement(element);
-                        return false;
+            // Check required text fields
+            const businessName = document.getElementById('business-name');
+            if (!businessName.value.trim()) {
+                showError('Please enter your business name');
+                businessName.focus();
+                scrollToElement(businessName);
+                return false;
+            }
+
+            const industry = document.getElementById('industry');
+            if (!industry.value.trim()) {
+                showError('Please enter your industry');
+                industry.focus();
+                scrollToElement(industry);
+                return false;
+            }
+
+            const targetAudience = document.getElementById('target-audience');
+            if (!targetAudience.value.trim()) {
+                showError('Please describe your target audience');
+                targetAudience.focus();
+                scrollToElement(targetAudience);
+                return false;
+            }
+
+            const email = document.getElementById('email');
+            if (!email.value.trim()) {
+                showError('Please enter your email address');
+                email.focus();
+                scrollToElement(email);
+                return false;
+            }
+
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email.value)) {
+                showError('Please enter a valid email address');
+                email.focus();
+                scrollToElement(email);
+                return false;
+            }
+
+            // Check required radio groups
+            const radioGroups = [
+                { name: 'website_type', message: 'Please select a website type' },
+                { name: 'current_website', message: 'Please indicate if you have a current website' },
+                { name: 'page_count', message: 'Please select estimated page count' },
+                { name: 'content_updates', message: 'Please indicate your preference for content updates' },
+                { name: 'design_style', message: 'Please select a design style' },
+                { name: 'branding', message: 'Please indicate your branding status' },
+                { name: 'content_status', message: 'Please indicate your content status' },
+                { name: 'photos_status', message: 'Please indicate your photo status' },
+                { name: 'timeline', message: 'Please select your timeline' },
+                { name: 'budget', message: 'Please select your budget range' }
+            ];
+
+            for (const group of radioGroups) {
+                const checked = document.querySelector(`input[name="${group.name}"]:checked`);
+                if (!checked) {
+                    showError(group.message);
+                    const firstRadio = document.querySelector(`input[name="${group.name}"]`);
+                    if (firstRadio) {
+                        scrollToElement(firstRadio);
                     }
-                } else {
-                    if (!element.value.trim()) {
-                        showError(field.message);
-                        element.focus();
-                        scrollToElement(element);
-                        return false;
-                    }
-                    
-                    // Email validation
-                    if (field.name === '_replyto') {
-                        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                        if (!emailRegex.test(element.value)) {
-                            showError('Please enter a valid email address');
-                            element.focus();
-                            scrollToElement(element);
-                            return false;
-                        }
-                    }
+                    return false;
                 }
             }
 
+            // Check rating groups
+            const ratingGroups = [
+                { name: 'importance_speed', message: 'Please rate the importance of website speed' },
+                { name: 'importance_mobile', message: 'Please rate the importance of mobile compatibility' },
+                { name: 'importance_easy', message: 'Please rate the importance of easy updates' },
+                { name: 'importance_seo', message: 'Please rate the importance of SEO' },
+                { name: 'importance_professional', message: 'Please rate the importance of professional appearance' }
+            ];
+
+            for (const group of ratingGroups) {
+                const checked = document.querySelector(`input[name="${group.name}"]:checked`);
+                if (!checked) {
+                    showError(group.message);
+                    const firstRadio = document.querySelector(`input[name="${group.name}"]`);
+                    if (firstRadio) {
+                        scrollToElement(firstRadio);
+                    }
+                    return false;
+                }
+            }
+
+            // Check if current website URL is required
+            const currentWebsiteSelection = document.querySelector('input[name="current_website"]:checked');
+            if (currentWebsiteSelection && currentWebsiteSelection.value === 'redesigning') {
+                const urlField = document.getElementById('current-website-url');
+                if (!urlField.value.trim()) {
+                    showError('Please enter your current website URL');
+                    urlField.focus();
+                    scrollToElement(urlField);
+                    return false;
+                }
+            }
+
+            console.log('Form validation passed!'); // Debug
             return true;
         }
 
         function showError(message) {
+            console.log('Showing error:', message); // Debug
+            
             // Remove existing error messages
             const existingError = document.querySelector('.error-message');
             if (existingError) {
@@ -1143,8 +1187,8 @@
             const errorDiv = document.createElement('div');
             errorDiv.className = 'error-message';
             errorDiv.innerHTML = `
-                <div style="background: #ff4444; color: white; padding: 15px; border-radius: 8px; margin: 20px 0; text-align: center; font-weight: 500;">
-                    ${message}
+                <div style="background: #ff4444; color: white; padding: 15px; border-radius: 8px; margin: 20px 0; text-align: center; font-weight: 500; position: relative; z-index: 1000;">
+                    ⚠️ ${message}
                 </div>
             `;
 
@@ -1152,12 +1196,18 @@
             const form = document.getElementById('questionnaire-form');
             form.insertBefore(errorDiv, form.firstChild);
 
-            // Auto remove after 5 seconds
+            // Scroll to top of form
+            form.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start' 
+            });
+
+            // Auto remove after 8 seconds
             setTimeout(() => {
-                if (errorDiv.parentNode) {
+                if (errorDiv && errorDiv.parentNode) {
                     errorDiv.remove();
                 }
-            }, 5000);
+            }, 8000);
         }
 
         function scrollToElement(element) {
