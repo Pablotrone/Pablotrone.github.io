@@ -1,0 +1,342 @@
+/* ============================================
+   LAYOUT STRUCTURE
+   Общая структура и контейнеры
+   ============================================ */
+
+/* ============================================
+   ОСНОВНАЯ СТРУКТУРА SWIPER
+   ============================================ */
+
+/* Вертикальный свайпер (на весь экран) */
+.vertical-swiper {
+    width: 100%;
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);  /* Фикс для iPhone */
+    overflow: hidden;
+}
+
+/* Обертка слайдов */
+.swiper-wrapper {
+    width: 100%;
+    height: 100%;
+}
+
+/* Каждый слайд */
+.swiper-slide {
+    width: 100%;
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);  /* Фикс для iPhone */
+    overflow: hidden;
+    
+    /* Центрирование контента */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* Позиционирование для фонового изображения */
+    position: relative;
+}
+
+
+/* ============================================
+   ФОНОВОЕ ИЗОБРАЖЕНИЕ СЛАЙДА
+   ============================================ */
+
+.slide-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    
+    /* Настройки фона */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    /* Затемнение фона для читаемости текста */
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);  /* Полупрозрачный черный */
+    }
+}
+
+
+/* ============================================
+   КОНТЕНТ ВНУТРИ СЛАЙДА
+   ============================================ */
+
+.slide-content {
+    width: 100%;
+    max-width: var(--container-xl);
+    padding: var(--space-8);
+    z-index: 1;  /* Поверх фона */
+    
+    /* Центрирование */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Мобильная версия */
+@media (max-width: 767px) {
+    .slide-content {
+        padding: var(--space-4);
+    }
+}
+
+
+/* ============================================
+   ГОРИЗОНТАЛЬНЫЙ СВАЙПЕР (для Practices)
+   ============================================ */
+
+.horizontal-swiper {
+    width: 100%;
+    max-width: var(--container-2xl);
+    height: 80vh;  /* 80% высоты экрана */
+    padding: var(--space-8) 0;
+}
+
+.horizontal-swiper .swiper-slide {
+    height: auto;  /* Не на весь экран */
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+}
+
+/* Мобильная версия */
+@media (max-width: 767px) {
+    .horizontal-swiper {
+        height: 70vh;
+        padding: var(--space-4) 0;
+    }
+}
+
+
+/* ============================================
+   НАВИГАЦИЯ SWIPER (кнопки, пагинация)
+   ============================================ */
+
+/* Pagination (точки) */
+.swiper-pagination {
+    position: fixed !important;
+    right: var(--space-8);
+    top: 50%;
+    transform: translateY(-50%);
+    width: auto !important;
+    z-index: var(--z-fixed);
+    
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    background: var(--color-border-light);
+    opacity: 0.6;
+    border-radius: var(--radius-full);
+    transition: all var(--duration-base) var(--ease-out);
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.swiper-pagination-bullet:hover {
+    opacity: 1;
+    background: var(--color-text-secondary);
+}
+
+.swiper-pagination-bullet-active {
+    opacity: 1;
+    background: var(--color-accent);
+    transform: scale(1.3);
+    border-color: var(--color-accent);
+}
+
+/* Мобильная версия - точки снизу */
+@media (max-width: 767px) {
+    .swiper-pagination {
+        right: auto;
+        left: 50%;
+        top: auto;
+        bottom: var(--space-6);
+        transform: translateX(-50%);
+        flex-direction: row;
+    }
+}
+
+
+/* Кнопки навигации (стрелки для горизонтального свайпера) */
+.swiper-button-prev,
+.swiper-button-next {
+    width: 50px;
+    height: 50px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: var(--radius-full);
+    color: var(--color-text-primary);
+    transition: all var(--duration-base) var(--ease-out);
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+    background: var(--color-accent);
+    color: var(--color-bg-primary);
+}
+
+/* Иконки стрелок (замена дефолтных) */
+.swiper-button-prev::after,
+.swiper-button-next::after {
+    font-size: var(--text-lg);
+    font-weight: var(--font-bold);
+}
+
+/* Мобильная версия - убираем стрелки */
+@media (max-width: 767px) {
+    .swiper-button-prev,
+    .swiper-button-next {
+        display: none;
+    }
+}
+
+
+/* ============================================
+   СЕКЦИИ (общие стили)
+   ============================================ */
+
+.section {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.section-inner {
+    width: 100%;
+    max-width: var(--container-xl);
+    padding: var(--space-8);
+}
+
+@media (max-width: 767px) {
+    .section-inner {
+        padding: var(--space-4);
+    }
+}
+
+/* Заголовок секции */
+.section-title {
+    font-size: var(--text-5xl);
+    font-weight: var(--font-bold);
+    text-align: center;
+    margin-bottom: var(--space-12);
+    color: var(--color-text-primary);
+    position: relative;
+}
+
+/* Декоративная линия под заголовком */
+.section-title::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background: var(--color-accent);
+    margin: var(--space-6) auto 0;
+    border-radius: var(--radius-full);
+}
+
+@media (max-width: 767px) {
+    .section-title {
+        font-size: var(--text-4xl);
+        margin-bottom: var(--space-8);
+    }
+    
+    .section-title::after {
+        width: 60px;
+        height: 2px;
+        margin-top: var(--space-4);
+    }
+}
+
+
+/* ============================================
+   СЕТКА (Grid Layout)
+   ============================================ */
+
+.grid {
+    display: grid;
+    gap: var(--space-6);
+}
+
+/* 2 колонки */
+.grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+/* 3 колонки */
+.grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+/* 4 колонки */
+.grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+/* Адаптивная сетка */
+@media (max-width: 1023px) {
+    .grid-3,
+    .grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 767px) {
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+        grid-template-columns: 1fr;
+        gap: var(--space-4);
+    }
+}
+
+
+/* ============================================
+   FLEXBOX УТИЛИТЫ
+   ============================================ */
+
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.gap-4 {
+    gap: var(--space-4);
+}
+
+.gap-8 {
+    gap: var(--space-8);
+}

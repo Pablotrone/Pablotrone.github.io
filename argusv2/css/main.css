@@ -1,0 +1,251 @@
+/* ============================================
+   ARGUS LAW - MAIN STYLESHEET
+   Импорт всех CSS модулей
+   ============================================ */
+
+/* 1. Переменные (цвета, шрифты, отступы) */
+@import url('00-variables.css');
+
+/* 2. Сброс браузерных стилей */
+@import url('01-reset.css');
+
+/* 3. Базовые стили (body, типографика) */
+@import url('02-base.css');
+
+/* 4. Структура и layout */
+@import url('03-layout.css');
+
+/* 5. Хедер и навигация */
+@import url('04-header.css');
+
+/* 6. Секции (Home, About, Practices, Contacts) */
+@import url('05-sections.css');
+
+/* 7. Кастомизация Swiper */
+@import url('06-swiper.css');
+
+/* 8. Адаптивность */
+@import url('07-responsive.css');
+
+
+/* ============================================
+   ДОПОЛНИТЕЛЬНЫЕ УТИЛИТЫ
+   ============================================ */
+
+/* Плавная прокрутка для якорных ссылок */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Запрет выделения текста (опционально) */
+.no-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Скрытие элемента */
+.hidden {
+    display: none !important;
+}
+
+/* Невидимый элемент (занимает место) */
+.invisible {
+    visibility: hidden !important;
+}
+
+/* Opacity утилиты */
+.opacity-0 { opacity: 0; }
+.opacity-50 { opacity: 0.5; }
+.opacity-100 { opacity: 1; }
+
+/* Pointer events */
+.pointer-events-none {
+    pointer-events: none;
+}
+
+.pointer-events-auto {
+    pointer-events: auto;
+}
+
+/* Cursor утилиты */
+.cursor-pointer { cursor: pointer; }
+.cursor-not-allowed { cursor: not-allowed; }
+.cursor-grab { cursor: grab; }
+.cursor-grabbing { cursor: grabbing; }
+
+/* Text align */
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+/* Text transform */
+.uppercase { text-transform: uppercase; }
+.lowercase { text-transform: lowercase; }
+.capitalize { text-transform: capitalize; }
+
+/* Font weight */
+.font-light { font-weight: var(--font-light); }
+.font-normal { font-weight: var(--font-normal); }
+.font-medium { font-weight: var(--font-medium); }
+.font-semibold { font-weight: var(--font-semibold); }
+.font-bold { font-weight: var(--font-bold); }
+
+/* Flexbox утилиты (дополнительные) */
+.flex-wrap { flex-wrap: wrap; }
+.flex-nowrap { flex-wrap: nowrap; }
+.flex-1 { flex: 1; }
+.flex-auto { flex: auto; }
+.flex-none { flex: none; }
+
+/* Positioning */
+.relative { position: relative; }
+.absolute { position: absolute; }
+.fixed { position: fixed; }
+.sticky { position: sticky; }
+
+/* Overflow */
+.overflow-hidden { overflow: hidden; }
+.overflow-auto { overflow: auto; }
+.overflow-scroll { overflow: scroll; }
+.overflow-visible { overflow: visible; }
+
+/* Width утилиты */
+.w-full { width: 100%; }
+.w-auto { width: auto; }
+.h-full { height: 100%; }
+.h-auto { height: auto; }
+
+/* Margin auto для центрирования */
+.mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Background */
+.bg-transparent { background: transparent; }
+
+/* Transitions */
+.transition-all {
+    transition: all var(--duration-base) var(--ease-out);
+}
+
+.transition-colors {
+    transition: color var(--duration-base) var(--ease-out),
+                background-color var(--duration-base) var(--ease-out),
+                border-color var(--duration-base) var(--ease-out);
+}
+
+.transition-transform {
+    transition: transform var(--duration-base) var(--ease-out);
+}
+
+.transition-opacity {
+    transition: opacity var(--duration-base) var(--ease-out);
+}
+
+/* Анимация появления (для JS) */
+.fade-in {
+    animation: fadeIn var(--duration-slow) var(--ease-out);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.slide-in-up {
+    animation: slideInUp var(--duration-slow) var(--ease-out);
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.slide-in-down {
+    animation: slideInDown var(--duration-slow) var(--ease-out);
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.scale-in {
+    animation: scaleIn var(--duration-slow) var(--ease-out);
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Загрузка (spinner) */
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--color-border);
+    border-top-color: var(--color-accent);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Backdrop (для модалок на будущее) */
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    z-index: var(--z-modal-backdrop);
+}
+
+
+/* ============================================
+   DEBUG РЕЖИМ (включать при разработке)
+   ============================================ */
+
+/* 
+   Раскомментируй для отладки layout
+   
+.debug * {
+    outline: 1px solid red;
+}
+
+.debug *:hover {
+    outline: 2px solid blue;
+}
+*/

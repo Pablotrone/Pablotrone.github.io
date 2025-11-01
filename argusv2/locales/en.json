@@ -1,0 +1,161 @@
+{
+  "site": {
+    "name": "Argus",
+    "subtitle": "Law Consultation"
+  },
+
+  "meta": {
+    "title": "Argus — Law Consultation | Protection of Your Rights",
+    "description": "Professional legal assistance. Argus Law Consultation — experience since 1999. Litigation, corporate law, legal expertise."
+  },
+  
+  "menu": {
+    "menu": "Menu",
+    "home": "Home",
+    "about": "About",
+    "practices": "Practices",
+    "consultation": "Consultations",
+    "publication": "Publications",
+    "litigation_financing": "Litigation Financing",
+    "contacts": "Contacts"
+  },
+  
+  "home": {
+    "title": "Argus",
+    "subtitle": "We separate white from black / we separate black from white",
+    "btn_consultation": "Consultation",
+    "btn_services": "Our Services"
+  },
+  
+  "about": {
+    "title_line1": "PROTECTION OF YOUR RIGHTS —",
+    "title_line2": "OUR MISSION",
+    "description_1": "Law Consultation \"Argus\" of the St. Petersburg City Bar Association was established in 1999 and is one of the oldest consultations within the St. Petersburg Bar Chamber.",
+    "description_2": "The consultation received its name in honor of Panoptes - the all-seeing Argus, symbolizing vigilance, unwavering devotion, and the ability to see the truth through any complexity. In turn, our lawyers apply these principles to protect the interests of clients regardless of the case complexity.",
+    "description_3": "Our team of professionals possesses deep knowledge in various areas of law, which allows us to offer clients comprehensive solutions for resolving any legal issues. Today, our specialization covers civil, corporate, investment law, we provide legal assistance both in conducting arbitration and general civil cases of any complexity, and we carry out legal consulting.",
+    "principles_title": "OUR PRINCIPLES",
+    "principle_1_title": "Vigilance ",
+    "principle_1_text": "we are always attentive to details and never miss important aspects!",
+    "principle_2_title": "Devotion ",
+    "principle_2_text": "the interests of our clients are our main priority!",
+    "principle_3_title": "Justice ",
+    "principle_3_text": "it is fair that no one should become richer from another's harm",
+    "director_name": "Denis Valerievich Shomesov",
+    "director_title": "Head of LC \"Argus\", St. Petersburg City Bar Association, Lawyer, Candidate of Legal Sciences"
+  },
+  
+  "practices": {
+    "title": "OUR PRACTICES",
+    "more": "Learn More",
+    
+    "card_1_title": "Litigation & Arbitration",
+    "card_1_text": "Argus lawyers solve complex tasks in various areas of law, including corporate disputes, disputes arising in business activities, bankruptcy procedures, including disputes related to bringing controlling persons to subsidiary liability, as well as disputes involving foreign parties.",
+    
+    "card_2_title": "Corporate Law & Investment",
+    "card_2_text": "We provide comprehensive legal consultations and offer unique solutions for developing and improving corporate governance issues, supporting corporate transactions and investments, and other corporate law matters.",
+    
+    "card_3_title": "Legal Expertise & Real Estate Transactions",
+    "card_3_text": "Services for structuring and supporting real estate transactions, including judicial and pre-trial support of disputes arising from lease relations, establishment of easements and other contracts related to real estate.",
+    
+    "card_4_title": "Inheritance Practice",
+    "card_4_text": "Assistance in registration of inheritance rights in Russia for Russian and foreign citizens, as well as inheritance rights in foreign countries with participation of Russian citizens and foreign nationals.",
+    
+    "card_5_title": "Investment",
+    "card_5_text": "Legal support of investment projects, development of organizational and corporate structures with investor objectives in mind, creation of specialized financial companies, organization of digital financial assets issuance. Creation of inheritance and personal funds and control over their management, development of mechanisms for protecting property and rights of owners and beneficiaries.",
+    
+    "card_6_title": "Bankruptcy",
+    "card_6_text": "Support of bankruptcy procedures for legal entities on behalf of creditors and debtors, including with investor participation. Disputes on bringing controlling persons to subsidiary liability - directors and participants (founders) of the debtor, other controlling persons, preventing the withdrawal of debtor's assets, providing assistance to creditors in their conflicts with insolvent companies.",
+    
+    "card_7_title": "Pro Bono",
+    "card_7_text": "Argus shares its knowledge and experience to restore justice and provide legal support to individuals as well as significant social and cultural projects."
+  },
+  
+  "contacts": {
+    "title": "CONTACTS",
+    "intro": "Contact us in any convenient way. We are ready to answer your questions and provide professional legal assistance.",
+    
+    "phone_label": "Phone",
+    "email_label": "Email",
+    "address_label": "Address",
+    "address": "191014, Saint Petersburg,\nVilensky Lane, 15,\nBuilding V, Office 6N",
+    
+    "spbgka_label": "Saint Petersburg\nCity Bar Association",
+    "spbgka_link": "Consultation page on SPbGKA website",
+    
+    "copyright": "© Argus Law Consultation of the Saint Petersburg City Bar Association, 1999-2025. All rights reserved."
+  },
+
+  "consultation": {
+    "title": "CONSULTATIONS",
+    "subtitle": "Professional legal assistance from Argus Law Consultation attorneys",
+    "cta_title": "Get a consultation",
+    "cta_description": "Learn about our services, prices and consultation formats",
+    "cta_button": "Consultation information",
+    "disclaimer": "Argus Law Consultation attorneys provide services only in the areas of law specified in the Practices section",
+    "features_title": "ADVANTAGES OF OUR CONSULTATIONS",
+    "feature_1_title": "Experienced attorneys",
+    "feature_1_text": "Over 25 years of successful practice in various areas of law",
+    "feature_2_title": "Confidentiality",
+    "feature_2_text": "Full compliance with attorney-client privilege",
+    "feature_3_title": "Flexible schedule",
+    "feature_3_text": "In-person and remote consultations at your convenience",
+    "feature_4_title": "Individual approach",
+    "feature_4_text": "Detailed analysis of your situation and personalized recommendations",
+    "feature_5_title": "Case assessment",
+    "feature_5_text": "Professional evaluation of chances for success and possible risks",
+    "feature_6_title": "Document preparation assistance",
+    "feature_6_text": "Consultations on drafting and reviewing legal documents",
+    "contact_title": "READY FOR A CONSULTATION?",
+    "contact_subtitle": "Contact us in the way that suits you",
+    "modal_title": "Consultation information",
+    "modal_oral_title": "Oral consultation",
+    "modal_oral_price": "15,000 rubles/hour",
+    "modal_format_1_title": "Personal meeting",
+    "modal_format_1_text": "At the attorney's office",
+    "modal_format_2_title": "Remote consultation",
+    "modal_format_2_text": "By phone, WhatsApp, Telegram, Zoom or Skype",
+    "modal_written_title": "Written consultation",
+    "modal_written_price": "Price upon request",
+    "modal_timing_1_label": "Standard:",
+    "modal_timing_1_value": "3-5 business days",
+    "modal_timing_2_label": "Urgent:",
+    "modal_timing_2_value": "1-2 business days",
+    "modal_timing_3_label": "Very urgent:",
+    "modal_timing_3_value": "within a day",
+    "modal_contact_title": "To book a consultation:"
+  },
+
+   "litigation": {
+    "title": "LITIGATION FINANCING",
+    "subtitle": "The investor covers the litigation costs of the disputing party and the attorney's fees",
+    "purpose_title": "PURPOSE",
+    "purpose_1": "For handling costly litigation disputes, including in arbitration courts",
+    "purpose_2": "To ensure the right to qualified legal assistance from an attorney",
+    "purpose_3": "For conducting quality dispute expertise (due diligence)",
+    "purpose_4": "To facilitate peaceful dispute resolution",
+    "process_title": "HOW IT WORKS",
+    "step_1_title": "Dispute Expertise",
+    "step_1_text": "Preliminary economic and legal expertise of the dispute (due diligence)",
+    "step_2_title": "Financing",
+    "step_2_text": "Coverage of all or part of litigation costs by the investor",
+    "step_3_title": "Case Management",
+    "step_3_text": "Managing the case in the interests of the disputing party at the investor's expense",
+    "step_4_title": "Result",
+    "step_4_text": "The ability to preserve the disputing party's funds and generate income for the investor",
+    "cta_title": "Interested in litigation financing?",
+    "cta_text": "Contact us to discuss your case and financing options"
+  },
+
+  "publication": {
+    "title": "PROFESSIONAL ACHIEVEMENTS, REVIEWS, PRACTICE",
+    "subtitle": "Latest achievements, articles and insights from our team",
+    "search_placeholder": "Search publications...",
+    "filter_all_categories": "All categories",
+    "filter_achievements": "Achievements",
+    "filter_reviews": "Reviews",
+    "filter_practice": "Practice",
+    "filter_all_years": "All time",
+    "no_results_title": "No publications found",
+    "no_results_text": "Try changing your search criteria or filters"
+  }
+}

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Консультации | Argus</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Serif:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/00-variables.css">
+    <link rel="stylesheet" href="css/01-reset.css">
+    <link rel="stylesheet" href="css/consultation.css">
+</head>
+<body>
+    <!-- Navigation Button -->
+    <a href="index.html#home" class="back-btn">
+        <img src="assets/images/logo.svg" alt="Home" width="32" height="32">
+    </a>
+
+    <!-- Main Content -->
+    <main class="consultation-page">
+        
+        <!-- Header Section -->
+        <section class="page-header">
+            <h1 class="page-title" data-i18n="consultation.title">Консультации</h1>
+            <p class="page-subtitle" data-i18n="consultation.subtitle">Профессиональная юридическая помощь от адвокатов АК «Аргус»</p>
+        </section>
+
+        <!-- Main CTA Section -->
+        <section class="cta-section">
+            <div class="cta-card">
+                <div class="cta-icon">
+                    <i class="fas fa-balance-scale"></i>
+                </div>
+                <h2 data-i18n="consultation.cta_title">Получить консультацию</h2>
+                <p data-i18n="consultation.cta_description">Узнайте о наших услугах, ценах и форматах консультаций</p>
+                
+                <button class="cta-btn" id="consultationInfoBtn">
+                    <i class="fas fa-info-circle"></i>
+                    <span data-i18n="consultation.cta_button">Информация о консультациях</span>
+                </button>
+                
+                <p class="disclaimer" data-i18n="consultation.disclaimer">
+                    Адвокаты Адвокатской консультации «Аргус» оказывают услуги только по отраслям права, указанным в разделе «Практики»
+                </p>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section">
+            <h2 class="section-title" data-i18n="consultation.features_title">Преимущества наших консультаций</h2>
+            
+            <div class="features-grid">
+                <!-- Feature 1 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h3 data-i18n="consultation.feature_1_title">Опытные адвокаты</h3>
+                    <p data-i18n="consultation.feature_1_text">Более 25 лет успешной практики в различных отраслях права</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 data-i18n="consultation.feature_2_title">Конфиденциальность</h3>
+                    <p data-i18n="consultation.feature_2_text">Полное соблюдение адвокатской тайны</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 data-i18n="consultation.feature_3_title">Гибкий график</h3>
+                    <p data-i18n="consultation.feature_3_text">Очные и дистанционные консультации в удобное для вас время</p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3 data-i18n="consultation.feature_4_title">Индивидуальный подход</h3>
+                    <p data-i18n="consultation.feature_4_text">Детальный анализ вашей ситуации и персональные рекомендации</p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 data-i18n="consultation.feature_5_title">Оценка перспектив дела</h3>
+                    <p data-i18n="consultation.feature_5_text">Профессиональная оценка шансов на успех и возможных рисков</p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-signature"></i>
+                    </div>
+                    <h3 data-i18n="consultation.feature_6_title">Помощь в подготовке документов</h3>
+                    <p data-i18n="consultation.feature_6_text">Консультации по составлению и проверке правовых документов</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section">
+            <h2 class="section-title" data-i18n="consultation.contact_title">Готовы к консультации?</h2>
+            <p class="section-subtitle" data-i18n="consultation.contact_subtitle">Свяжитесь с нами удобным способом</p>
+            
+            <div class="contact-buttons">
+                <a href="tel:+78129373416" class="contact-btn contact-btn--phone">
+                    <i class="fas fa-phone"></i>
+                    <span>+7 (812) 937-34-16</span>
+                </a>
+                <a href="mailto:info@lawco.ru" class="contact-btn contact-btn--email">
+                    <i class="fas fa-envelope"></i>
+                    <span>info@lawco.ru</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="page-footer">
+            <p data-i18n="contacts.copyright">
+                © Адвокатская консультация «Аргус» Санкт-Петербургской городской коллегии адвокатов, 1999-2025. Все права защищены.
+            </p>
+        </footer>
+    </main>
+
+    <!-- Consultation Info Modal -->
+    <div class="modal" id="consultationModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 data-i18n="consultation.modal_title">Информация о консультациях</h2>
+                <button class="modal-close" id="modalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <!-- Oral Consultation -->
+                <div class="consultation-type">
+                    <div class="type-header">
+                        <div class="type-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="type-info">
+                            <h3 data-i18n="consultation.modal_oral_title">Устная консультация</h3>
+                            <div class="price" data-i18n="consultation.modal_oral_price">15 000 руб./час</div>
+                        </div>
+                    </div>
+                    
+                    <div class="type-formats">
+                        <div class="format-item">
+                            <i class="fas fa-user-friends"></i>
+                            <div>
+                                <h4 data-i18n="consultation.modal_format_1_title">Личная встреча</h4>
+                                <p data-i18n="consultation.modal_format_1_text">В офисе адвоката</p>
+                            </div>
+                        </div>
+                        
+                        <div class="format-item">
+                            <i class="fas fa-video"></i>
+                            <div>
+                                <h4 data-i18n="consultation.modal_format_2_title">Дистанционная консультация</h4>
+                                <p data-i18n="consultation.modal_format_2_text">По телефону, WhatsApp, Telegram, Zoom или Skype</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Written Consultation -->
+                <div class="consultation-type">
+                    <div class="type-header">
+                        <div class="type-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="type-info">
+                            <h3 data-i18n="consultation.modal_written_title">Письменная консультация</h3>
+                            <div class="price" data-i18n="consultation.modal_written_price">Цена по запросу</div>
+                        </div>
+                    </div>
+                    
+                    <div class="written-details">
+                        <div class="detail-item">
+                            <i class="fas fa-clock"></i>
+                            <span><strong data-i18n="consultation.modal_timing_1_label">Обычная:</strong> <span data-i18n="consultation.modal_timing_1_value">3-5 рабочих дней</span></span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-bolt"></i>
+                            <span><strong data-i18n="consultation.modal_timing_2_label">Срочная:</strong> <span data-i18n="consultation.modal_timing_2_value">1-2 рабочих дня</span></span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-fire"></i>
+                            <span><strong data-i18n="consultation.modal_timing_3_label">Очень срочная:</strong> <span data-i18n="consultation.modal_timing_3_value">в течение дня</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="modal-contact">
+                    <h4 data-i18n="consultation.modal_contact_title">Для записи на консультацию:</h4>
+                    <div class="contact-methods">
+                        <a href="tel:+78129373416" class="contact-method">
+                            <i class="fas fa-phone"></i>
+                            <span>+7 (812) 937-34-16</span>
+                        </a>
+                        <a href="mailto:info@lawco.ru" class="contact-method">
+                            <i class="fas fa-envelope"></i>
+                            <span>info@lawco.ru</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="js/config.js"></script>
+    <script type="module" src="js/i18n.js"></script>
+    <script type="module" src="js/consultation.js"></script>
+</body>
+</html>

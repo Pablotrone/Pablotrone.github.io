@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- SEO Meta Tags -->
+    <title>Аргус — Адвокатская консультация | Защита ваших прав</title>
+    <meta name="description" content="Профессиональная юридическая помощь. Адвокатская консультация Аргус — опыт с 1999 года. Судебная защита, корпоративное право, правовая экспертиза.">
+    <meta name="keywords" content="адвокат, юрист, юридическая консультация, судебная защита, корпоративное право">
+    <meta name="author" content="Argus Law">
+    
+    <!-- Open Graph (для соцсетей) -->
+    <meta property="og:title" content="Аргус — Адвокатская консультация">
+    <meta property="og:description" content="Профессиональная юридическая помощь с 1999 года">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://argus-law.com">
+    <meta property="og:image" content="assets/images/og-image.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+    <link rel="apple-touch-icon" href="assets/images/logo.svg">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Serif:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    
+    <!-- ============================================
+         ВЕРТИКАЛЬНЫЙ SWIPER (главный контейнер)
+         ============================================ -->
+    <div class="swiper vertical-swiper">
+        <div class="swiper-wrapper">
+            
+            <!-- ============================================
+                 СЛАЙД 1: HOME
+                 ============================================ -->
+            <div class="swiper-slide slide-home">
+                <!-- Фоновое изображение -->
+                <div class="slide-background home-background"></div>
+                
+                <!-- Хедер (только на HOME) -->
+                <header class="header">
+                    <div class="header-container">
+                        <!-- Логотип -->
+                        <a href="#home" class="header-logo">
+                            <img src="assets/images/logo.svg" alt="Логотип Аргус" width="48" height="48">
+                            <div class="header-logo-content">
+                                <span class="header-logo-text" data-i18n="site.name">Argus</span>
+                                <span class="header-logo-subtitle" data-i18n="site.subtitle">Адвокатская консультация</span>
+                            </div>
+                        </a>
+                        
+                        <!-- ОБОРАЧИВАЕМ В header-right -->
+                        <div class="header-right">
+                            <!-- Переключатель языков -->
+                            <div class="language-switcher">
+                                <button class="lang-btn active" data-lang="ru" aria-label="Русский язык">RU</button>
+                                <button class="lang-btn" data-lang="en" aria-label="English">EN</button>
+                                <button class="lang-btn" data-lang="fr" aria-label="Français">FR</button>
+                            </div>
+                            
+                            <!-- Выпадающее меню (только десктоп) -->
+                            <div class="desktop-dropdown">
+                                <button class="dropdown-toggle" aria-label="Открыть меню" aria-expanded="false">
+                                    <span data-i18n="menu.menu">Меню</span>
+                                    <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                                
+                                <div class="dropdown-menu">
+                                    <a href="#home" class="dropdown-link active" data-i18n="menu.home">Главная</a>
+                                    <a href="#about" class="dropdown-link" data-i18n="menu.about">О нас</a>
+                                    <a href="#practices" class="dropdown-link" data-i18n="menu.practices">Практики</a>
+                                    <a href="consultation.html" class="dropdown-link" data-i18n="menu.consultation">Консультации</a>
+                                    <a href="publication.html" class="dropdown-link" data-i18n="menu.publication">Публикации</a>
+                                    <a href="litigation-financing.html" class="dropdown-link" data-i18n="menu.litigation_financing">Судебное финансирование</a>
+                                    <a href="#contacts" class="dropdown-link" data-i18n="menu.contacts">Контакты</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Бургер-меню (только мобилка) -->
+                        <button class="menu-toggle" aria-label="Открыть меню" aria-expanded="false">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </div>
+                </header>
+                
+                <!-- Контент HOME -->
+                <div class="slide-content home-content">
+                    <h1 class="home-title" data-i18n="home.title">Аргус</h1>
+                    <p class="home-subtitle" data-i18n="home.subtitle">Отделим белое от черного!</p>
+                    
+                    <div class="home-cta">
+                        <a href="consultation.html" class="btn btn-primary" data-i18n="home.btn_consultation">Консультация</a>
+                        <a href="#practices" class="btn btn-secondary" data-i18n="home.btn_services">Наши услуги</a>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <!-- ============================================
+                 СЛАЙД 2: ABOUT
+                 ============================================ -->
+            <div class="swiper-slide slide-about">
+                <!-- Фоновое изображение -->
+                <div class="slide-background about-background"></div>
+                
+                <!-- Кнопка возврата на главную -->
+                <a href="#home" class="logo-home-btn" aria-label="Вернуться на главную">
+                    <img src="assets/images/logo.svg" alt="На главную" width="32" height="32">
+                </a>
+                
+                <!-- Контент ABOUT -->
+                <div class="slide-content about-content">
+                    
+                    <!-- Левая часть - текст -->
+                    <div class="about-text-section">
+                        
+                        <!-- Заголовок -->
+                        <h2 class="about-main-title">
+                            <span data-i18n="about.title_line1">ЗАЩИТА ВАШИХ ПРАВ —</span><br>
+                            <span data-i18n="about.title_line2">НАША МИССИЯ</span>
+                        </h2>
+                        
+                        <!-- Описание -->
+                        <div class="about-description">
+                            <p data-i18n="about.description_1">
+                                Адвокатская консультация «Аргус» Санкт-Петербургской городской коллегии адвокатов создана в 1999 году и является одной из старейших консультаций в составе Адвокатской палаты Санкт-Петербурга.
+                            </p>
+                            <p data-i18n="about.description_2">
+                                Свое название консультация получила в честь Паноптэ - всевидящего Аргуса (Argus), символизирующего бдительность, непоколебимую преданность и способность видеть истину сквозь любые сложности. В свою очередь наши адвокаты применяют данные принципы, чтобы защищать интересы доверителей независимо от сложности дела.
+                            </p>
+                            <p data-i18n="about.description_3">
+                                Наша команда профессионалов обладает глубокими знаниями в различных областях права, что позволяет предлагать доверителям комплексные решения для разрешения любых юридических задач. Сегодня наша специализация охватывает гражданское, корпоративное, инвестиционное право, мы оказываем юридическую помощь как при ведении арбитражных и общегражданских дел любой сложности, так и осуществляем правовой консалтинг.
+                            </p>
+                        </div>
+                        
+                        <!-- Принципы -->
+                        <h3 class="about-section-title" data-i18n="about.principles_title">НАШИ ПРИНЦИПЫ</h3>
+                        
+                        <div class="about-principles">
+                            <!-- Бдительность -->
+                            <div class="principle-item">
+                                <h4 class="principle-title" data-i18n="about.principle_1_title">Бдительность</h4>
+                                <p class="principle-text" data-i18n="about.principle_1_text">
+                                    мы всегда внимательны к деталям и никогда не упускаем важные аспекты дела!
+                                </p>
+                            </div>
+                            
+                            <!-- Преданность -->
+                            <div class="principle-item">
+                                <h4 class="principle-title" data-i18n="about.principle_2_title">Преданность</h4>
+                                <p class="principle-text" data-i18n="about.principle_2_text">
+                                    интересы наших доверителей - наш главный приоритет!
+                                </p>
+                            </div>
+                            
+                            <!-- Справедливость -->
+                            <div class="principle-item">
+                                <h4 class="principle-title" data-i18n="about.principle_3_title">Справедливость</h4>
+                                <p class="principle-text" data-i18n="about.principle_3_text">
+                                    справедливо, чтобы никто не становился богаче от ущерба другого
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- Директор -->
+                        <div class="about-director">
+                            <div class="director-info">
+                                <p class="director-name" data-i18n="about.director_name">Шомесов Денис Валерьевич</p>
+                                <p class="director-title" data-i18n="about.director_title">Заведующий АК "Аргус" Санкт-Петербургской городской коллегии адвокатов, адвокат, кандидат юридических наук</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <!-- ============================================
+                 СЛАЙД 3: PRACTICES
+                 ============================================ -->
+            <div class="swiper-slide slide-practices">
+                <!-- Фоновое изображение -->
+                <div class="slide-background practices-background"></div>
+
+                <!-- Кнопка возврата на главную -->
+                <a href="#home" class="logo-home-btn" aria-label="Вернуться на главную">
+                    <img src="assets/images/logo.svg" alt="На главную" width="32" height="32">
+                </a>
+
+                <!-- Контент PRACTICES -->
+                <div class="slide-content practices-content">
+
+                    <!-- ОДНА КАРТОЧКА -->
+                    <div class="practice-single-card">
+
+                        <!-- Стрелка влево -->
+                        <button class="practice-nav-btn practice-prev" aria-label="Предыдущая практика">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+
+                        <!-- Контент карточки -->
+                        <div class="practice-card-content">
+                            <div class="practice-icon" aria-hidden="true"></div>
+                            <h3 class="practice-title"></h3>
+                            <div class="practice-divider"></div>
+                            <p class="practice-description"></p>
+                        </div>
+
+                        <!-- Стрелка вправо -->
+                        <button class="practice-nav-btn practice-next" aria-label="Следующая практика">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+
+                    </div>
+
+                    <!-- Пагинация -->
+                    <div class="practice-pagination"></div>
+
+                </div>
+            </div>
+            <!-- ============================================
+                 СЛАЙД 4: CONTACTS
+                 ============================================ -->
+            <div class="swiper-slide slide-contacts">
+                <!-- Фоновое изображение -->
+                <div class="slide-background contacts-background"></div>
+                
+                <!-- Кнопка возврата на главную -->
+                <a href="#home" class="logo-home-btn" aria-label="Вернуться на главную">
+                    <img src="assets/images/logo.svg" alt="На главную" width="32" height="32">
+                </a>
+                
+                <!-- Контент CONTACTS -->
+                <div class="slide-content contacts-content">
+                    
+                    <!-- Левая часть - текст -->
+                    <div class="contacts-text-section">
+                        
+                        <!-- Заголовок -->
+                        <h2 class="contacts-main-title">
+                            <span data-i18n="contacts.title">КОНТАКТЫ</span>
+                        </h2>
+                        
+                        <!-- Описание -->
+                        <p class="contacts-intro" data-i18n="contacts.intro">
+                            Свяжитесь с нами любым удобным способом. Мы готовы ответить на ваши вопросы и оказать профессиональную юридическую помощь.
+                        </p>
+                        
+                        <!-- Контактная информация -->
+                        <div class="contacts-info">
+                            
+                            <!-- Телефон -->
+                            <div class="contact-item">
+                                <h3 class="contact-label" data-i18n="contacts.phone_label">Телефон</h3>
+                                <a href="tel:+78129373416" class="contact-value contact-link">+7 (812) 937-34-16</a>
+                            </div>
+                            
+                            <!-- Email -->
+                            <div class="contact-item">
+                                <h3 class="contact-label" data-i18n="contacts.email_label">Email</h3>
+                                <a href="mailto:info@lawco.ru" class="contact-value contact-link">info@lawco.ru</a>
+                            </div>
+                            
+                            <!-- Адрес -->
+                            <div class="contact-item">
+                                <h3 class="contact-label" data-i18n="contacts.address_label">Адрес</h3>
+                                <p class="contact-value" data-i18n="contacts.address">
+                                    191014, Санкт-Петербург,<br>
+                                    Виленский переулок, д.15,<br>
+                                    литер В, пом. 6Н
+                                </p>
+                            </div>
+                            
+                            <!-- Ссылка на СПбГКА -->
+                            <div class="contact-item">
+                                <h3 class="contact-label" data-i18n="contacts.spbgka_label">Санкт-Петербургская<br>городская коллегия адвокатов</h3>
+                                <a href="https://spbgka.ru/advokatskie-konsultaczii/moskovskij-rajon/advokatskaya-konsultacziya-argus/" 
+                                   target="_blank" 
+                                   rel="noopener noreferrer" 
+                                   class="contact-value contact-link spbgka-link"
+                                   data-i18n="contacts.spbgka_link">
+                                    Страница консультации на сайте СПбГКА
+                                </a>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <!-- Copyright внизу по центру -->
+                    <div class="contacts-copyright">
+                        <p class="copyright" data-i18n="contacts.copyright">
+                            © 2025 Адвокатская консультация «Аргус». Все права защищены.
+                        </p>
+                    </div>
+                    
+                </div>
+            </div>
+
+    <!-- ============================================
+         МОБИЛЬНОЕ МЕНЮ
+         ============================================ -->
+    <div class="mobile-menu">
+        <nav class="mobile-menu-nav">
+            <a href="#home" class="mobile-menu-link active" data-i18n="menu.home">Главная</a>
+            <a href="#about" class="mobile-menu-link" data-i18n="menu.about">О нас</a>
+            <a href="#practices" class="mobile-menu-link" data-i18n="menu.practices">Практики</a>
+            <a href="consultation.html" class="mobile-menu-link" data-i18n="menu.consultation">Консультации</a>
+            <a href="publication.html" class="mobile-menu-link" data-i18n="menu.publication">Публикации</a>
+            <a href="litigation-financing.html" class="mobile-menu-link" data-i18n="menu.litigation_financing">Судебное финансирование</a>
+            <a href="#contacts" class="mobile-menu-link" data-i18n="menu.contacts">Контакты</a>
+        </nav>
+        
+        <!-- Переключатель языков в мобильном меню -->
+        <div class="language-switcher">
+            <button class="lang-btn active" data-lang="ru" aria-label="Русский язык">RU</button>
+            <button class="lang-btn" data-lang="en" aria-label="English">EN</button>
+            <button class="lang-btn" data-lang="fr" aria-label="Français">FR</button>
+        </div>
+    </div>
+    
+    
+    <!-- ============================================
+         SCRIPTS
+         ============================================ -->
+    
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    
+    <!-- Main JS -->
+    <script src="js/app.js" type="module"></script>
+
+</body>
+</html>

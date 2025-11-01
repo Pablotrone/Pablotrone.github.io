@@ -1,0 +1,161 @@
+{
+  "site": {
+    "name": "Argus",
+    "subtitle": "Cabinet d'avocats"
+  },
+
+  "meta": {
+    "title": "Argus — Cabinet d'avocats | Protection de vos droits",
+    "description": "Assistance juridique professionnelle. Cabinet d'avocats Argus — expérience depuis 1999. Contentieux, droit des sociétés, expertise juridique."
+  },
+  
+  "menu": {
+    "menu": "Menu",
+    "home": "Accueil",
+    "about": "À propos",
+    "practices": "Pratiques",
+    "consultation": "Consultations",
+    "publication": "Publications",
+    "litigation_financing": "Financement des litiges",
+    "contacts": "Contacts"
+  },
+  
+  "home": {
+    "title": "Argus",
+    "subtitle": "Nous séparons le blanc du noir / nous séparons le noir du blanc",
+    "btn_consultation": "Consultation",
+    "btn_services": "Nos Services"
+  },
+  
+  "about": {
+    "title_line1": "PROTECTION DE VOS DROITS —",
+    "title_line2": "NOTRE MISSION",
+    "description_1": "Le Cabinet \"Argus\" du Barreau de Saint-Pétersbourg a été créé en 1999 et est l'une des plus anciennes consultations du Barreau de Saint-Pétersbourg.",
+    "description_2": "Le cabinet a reçu son nom en l'honneur de Panoptès - Argus aux cent yeux, symbolisant la vigilance, le dévouement inébranlable et la capacité de voir la vérité à travers toute complexité.",
+    "description_3": "Notre équipe possède des connaissances approfondies dans divers domaines du droit. Notre spécialisation couvre le droit civil, commercial, des investissements.",
+    "principles_title": "NOS PRINCIPES",
+    "principle_1_title": "Vigilance",
+    "principle_1_text": "nous sommes toujours attentifs aux détails!",
+    "principle_2_title": "Dévouement",
+    "principle_2_text": "les intérêts de nos clients sont notre priorité!",
+    "principle_3_title": "Justice",
+    "principle_3_text": "personne ne devrait s'enrichir du préjudice d'autrui",
+    "director_name": "Denis Valeriévitch Chomesov",
+    "director_title": "Directeur du Cabinet \"Argus\", Barreau de Saint-Pétersbourg, Avocat, Candidat en Sciences Juridiques"
+  },
+  
+  "practices": {
+    "title": "NOS PRATIQUES",
+    "more": "En savoir plus",
+    
+    "card_1_title": "Contentieux et Arbitrage",
+    "card_1_text": "Les avocats d'Argus résolvent des tâches complexes dans divers domaines du droit, y compris les litiges d'entreprise, les litiges commerciaux, les procédures de faillite, y compris les litiges liés à la responsabilité subsidiaire des personnes contrôlantes, ainsi que les litiges impliquant des parties étrangères.",
+    
+    "card_2_title": "Droit des Sociétés et Investissement",
+    "card_2_text": "Nous fournissons des consultations juridiques complètes et proposons des solutions uniques pour développer et améliorer les questions de gouvernance d'entreprise, l'accompagnement des transactions d'entreprise et des investissements, et d'autres questions de droit des sociétés.",
+    
+    "card_3_title": "Expertise Juridique et Transactions Immobilières",
+    "card_3_text": "Services de structuration et d'accompagnement des transactions immobilières, y compris l'accompagnement judiciaire et précontentieux des litiges découlant des relations de location, de l'établissement de servitudes et d'autres contrats liés aux biens immobiliers.",
+    
+    "card_4_title": "Pratique Successorale",
+    "card_4_text": "Assistance à l'enregistrement des droits successoraux en Russie pour les citoyens russes et étrangers, ainsi que des droits successoraux dans les pays étrangers avec la participation de citoyens russes et étrangers.",
+    
+    "card_5_title": "Investissement",
+    "card_5_text": "Accompagnement juridique de projets d'investissement, développement de structures organisationnelles et d'entreprise en tenant compte des objectifs de l'investisseur, création de sociétés financières spécialisées, organisation de l'émission d'actifs financiers numériques. Création de fonds successoraux et personnels et contrôle de leur gestion, développement de mécanismes de protection des biens et des droits des propriétaires et bénéficiaires.",
+    
+    "card_6_title": "Faillite",
+    "card_6_text": "Accompagnement des procédures de faillite pour les personnes morales du côté des créanciers et des débiteurs, y compris avec la participation d'investisseurs. Litiges sur la responsabilité subsidiaire des personnes contrôlantes - dirigeants et participants (fondateurs) du débiteur, autres personnes contrôlantes, prévention du retrait des actifs du débiteur, assistance aux créanciers dans leurs conflits avec des sociétés insolvables.",
+    
+    "card_7_title": "Pro Bono",
+    "card_7_text": "Argus partage ses connaissances et son expérience pour rétablir la justice et fournir un soutien juridique aux individus ainsi qu'aux projets sociaux et culturels significatifs."
+  },
+  
+  "contacts": {
+    "title": "CONTACTS",
+    "intro": "Contactez-nous de la manière qui vous convient. Nous sommes prêts à répondre à vos questions et à fournir une assistance juridique professionnelle.",
+    
+    "phone_label": "Téléphone",
+    "email_label": "Email",
+    "address_label": "Adresse",
+    "address": "191014, Saint-Pétersbourg,\nRuelle Vilensky, 15,\nBâtiment V, Bureau 6N",
+    
+    "spbgka_label": "Barreau de la ville\nde Saint-Pétersbourg",
+    "spbgka_link": "Page de consultation sur le site SPbGKA",
+    
+    "copyright": "© Cabinet d'avocats Argus du Barreau de la ville de Saint-Pétersbourg, 1999-2025. Tous droits réservés."
+  },
+
+  "consultation": {
+    "title": "CONSULTATIONS",
+    "subtitle": "Assistance juridique professionnelle des avocats du Cabinet Argus",
+    "cta_title": "Obtenir une consultation",
+    "cta_description": "Découvrez nos services, tarifs et formats de consultations",
+    "cta_button": "Informations sur les consultations",
+    "disclaimer": "Les avocats du Cabinet Argus fournissent des services uniquement dans les domaines du droit spécifiés dans la section Pratiques",
+    "features_title": "AVANTAGES DE NOS CONSULTATIONS",
+    "feature_1_title": "Avocats expérimentés",
+    "feature_1_text": "Plus de 25 ans de pratique réussie dans divers domaines du droit",
+    "feature_2_title": "Confidentialité",
+    "feature_2_text": "Respect total du secret professionnel",
+    "feature_3_title": "Horaires flexibles",
+    "feature_3_text": "Consultations en personne et à distance à votre convenance",
+    "feature_4_title": "Approche individuelle",
+    "feature_4_text": "Analyse détaillée de votre situation et recommandations personnalisées",
+    "feature_5_title": "Évaluation des perspectives",
+    "feature_5_text": "Évaluation professionnelle des chances de succès et des risques possibles",
+    "feature_6_title": "Aide à la préparation de documents",
+    "feature_6_text": "Consultations sur la rédaction et la vérification de documents juridiques",
+    "contact_title": "PRÊT POUR UNE CONSULTATION?",
+    "contact_subtitle": "Contactez-nous de la manière qui vous convient",
+    "modal_title": "Informations sur les consultations",
+    "modal_oral_title": "Consultation orale",
+    "modal_oral_price": "15 000 roubles/heure",
+    "modal_format_1_title": "Rencontre personnelle",
+    "modal_format_1_text": "Au bureau de l'avocat",
+    "modal_format_2_title": "Consultation à distance",
+    "modal_format_2_text": "Par téléphone, WhatsApp, Telegram, Zoom ou Skype",
+    "modal_written_title": "Consultation écrite",
+    "modal_written_price": "Prix sur demande",
+    "modal_timing_1_label": "Standard:",
+    "modal_timing_1_value": "3-5 jours ouvrables",
+    "modal_timing_2_label": "Urgent:",
+    "modal_timing_2_value": "1-2 jours ouvrables",
+    "modal_timing_3_label": "Très urgent:",
+    "modal_timing_3_value": "dans la journée",
+    "modal_contact_title": "Pour réserver une consultation:"
+  },
+
+  "litigation": {
+    "title": "FINANCEMENT DES LITIGES",
+    "subtitle": "L'investisseur couvre les frais judiciaires de la partie en litige et les honoraires d'avocat",
+    "purpose_title": "OBJECTIF",
+    "purpose_1": "Pour le traitement de litiges judiciaires coûteux, y compris devant les tribunaux d'arbitrage",
+    "purpose_2": "Pour garantir le droit à une assistance juridique qualifiée d'un avocat",
+    "purpose_3": "Pour mener une expertise de litige de qualité (due diligence)",
+    "purpose_4": "Pour faciliter le règlement pacifique des litiges",
+    "process_title": "COMMENT ÇA FONCTIONNE",
+    "step_1_title": "Expertise du litige",
+    "step_1_text": "Expertise économique et juridique préliminaire du litige (due diligence)",
+    "step_2_title": "Financement",
+    "step_2_text": "Couverture de tout ou partie des frais judiciaires par l'investisseur",
+    "step_3_title": "Gestion du dossier",
+    "step_3_text": "Gestion du dossier dans l'intérêt de la partie en litige aux frais de l'investisseur",
+    "step_4_title": "Résultat",
+    "step_4_text": "La possibilité de préserver les fonds de la partie en litige et de générer des revenus pour l'investisseur",
+    "cta_title": "Intéressé par le financement de litiges?",
+    "cta_text": "Contactez-nous pour discuter de votre affaire et des options de financement"
+  },
+
+  "publication": {
+    "title": "RÉALISATIONS PROFESSIONNELLES, REVUES, PRATIQUE",
+    "subtitle": "Dernières réalisations, articles et idées de notre équipe",
+    "search_placeholder": "Rechercher des publications...",
+    "filter_all_categories": "Toutes les catégories",
+    "filter_achievements": "Réalisations",
+    "filter_reviews": "Revues",
+    "filter_practice": "Pratique",
+    "filter_all_years": "Tout le temps",
+    "no_results_title": "Aucune publication trouvée",
+    "no_results_text": "Essayez de modifier vos critères de recherche ou vos filtres"
+  }
+}

@@ -1,0 +1,408 @@
+/* ============================================
+   RESPONSIVE UTILITIES
+   Дополнительные адаптивные стили
+   ============================================ */
+
+/* ============================================
+   ОЧЕНЬ МАЛЕНЬКИЕ ЭКРАНЫ (до 375px)
+   ============================================ */
+
+@media (max-width: 374px) {
+    /* Уменьшаем отступы */
+    :root {
+        --space-8: 1.5rem;   /* 24px вместо 32px */
+        --space-12: 2rem;    /* 32px вместо 48px */
+        --space-16: 2.5rem;  /* 40px вместо 64px */
+    }
+    
+    /* Шрифты еще меньше */
+    .home-title {
+        font-size: var(--text-3xl);
+    }
+    
+    .section-title {
+        font-size: var(--text-3xl);
+    }
+    
+    /* Кнопки компактнее */
+    .btn {
+        padding: var(--space-2) var(--space-4);
+        font-size: var(--text-xs);
+    }
+}
+
+
+/* ============================================
+   LANDSCAPE ОРИЕНТАЦИЯ НА МОБИЛКЕ
+   ============================================ */
+
+@media (max-width: 767px) and (orientation: landscape) {
+    /* Уменьшаем высоту хедера */
+    .header {
+        height: 50px;
+    }
+    
+    /* Компактный контент */
+    .slide-content {
+        padding: var(--space-4) var(--space-8);
+    }
+    
+    .home-title {
+        font-size: var(--text-3xl);
+        margin-bottom: var(--space-3);
+    }
+    
+    .home-subtitle {
+        font-size: var(--text-base);
+        margin-bottom: var(--space-6);
+    }
+    
+    /* Кнопки в ряд */
+    .home-cta {
+        flex-direction: row;
+        gap: var(--space-3);
+    }
+    
+    /* Pagination снизу */
+    .swiper-pagination {
+        bottom: var(--space-3);
+    }
+    
+    /* Логотип меньше */
+    .logo-home-btn {
+        width: 40px;
+        height: 40px;
+        top: var(--space-2);
+        left: var(--space-2);
+    }
+    
+    .logo-home-btn img,
+    .logo-home-btn svg {
+        width: 24px;
+        height: 24px;
+    }
+    
+    /* Принципы в ряд */
+    .principles-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--space-3);
+    }
+    
+    .principle-item {
+        padding: var(--space-3);
+    }
+    
+    /* Контакты в ряд */
+    .contacts-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--space-3);
+    }
+}
+
+
+/* ============================================
+   ПЛАНШЕТ PORTRAIT (768px - 1023px)
+   ============================================ */
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    /* Заголовки чуть меньше */
+    .home-title {
+        font-size: var(--text-5xl);
+    }
+    
+    .section-title {
+        font-size: var(--text-4xl);
+    }
+    
+    /* Принципы 2 колонки */
+    .principles-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Контакты 2 колонки */
+    .contacts-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Карточки практик по 2 */
+    .horizontal-swiper {
+        height: 75vh;
+    }
+}
+
+
+/* ============================================
+   ПЛАНШЕТ LANDSCAPE (1024px - 1279px)
+   ============================================ */
+
+@media (min-width: 1024px) and (max-width: 1279px) and (orientation: landscape) {
+    /* Оптимизация для ноутбуков с низким разрешением */
+    
+    .home-title {
+        font-size: var(--text-5xl);
+    }
+    
+    .section-title {
+        font-size: var(--text-4xl);
+    }
+    
+    /* Карточки практик */
+    .practice-card {
+        padding: var(--space-6);
+    }
+    
+    .practice-title {
+        font-size: var(--text-xl);
+    }
+}
+
+
+/* ============================================
+   БОЛЬШИЕ ЭКРАНЫ (1440px+)
+   ============================================ */
+
+@media (min-width: 1440px) {
+    /* Увеличиваем контейнеры */
+    .slide-content {
+        max-width: var(--container-2xl);
+    }
+    
+    .home-content {
+        max-width: 1100px;
+    }
+    
+    .about-content {
+        max-width: 1400px;
+    }
+    
+    /* Можно увеличить шрифты */
+    .home-title {
+        font-size: 4.5rem;
+    }
+    
+    .home-subtitle {
+        font-size: var(--text-3xl);
+    }
+}
+
+
+/* ============================================
+   ОЧЕНЬ БОЛЬШИЕ ЭКРАНЫ (1920px+)
+   ============================================ */
+
+@media (min-width: 1920px) {
+    /* Ограничиваем максимальные размеры */
+    .home-title {
+        font-size: 5rem;
+    }
+    
+    .section-title {
+        font-size: 3.5rem;
+    }
+    
+    /* Контейнеры не растягиваем слишком сильно */
+    .slide-content {
+        max-width: 1600px;
+    }
+}
+
+
+/* ============================================
+   НИЗКИЕ ЭКРАНЫ (по высоте)
+   ============================================ */
+
+/* Ноутбуки с низким экраном */
+@media (max-height: 700px) {
+    .home-title {
+        font-size: var(--text-4xl);
+        margin-bottom: var(--space-4);
+    }
+    
+    .home-subtitle {
+        font-size: var(--text-lg);
+        margin-bottom: var(--space-8);
+    }
+    
+    .section-title {
+        font-size: var(--text-3xl);
+        margin-bottom: var(--space-8);
+    }
+    
+    .about-text {
+        margin-bottom: var(--space-8);
+    }
+    
+    .principles-grid {
+        gap: var(--space-4);
+        margin-bottom: var(--space-8);
+    }
+    
+    .principle-item {
+        padding: var(--space-4);
+    }
+    
+    .contacts-grid {
+        gap: var(--space-4);
+        margin-bottom: var(--space-8);
+    }
+    
+    .horizontal-swiper {
+        height: 75vh;
+    }
+}
+
+/* Очень низкие экраны */
+@media (max-height: 600px) {
+    .home-title {
+        font-size: var(--text-3xl);
+        margin-bottom: var(--space-3);
+    }
+    
+    .home-subtitle {
+        font-size: var(--text-base);
+        margin-bottom: var(--space-6);
+    }
+    
+    .btn {
+        padding: var(--space-2) var(--space-6);
+    }
+    
+    .section-title {
+        font-size: var(--text-2xl);
+        margin-bottom: var(--space-6);
+    }
+    
+    .section-title::after {
+        margin-top: var(--space-3);
+    }
+    
+    .principles-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--space-3);
+    }
+    
+    .principle-item {
+        padding: var(--space-3);
+    }
+    
+    .principle-icon {
+        font-size: var(--text-3xl);
+        margin-bottom: var(--space-2);
+    }
+    
+    .horizontal-swiper {
+        height: 70vh;
+    }
+    
+    .practice-card {
+        padding: var(--space-4);
+    }
+}
+
+
+/* ============================================
+   ВЫСОКИЕ ЭКРАНЫ (вертикальные мониторы)
+   ============================================ */
+
+@media (min-height: 1200px) {
+    /* Не даем контенту растягиваться слишком сильно */
+    .slide-content {
+        max-height: 1000px;
+    }
+    
+    .home-content {
+        max-height: 800px;
+    }
+    
+    /* Увеличиваем отступы */
+    .section-title {
+        margin-bottom: var(--space-16);
+    }
+    
+    .about-text {
+        margin-bottom: var(--space-16);
+    }
+}
+
+
+/* ============================================
+   УТИЛИТЫ ДЛЯ СКРЫТИЯ/ПОКАЗА НА УСТРОЙСТВАХ
+   ============================================ */
+
+/* Скрыть на мобилке */
+.hide-mobile {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .hide-mobile {
+        display: block;
+    }
+}
+
+/* Скрыть на десктопе */
+.hide-desktop {
+    display: block;
+}
+
+@media (min-width: 768px) {
+    .hide-desktop {
+        display: none;
+    }
+}
+
+/* Показать только на планшете */
+.show-tablet {
+    display: none;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .show-tablet {
+        display: block;
+    }
+}
+
+
+/* ============================================
+   PRINT STYLES (для печати)
+   ============================================ */
+
+@media print {
+    /* Убираем навигацию при печати */
+    .header,
+    .swiper-pagination,
+    .swiper-button-prev,
+    .swiper-button-next,
+    .logo-home-btn,
+    .menu-toggle {
+        display: none !important;
+    }
+    
+    /* Белый фон */
+    body {
+        background: white;
+        color: black;
+    }
+    
+    /* Убираем тени и эффекты */
+    * {
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+}
+
+
+/* ============================================
+   ТЕМНЫЙ РЕЖИМ СИСТЕМЫ (на будущее)
+   ============================================ */
+
+@media (prefers-color-scheme: dark) {
+    /* Если пользователь использует темную тему системы */
+    /* Уже используем темную тему по умолчанию */
+    /* Этот блок для будущей светлой темы */
+}
+
+@media (prefers-color-scheme: light) {
+    /* Если пользователь использует светлую тему системы */
+    /* Когда добавим светлую тему - активируем ее здесь автоматически */
+}
