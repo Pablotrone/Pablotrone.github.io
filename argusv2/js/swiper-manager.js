@@ -274,6 +274,9 @@ class SwiperManager {
             });
         }
         
+        // Touch события для свайпа на мобилке
+        this.initPracticeSwipe(card);
+        
         // Пауза при hover
         card.addEventListener('mouseenter', () => this.stopPracticeAutoplay());
         card.addEventListener('mouseleave', () => this.startPracticeAutoplay());
@@ -366,7 +369,7 @@ class SwiperManager {
     
     startPracticeAutoplay() {
         this.stopPracticeAutoplay();
-        this.autoplayInterval = setInterval(() => this.nextPractice(), 5000);
+        this.autoplayInterval = setInterval(() => this.nextPractice(), 15000);
     }
     
     stopPracticeAutoplay() {
@@ -379,6 +382,48 @@ class SwiperManager {
     resetPracticeAutoplay() {
         this.stopPracticeAutoplay();
         this.startPracticeAutoplay();
+    }
+    
+    /**
+     * Инициализация свайпа для карточек практик
+     */
+    initPracticeSwipe(element) {
+        let touchStartX = 0;
+        let touchEndX = 0;
+        let touchStartY = 0;
+        let touchEndY = 0;
+        
+        // Минимальная дистанция для срабатывания свайпа (в пикселях)
+        const minSwipeDistance = 50;
+        
+        element.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
+        }, { passive: true });
+        
+        element.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            touchEndY = e.changedTouches[0].screenY;
+            
+            // Определяем направление свайпа
+            const diffX = touchStartX - touchEndX;
+            const diffY = touchStartY - touchEndY;
+            
+            // Проверяем что это горизонтальный свайп (а не вертикальный скролл)
+            if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > minSwipeDistance) {
+                if (diffX > 0) {
+                    // Свайп влево - следующий слайд
+                    this.nextPractice();
+                    this.resetPracticeAutoplay();
+                    utils.log('Swipe left - next slide');
+                } else {
+                    // Свайп вправо - предыдущий слайд
+                    this.prevPractice();
+                    this.resetPracticeAutoplay();
+                    utils.log('Swipe right - prev slide');
+                }
+            }
+        }, { passive: true });
     }
 }
 

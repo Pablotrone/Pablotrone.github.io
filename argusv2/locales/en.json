@@ -3,12 +3,10 @@
     "name": "Argus",
     "subtitle": "Law Consultation"
   },
-
   "meta": {
     "title": "Argus — Law Consultation | Protection of Your Rights",
     "description": "Professional legal assistance. Argus Law Consultation — experience since 1999. Litigation, corporate law, legal expertise."
   },
-  
   "menu": {
     "menu": "Menu",
     "home": "Home",
@@ -19,72 +17,57 @@
     "litigation_financing": "Litigation Financing",
     "contacts": "Contacts"
   },
-  
   "home": {
     "title": "Argus",
-    "subtitle": "We separate white from black / we separate black from white",
+    "subtitle": "We separate white from black.\nWe separate black from white.",
     "btn_consultation": "Consultation",
     "btn_services": "Our Services"
   },
-  
   "about": {
-    "title_line1": "PROTECTION OF YOUR RIGHTS —",
-    "title_line2": "OUR MISSION",
+    "title_line1": "MISSION —",
+    "title_line2": "PROTECTION OF RIGHTS!",
     "description_1": "Law Consultation \"Argus\" of the St. Petersburg City Bar Association was established in 1999 and is one of the oldest consultations within the St. Petersburg Bar Chamber.",
-    "description_2": "The consultation received its name in honor of Panoptes - the all-seeing Argus, symbolizing vigilance, unwavering devotion, and the ability to see the truth through any complexity. In turn, our lawyers apply these principles to protect the interests of clients regardless of the case complexity.",
-    "description_3": "Our team of professionals possesses deep knowledge in various areas of law, which allows us to offer clients comprehensive solutions for resolving any legal issues. Today, our specialization covers civil, corporate, investment law, we provide legal assistance both in conducting arbitration and general civil cases of any complexity, and we carry out legal consulting.",
+    "description_2": "The defense of clients by our law consultation attorneys is built upon the unwavering qualities of the 'all-seeing' Argus – justice, vigilance, and devotion.",
+    "description_3": "Our legal expertise covers civil, corporate, and investment law. We also provide legal assistance in conducting complex litigation and arbitration cases.",
     "principles_title": "OUR PRINCIPLES",
-    "principle_1_title": "Vigilance ",
-    "principle_1_text": "we are always attentive to details and never miss important aspects!",
-    "principle_2_title": "Devotion ",
-    "principle_2_text": "the interests of our clients are our main priority!",
-    "principle_3_title": "Justice ",
-    "principle_3_text": "it is fair that no one should become richer from another's harm",
+    "principle_1_title": "Justice",
+    "principle_1_text": "It is fair that no one should become richer from another's harm 'Aequum est cum alterius detrimento fieri'",
+    "principle_2_title": "Devotion",
+    "principle_2_text": "our priority is the interests of our clients",
+    "principle_3_title": "Vigilance",
+    "principle_3_text": "attention to detail, not missing the important",
     "director_name": "Denis Valerievich Shomesov",
     "director_title": "Head of LC \"Argus\", St. Petersburg City Bar Association, Lawyer, Candidate of Legal Sciences"
   },
-  
   "practices": {
     "title": "OUR PRACTICES",
     "more": "Learn More",
-    
     "card_1_title": "Litigation & Arbitration",
-    "card_1_text": "Argus lawyers solve complex tasks in various areas of law, including corporate disputes, disputes arising in business activities, bankruptcy procedures, including disputes related to bringing controlling persons to subsidiary liability, as well as disputes involving foreign parties.",
-    
+    "card_1_text": "Complex disputes in various areas of law – corporate disputes, bankruptcy cases, inheritance matters, breach of contractual obligations, tort claims, recovery of damages, cases involving foreign parties, and others.",
     "card_2_title": "Corporate Law & Investment",
-    "card_2_text": "We provide comprehensive legal consultations and offer unique solutions for developing and improving corporate governance issues, supporting corporate transactions and investments, and other corporate law matters.",
-    
+    "card_2_text": "Development of corporate structure based on client objectives; improvement of corporate structure and governance; resolution of corporate disputes and conflicts. Creation and liquidation of corporations.",
     "card_3_title": "Legal Expertise & Real Estate Transactions",
     "card_3_text": "Services for structuring and supporting real estate transactions, including judicial and pre-trial support of disputes arising from lease relations, establishment of easements and other contracts related to real estate.",
-    
     "card_4_title": "Inheritance Practice",
     "card_4_text": "Assistance in registration of inheritance rights in Russia for Russian and foreign citizens, as well as inheritance rights in foreign countries with participation of Russian citizens and foreign nationals.",
-    
-    "card_5_title": "Investment",
-    "card_5_text": "Legal support of investment projects, development of organizational and corporate structures with investor objectives in mind, creation of specialized financial companies, organization of digital financial assets issuance. Creation of inheritance and personal funds and control over their management, development of mechanisms for protecting property and rights of owners and beneficiaries.",
-    
+    "card_5_title": "Investment & Taxes",
+    "card_5_text": "Legal support for investment projects, including those involving digital financial assets. Development and preparation of investment agreements. Development of mechanisms to protect property and owners' rights. Challenging actions of tax authorities.",
     "card_6_title": "Bankruptcy",
-    "card_6_text": "Support of bankruptcy procedures for legal entities on behalf of creditors and debtors, including with investor participation. Disputes on bringing controlling persons to subsidiary liability - directors and participants (founders) of the debtor, other controlling persons, preventing the withdrawal of debtor's assets, providing assistance to creditors in their conflicts with insolvent companies.",
-    
+    "card_6_text": "Support of client interests in bankruptcy proceedings on behalf of the debtor, debtor's counterparties, creditors, and persons controlling the debtor. Litigation regarding subsidiary liability.",
     "card_7_title": "Pro Bono",
     "card_7_text": "Argus shares its knowledge and experience to restore justice and provide legal support to individuals as well as significant social and cultural projects."
   },
-  
   "contacts": {
     "title": "CONTACTS",
     "intro": "Contact us in any convenient way. We are ready to answer your questions and provide professional legal assistance.",
-    
     "phone_label": "Phone",
     "email_label": "Email",
     "address_label": "Address",
-    "address": "191014, Saint Petersburg,\nVilensky Lane, 15,\nBuilding V, Office 6N",
-    
+    "address": "191014, Saint Petersburg,\nVilensky Lane, 15,\nBuilding V",
     "spbgka_label": "Saint Petersburg\nCity Bar Association",
     "spbgka_link": "Consultation page on SPbGKA website",
-    
     "copyright": "© Argus Law Consultation of the Saint Petersburg City Bar Association, 1999-2025. All rights reserved."
   },
-
   "consultation": {
     "title": "CONSULTATIONS",
     "subtitle": "Professional legal assistance from Argus Law Consultation attorneys",
@@ -96,11 +79,11 @@
     "feature_1_title": "Experienced attorneys",
     "feature_1_text": "Over 25 years of successful practice in various areas of law",
     "feature_2_title": "Confidentiality",
-    "feature_2_text": "Full compliance with attorney-client privilege",
+    "feature_2_text": "Your inquiry and information are protected by attorney-client privilege",
     "feature_3_title": "Flexible schedule",
     "feature_3_text": "In-person and remote consultations at your convenience",
     "feature_4_title": "Individual approach",
-    "feature_4_text": "Detailed analysis of your situation and personalized recommendations",
+    "feature_4_text": "We help you properly formulate the task and select effective legal tools for its solution",
     "feature_5_title": "Case assessment",
     "feature_5_text": "Professional evaluation of chances for success and possible risks",
     "feature_6_title": "Document preparation assistance",
@@ -113,7 +96,7 @@
     "modal_format_1_title": "Personal meeting",
     "modal_format_1_text": "At the attorney's office",
     "modal_format_2_title": "Remote consultation",
-    "modal_format_2_text": "By phone, WhatsApp, Telegram, Zoom or Skype",
+    "modal_format_2_text": "By email, phone, or other agreed means of communication",
     "modal_written_title": "Written consultation",
     "modal_written_price": "Price upon request",
     "modal_timing_1_label": "Standard:",
@@ -124,8 +107,7 @@
     "modal_timing_3_value": "within a day",
     "modal_contact_title": "To book a consultation:"
   },
-
-   "litigation": {
+  "litigation": {
     "title": "LITIGATION FINANCING",
     "subtitle": "The investor covers the litigation costs of the disputing party and the attorney's fees",
     "purpose_title": "PURPOSE",
@@ -139,13 +121,12 @@
     "step_2_title": "Financing",
     "step_2_text": "Coverage of all or part of litigation costs by the investor",
     "step_3_title": "Case Management",
-    "step_3_text": "Managing the case in the interests of the disputing party at the investor's expense",
+    "step_3_text": "Qualified case management by a specialist in the interests of the disputing party",
     "step_4_title": "Result",
-    "step_4_text": "The ability to preserve the disputing party's funds and generate income for the investor",
+    "step_4_text": "Cost savings for the disputing party and income generation for all participants in the process",
     "cta_title": "Interested in litigation financing?",
     "cta_text": "Contact us to discuss your case and financing options"
   },
-
   "publication": {
     "title": "PROFESSIONAL ACHIEVEMENTS, REVIEWS, PRACTICE",
     "subtitle": "Latest achievements, articles and insights from our team",

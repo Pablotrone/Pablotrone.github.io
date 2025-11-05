@@ -120,6 +120,17 @@ body {
     color: var(--color-accent);
     margin-bottom: var(--space-6);
     filter: drop-shadow(0 0 20px rgba(227, 173, 122, 0.3));
+    
+    /* Центрирование логотипа */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Логотип в CTA карточке */
+.cta-logo img {
+    display: block;
+    margin: 0 auto;
 }
 
 .cta-card h2 {

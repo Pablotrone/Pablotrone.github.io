@@ -69,6 +69,7 @@
     font-weight: var(--font-normal);
     color: var(--color-text-primary);
     margin-bottom: var(--space-12);
+    white-space: pre-line;
     
     /* Анимация появления */
     opacity: 0;
@@ -165,19 +166,19 @@
 
 /* Левая часть - текст */
 .about-text-section {
-    width: 50%;
+    width: 70%;
     padding: var(--space-8) var(--space-10);
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: var(--space-4);
+    gap: var(--space-8);
     z-index: 2;
 }
 
 /* Заголовок */
 .about-main-title {
     font-family: var(--font-heading);
-    font-size: var(--text-3xl);
+    font-size: var(--text-5xl);
     font-weight: var(--font-bold);
     color: var(--color-text-primary);
     line-height: 1.2;
@@ -194,7 +195,7 @@
 }
 
 .about-description p {
-    font-size: var(--text-sm);
+    font-size: var(--text-xl);
     line-height: 1.6;
     color: var(--color-text-secondary);
     text-align: justify;
@@ -203,7 +204,7 @@
 /* Заголовок секции */
 .about-section-title {
     font-family: var(--font-heading);
-    font-size: var(--text-2xl);
+    font-size: var(--text-3xl);
     font-weight: var(--font-bold);
     color: var(--color-text-primary);
     text-transform: uppercase;
@@ -227,14 +228,14 @@
 
 .principle-title {
     font-family: var(--font-heading);
-    font-size: var(--text-base);
+    font-size: var(--text-xl);
     font-weight: var(--font-bold);
     color: var(--color-accent);
     margin-bottom: var(--space-1);
 }
 
 .principle-text {
-    font-size: var(--text-sm);
+    font-size: var(--text-base);
     line-height: 1.5;
     color: var(--color-text-secondary);
 }
@@ -245,7 +246,7 @@
     flex-direction: column;
     gap: var(--space-1);
     margin-top: var(--space-8);
-    padding-top: var(--space-3);
+    padding: var(--space-3) var(--space-3);
     border-top: 1px solid var(--color-border);
 }
 
@@ -256,7 +257,7 @@
 }
 
 .director-name {
-    font-size: var(--text-base);
+    font-size: var(--text-xl);
     margin-top: var(--space-4);
     font-weight: var(--font-bold);
     color: var(--color-accent);
@@ -316,12 +317,17 @@
 /* МОБИЛКИ */
 @media (max-width: 767px) {
     .slide-about .slide-content {
-        padding-top: var(--space-10);
+        padding-top: var(--space-10);  /* 16px - нормальный отступ */
+    }
+    
+    .about-content {
+        justify-content: flex-start;  /* Прижато к верху, но НЕ по центру */
     }
 
     .about-text-section {
-        padding: var(--space-5) var(--space-2);
+        padding: var(--space-4) var(--space-4);  /* 16px со всех сторон */
         gap: var(--space-1);
+        justify-content: flex-start;
     }
     
     .about-main-title {
@@ -333,7 +339,7 @@
     }
     
     .about-description p {
-        font-size: 11px;
+        font-size: 13px;
         line-height: 1.5;
     }
     
@@ -368,7 +374,7 @@
     }
     
     .director-title {
-        font-size: 9px;
+        font-size: 11px;
     }
     
     .about-image-section {
@@ -632,7 +638,7 @@
     }
     
     .practice-description {
-        font-size: 11px;
+        font-size: 15px;
         line-height: 1.5;
         max-height: none; /* УБИРАЕМ СКРОЛЛ */
         overflow: visible;
@@ -666,15 +672,14 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: flex-start; /* СЛЕВА */
+    align-items: center;
     height: 100vh;
     width: 100%;
     position: relative;
 }
 
-/* Левая часть - текст */
 .contacts-text-section {
-    width: 50%;
+    width: 100%;
     padding: var(--space-24) var(--space-6) var(--space-8) var(--space-2);
     display: flex;
     flex-direction: column;
@@ -700,7 +705,7 @@
 .contacts-intro {
     font-size: var(--text-base);
     line-height: 1.6;
-    color: var(--color-text-secondary);
+    color: var(--color-text-primary);
     margin-bottom: var(--space-4);
     max-width: 100%; /* УБРАЛИ ОГРАНИЧЕНИЕ */
     width: 100%;
