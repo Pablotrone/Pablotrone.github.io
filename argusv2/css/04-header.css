@@ -417,10 +417,15 @@
     background: var(--color-accent);
 }
 
-/* Скрываем мобильное меню на десктопе */
+/* Скрываем мобильное меню на планшетах и десктопе */
 @media (min-width: 768px) {
     .mobile-menu {
         display: none;
+    }
+    
+    /* Скрываем бургер-кнопку на планшетах и десктопе */
+    .menu-toggle {
+        display: none !important;
     }
 }
 
@@ -433,8 +438,8 @@
     display: none;
 }
 
-/* Показываем только на десктопе */
-@media (min-width: 1024px) {
+/* Показываем на планшетах и десктопе */
+@media (min-width: 768px) {
     .desktop-dropdown {
         display: block;
     }

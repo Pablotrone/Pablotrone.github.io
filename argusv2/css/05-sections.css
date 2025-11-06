@@ -1,6 +1,6 @@
 /* ============================================
    SECTIONS
-   Стили для всех секций сайта
+   Базовые стили БЕЗ адаптивности
    ============================================ */
 
 /* ============================================
@@ -122,29 +122,6 @@
     to {
         opacity: 1;
         transform: translateY(0);
-    }
-}
-
-/* Мобильная версия */
-@media (max-width: 767px) {
-    .home-title {
-        font-size: var(--text-4xl);
-        margin-bottom: var(--space-4);
-    }
-    
-    .home-subtitle {
-        font-size: var(--text-lg);
-        margin-bottom: var(--space-8);
-    }
-    
-    .home-cta {
-        flex-direction: column;
-        gap: var(--space-3);
-    }
-    
-    .btn {
-        padding: var(--space-3) var(--space-6);
-        font-size: var(--text-sm);
     }
 }
 
@@ -272,122 +249,13 @@
     opacity: 0.8;
 }
 
-/* АДАПТИВНОСТЬ */
-
-/* Планшеты */
-@media (max-width: 1023px) {
-    .about-content {
-        flex-direction: column;
-    }
-    
-    .about-text-section {
-        width: 100%;
-        padding: var(--space-6) var(--space-5);
-        gap: var(--space-3);
-    }
-    
-    .about-image-section {
-        width: 100%;
-        height: 250px;
-    }
-    
-    .about-gradient-overlay {
-        width: 50%;
-    }
-    
-    .about-main-title {
-        font-size: var(--text-3xl);
-    }
-    
-    .about-section-title {
-        font-size: var(--text-xl);
-    }
-    
-    /* Две колонки на планшете */
-    .about-principles {
-        grid-template-columns: repeat(2, 1fr);
-        gap: var(--space-3);
-    }
-    
-    .about-description p {
-        font-size: var(--text-sm);
-    }
-}
-
-/* МОБИЛКИ */
-@media (max-width: 767px) {
-    .slide-about .slide-content {
-        padding-top: var(--space-10);  /* 16px - нормальный отступ */
-    }
-    
-    .about-content {
-        justify-content: flex-start;  /* Прижато к верху, но НЕ по центру */
-    }
-
-    .about-text-section {
-        padding: var(--space-4) var(--space-4);  /* 16px со всех сторон */
-        gap: var(--space-1);
-        justify-content: flex-start;
-    }
-    
-    .about-main-title {
-        font-size: var(--text-2xl);
-    }
-    
-    .about-description {
-        gap: var(--space-2);
-    }
-    
-    .about-description p {
-        font-size: 13px;
-        line-height: 1.5;
-    }
-    
-    .about-section-title {
-        font-size: var(--text-lg);
-        margin-top: var(--space-2);
-        margin-bottom: var(--space-2);
-    }
-    
-    /* ОДНА КОЛОНКА на телефоне */
-    .about-principles {
-        grid-template-columns: 1fr;
-        gap: var(--space-2);
-    }
-    
-    .principle-title {
-        font-size: var(--text-sm);
-    }
-    
-    .principle-text {
-        font-size: 11px;
-        line-height: 1.4;
-    }
-    
-    .about-director {
-        margin-top: var(--space-3);
-        padding-top: var(--space-2);
-    }
-    
-    .director-name {
-        font-size: var(--text-sm);
-    }
-    
-    .director-title {
-        font-size: 11px;
-    }
-    
-    .about-image-section {
-        height: 200px;
-    }
-}
 
 /* ============================================
    СЕКЦИЯ PRACTICES
    ============================================ */
 
 .practices-content {
-    width: 100%;
+    width: 60%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -397,149 +265,134 @@
     gap: var(--space-8);
 }
 
-/* ОДНА БОЛЬШАЯ КАРТОЧКА - ФИКСИРОВАННЫЙ РАЗМЕР */
-.practice-single-card {
-    position: relative;
+.practices-swiper {
     width: 100%;
-    max-width: 1000px;
-    height: 500px; /* ФИКСИРОВАННАЯ ВЫСОТА */
-    background: rgba(15, 15, 15, 0.75);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(227, 173, 122, 0.2);
-    border-radius: var(--radius-xl);
-    padding: var(--space-16) var(--space-20);
+    max-width: 700px;
+    position: relative;
+}
+
+/* Single Card Container */
+.practice-single-card {
+    background: rgba(26, 26, 26, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-16) var(--space-16);
     
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: var(--space-8);
+    gap: var(--space-6);
     
-    overflow: hidden; /* ВАЖНО для анимации */
+    min-height: 500px;
+    position: relative;
     
-    transition: border-color var(--duration-base) var(--ease-out),
-                background var(--duration-base) var(--ease-out);
+    transition: all var(--duration-base) var(--ease-out);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
 .practice-single-card:hover {
-    border-color: rgba(227, 173, 122, 0.4);
-    background: rgba(15, 15, 15, 0.85);
+    border-color: var(--color-accent);
+    transform: translateY(-5px);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
 }
 
-/* Контент внутри карточки */
+/* Card Content */
 .practice-card-content {
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    
-    /* Анимация появления */
-    opacity: 1;
-    transform: translateX(0);
-    transition: opacity 0.4s ease, transform 0.4s ease;
+    gap: var(--space-4);
 }
 
-/* Состояния анимации */
-.practice-card-content.slide-out {
-    opacity: 0;
-    transform: translateX(-30px);
-}
-
-.practice-card-content.slide-in {
-    opacity: 0;
-    transform: translateX(30px);
-}
-
-/* Иконка */
 .practice-icon {
     width: 80px;
     height: 80px;
     margin-bottom: var(--space-6);
+    color: var(--color-accent);
+    
     display: flex;
     align-items: center;
     justify-content: center;
+    
+    font-size: 4rem;
+    transition: transform var(--duration-base) var(--ease-out);
 }
 
-.practice-icon img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    filter: brightness(1.2);
+.practice-single-card:hover .practice-icon {
+    transform: scale(1.1);
 }
 
-/* Заголовок */
 .practice-title {
     font-family: var(--font-heading);
     font-size: var(--text-3xl);
     font-weight: var(--font-bold);
     color: var(--color-text-primary);
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: var(--space-4);
-    line-height: var(--leading-tight);
-    min-height: 80px; /* Фиксированная высота для заголовка */
+    letter-spacing: 0.05em;
+    line-height: 1.3;
+    
+    min-height: 90px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* Разделитель */
 .practice-divider {
-    width: 80px;
+    width: 60px;
     height: 2px;
     background: var(--color-accent);
-    margin: 0 auto var(--space-6);
+    margin-bottom: var(--space-4);
 }
 
-/* Описание */
 .practice-description {
     font-size: var(--text-base);
-    line-height: var(--leading-relaxed);
+    line-height: 1.6;
     color: var(--color-text-secondary);
-    max-width: 700px;
-    text-align: justify;
-    overflow-y: auto; /* Скролл если текст длинный */
+    
     max-height: 250px;
+    overflow-y: auto;
     padding-right: var(--space-2);
 }
 
-/* Кастомный скроллбар для описания */
 .practice-description::-webkit-scrollbar {
     width: 4px;
 }
 
 .practice-description::-webkit-scrollbar-track {
-    background: transparent;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-full);
 }
 
 .practice-description::-webkit-scrollbar-thumb {
-    background: rgba(227, 173, 122, 0.3);
-    border-radius: 2px;
+    background: var(--color-accent);
+    border-radius: var(--radius-full);
 }
 
-.practice-description::-webkit-scrollbar-thumb:hover {
-    background: rgba(227, 173, 122, 0.5);
-}
-
-/* Кнопки навигации (стрелки) */
+/* Navigation Buttons */
 .practice-nav-btn {
     width: 50px;
     height: 50px;
-    background: transparent;
-    border: 2px solid rgba(227, 173, 122, 0.3);
+    background: rgba(227, 173, 122, 0.1);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-full);
     color: var(--color-accent);
+    
     display: flex;
     align-items: center;
     justify-content: center;
+    
     cursor: pointer;
     transition: all var(--duration-base) var(--ease-out);
     flex-shrink: 0;
 }
 
 .practice-nav-btn:hover {
-    background: rgba(227, 173, 122, 0.15);
+    background: var(--color-accent);
+    color: var(--color-bg-primary);
     border-color: var(--color-accent);
     transform: scale(1.1);
 }
@@ -574,95 +427,11 @@
     transform: scale(1.3);
 }
 
-/* АДАПТИВНОСТЬ */
-
-@media (max-width: 1023px) {
-    .practice-single-card {
-        height: 450px;
-        padding: var(--space-12) var(--space-12);
-    }
-    
-    .practice-icon {
-        font-size: 3.5rem;
-        margin-bottom: var(--space-5);
-    }
-    
-    .practice-title {
-        font-size: var(--text-2xl);
-        min-height: 70px;
-    }
-    
-    .practice-description {
-        font-size: var(--text-sm);
-        max-height: 220px;
-    }
-    
-    .practice-nav-btn {
-        width: 45px;
-        height: 45px;
-    }
-}
-
-/* Мобилка PRACTICES */
-@media (max-width: 767px) {
-    .practices-content {
-        padding: var(--space-4);
-    }
-    
-    .practices-swiper {
-        max-width: 100%;
-    }
-    
-    .practice-single-card {
-        padding: var(--space-6) var(--space-4);
-        min-height: auto; /* Убираем фиксированную высоту */
-        height: auto;
-        gap: var(--space-3);
-    }
-    
-    .practice-icon {
-        width: 60px;
-        height: 60px;
-        margin-bottom: var(--space-3);
-    }
-    
-    .practice-title {
-        font-size: var(--text-base);
-        min-height: auto; /* Убираем фиксированную высоту */
-        margin-bottom: var(--space-2);
-    }
-    
-    .practice-divider {
-        width: 50px;
-        margin-bottom: var(--space-3);
-    }
-    
-    .practice-description {
-        font-size: 15px;
-        line-height: 1.5;
-        max-height: none; /* УБИРАЕМ СКРОЛЛ */
-        overflow: visible;
-    }
-    
-    .practice-nav-btn {
-        width: 36px;
-        height: 36px;
-    }
-    
-    .practice-nav-btn svg {
-        width: 16px;
-        height: 16px;
-    }
-    
-    .practice-pagination {
-        margin-top: var(--space-4);
-    }
-}
-
 
 /* ============================================
    СЕКЦИЯ CONTACTS
    ============================================ */
+
 .slide-contacts .slide-content {
     padding: 0;
     max-width: 100%;
@@ -707,7 +476,7 @@
     line-height: 1.6;
     color: var(--color-text-primary);
     margin-bottom: var(--space-4);
-    max-width: 100%; /* УБРАЛИ ОГРАНИЧЕНИЕ */
+    max-width: 100%;
     width: 100%;
 }
 
@@ -777,7 +546,7 @@
     width: 100%;
 }
 
-/* Ссылка на СПбГКА - БЕЗ СТРЕЛОЧКИ */
+/* Ссылка на СПбГКА */
 .spbgka-link {
     font-size: var(--text-base);
 }
@@ -797,7 +566,7 @@
 /* ПОЛОСКА СВЕРХУ */
 .contacts-copyright::before {
     content: '';
-    width: 800px; /* ДЛИНА ПОЛОСКИ */
+    width: 800px;
     height: 1px;
     background: var(--color-border);
     margin-bottom: var(--space-6);
@@ -808,97 +577,4 @@
     color: var(--color-text-muted);
     line-height: 1.5;
     text-align: center;
-}
-
-/* АДАПТИВНОСТЬ */
-
-/* Планшет */
-@media (max-width: 1023px) {
-    .contacts-content {
-        align-items: stretch;
-    }
-    
-    .contacts-text-section {
-        width: 100%;
-        padding: var(--space-8) var(--space-6);
-        gap: var(--space-5);
-    }
-    
-    .contacts-main-title {
-        font-size: var(--text-3xl);
-    }
-    
-    .contacts-intro {
-        font-size: var(--text-sm);
-    }
-    
-    .contact-value {
-        font-size: var(--text-base);
-    }
-    
-    .contacts-info {
-        gap: var(--space-5);
-    }
-    
-    .contacts-copyright {
-        padding: var(--space-5) var(--space-6);
-    }
-}
-
-/* Мобилка */
-@media (max-width: 767px) {
-    .slide-contacts .slide-content {
-        padding: var(--space-4);
-    }
-    
-    .contacts-text-section {
-        width: 100% !important;
-        padding: var(--space-12) var(--space-4) var(--space-4) var(--space-4) !important;
-        gap: var(--space-4);
-    }
-
-    .contacts-text-section {
-        width: 100% !important;
-        padding: var(--space-6) var(--space-4) !important;
-        gap: var(--space-4);
-    }
-    
-    .contacts-main-title {
-        font-size: var(--text-2xl);
-        margin-bottom: var(--space-3);
-    }
-    
-    .contacts-intro {
-        font-size: var(--text-sm);
-        margin-bottom: var(--space-3);
-    }
-    
-    .contacts-info {
-        gap: var(--space-4);
-    }
-    
-    .contact-item {
-        gap: var(--space-1);
-        padding-bottom: var(--space-3);
-    }
-    
-    .contact-label {
-        font-size: var(--text-xs);
-    }
-    
-    .contact-value {
-        font-size: var(--text-base);
-    }
-    
-    .spbgka-link {
-        font-size: var(--text-sm);
-    }
-    
-    .contacts-copyright {
-        padding: var(--space-4);
-    }
-    
-    .contacts-copyright .copyright {
-        font-size: var(--text-xs);
-    }
 }
