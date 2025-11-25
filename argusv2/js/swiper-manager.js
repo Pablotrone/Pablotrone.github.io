@@ -244,9 +244,9 @@ class SwiperManager {
             { icon: 'logo', titleKey: 'practices.card_1_title', textKey: 'practices.card_1_text' },
             { icon: 'logo', titleKey: 'practices.card_2_title', textKey: 'practices.card_2_text' },
             { icon: 'logo', titleKey: 'practices.card_3_title', textKey: 'practices.card_3_text' },
-            { icon: 'logo', titleKey: 'practices.card_4_title', textKey: 'practices.card_4_text' },
             { icon: 'logo', titleKey: 'practices.card_5_title', textKey: 'practices.card_5_text' },
             { icon: 'logo', titleKey: 'practices.card_6_title', textKey: 'practices.card_6_text' },
+            { icon: 'logo', titleKey: 'practices.card_4_title', textKey: 'practices.card_4_text' },
             { icon: 'logo', titleKey: 'practices.card_7_title', textKey: 'practices.card_7_text' },
         ];
         

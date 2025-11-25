@@ -134,6 +134,7 @@
     display: flex;
     align-items: stretch;
     height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     width: 100%;
     position: relative;
     background-size: cover;
@@ -143,7 +144,7 @@
 
 /* Левая часть - текст */
 .about-text-section {
-    width: 70%;
+    width: 100%;  /* Mobile-first, переопределяется в responsive */
     padding: var(--space-8) var(--space-10);
     display: flex;
     flex-direction: column;
@@ -255,7 +256,7 @@
    ============================================ */
 
 .practices-content {
-    width: 60%;
+    width: 100%;  /* Mobile-first, переопределяется в responsive */
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -443,6 +444,7 @@
     justify-content: space-between;
     align-items: center;
     height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     width: 100%;
     position: relative;
 }

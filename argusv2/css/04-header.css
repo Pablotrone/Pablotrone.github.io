@@ -15,6 +15,9 @@
     height: var(--header-height);
     z-index: var(--z-header);
     
+    /* Safe area поддержка для iPhone */
+    padding-top: var(--safe-top, 0px);
+    
     /* Полупрозрачный фон с blur */
     background: rgba(15, 15, 15, 0.6);
     backdrop-filter: blur(10px);
@@ -363,6 +366,12 @@
     height: calc(var(--vh, 1vh) * 100);
     background: var(--color-bg-primary);
     z-index: var(--z-modal);
+    
+    /* Safe area поддержка для iPhone */
+    padding-top: var(--safe-top, 0px);
+    padding-bottom: var(--safe-bottom, 0px);
+    padding-left: var(--safe-left, 0px);
+    padding-right: var(--safe-right, 0px);
     
     display: flex;
     flex-direction: column;

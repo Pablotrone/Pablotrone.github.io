@@ -1,230 +1,301 @@
 /* ============================================
-   RESPONSIVE UTILITIES
-   ПРАВИЛЬНАЯ ВЕРСИЯ БЕЗ !important
-   ВСЯ адаптивность ЗДЕСЬ, БЕЗ конфликтов!
+   RESPONSIVE STYLES - ПОЛНАЯ ПЕРЕРАБОТКА
+   Mobile-First подход + Safe Area Support
    ============================================ */
 
 /* ============================================
-   ЭКСТРА МАЛЕНЬКИЕ ЭКРАНЫ (до 359px)
-   iPhone SE (320x568), старые Android
+   SAFE AREA ПЕРЕМЕННЫЕ (для iPhone notch/home indicator)
    ============================================ */
-
-@media (max-width: 359px) {
-    :root {
-        --space-8: 1rem;
-        --space-12: 1.5rem;
-        --space-16: 2rem;
-    }
-    
-    /* HOME SLIDE */
-    .home-title {
-        font-size: 1.75rem;
-        margin-bottom: var(--space-2);
-    }
-    
-    .home-subtitle {
-        font-size: 0.75rem;
-        margin-bottom: var(--space-5);
-    }
-    
-    .home-cta {
-        flex-direction: column;
-        gap: var(--space-2);
-        width: 100%;
-    }
-    
-    .btn {
-        padding: 0.5rem 0.875rem;
-        font-size: 0.625rem;
-        width: 100%;
-    }
-    
-    /* ABOUT SLIDE */
-    .slide-about .about-content {
-        justify-content: center;
-        align-items: center;
-    }
-    
-    .slide-about .about-text-section {
-        width: 100%;
-        padding: var(--space-2) var(--space-3);
-        gap: var(--space-1);
-        justify-content: center;
-    }
-    
-    .about-main-title {
-        font-size: 1rem;
-        line-height: 1.2;
-        margin-bottom: var(--space-1);
-    }
-    
-    .about-description p {
-        font-size: 9px;
-        line-height: 1.4;
-    }
-    
-    .about-section-title {
-        font-size: 0.6875rem;
-        margin-top: var(--space-1);
-        margin-bottom: var(--space-1);
-    }
-    
-    .slide-about .about-principles {
-        grid-template-columns: 1fr;
-        gap: var(--space-1);
-    }
-    
-    .principle-title {
-        font-size: 0.5625rem;
-        margin-bottom: 2px;
-    }
-    
-    .principle-text {
-        font-size: 8px;
-        line-height: 1.3;
-    }
-    
-    .about-director {
-        margin-top: var(--space-1);
-        padding: var(--space-1) 0;
-    }
-    
-    .director-name {
-        font-size: 0.6875rem;
-        margin-top: var(--space-1);
-    }
-    
-    .director-title {
-        font-size: 8px;
-    }
-    
-    /* PRACTICES SLIDE */
-    .practices-content {
-        width: 100%;
-        padding: var(--space-3);
-    }
-    
-    .practice-single-card {
-        padding: var(--space-3);
-        min-height: auto;
-        height: auto;
-        gap: var(--space-2);
-    }
-    
-    .practice-icon {
-        width: 44px;
-        height: 44px;
-        font-size: 2.25rem;
-        margin-bottom: var(--space-1);
-    }
-    
-    .practice-title {
-        font-size: 0.75rem;
-        min-height: auto;
-        margin-bottom: var(--space-1);
-    }
-    
-    .practice-divider {
-        width: 35px;
-        height: 1px;
-        margin-bottom: var(--space-1);
-    }
-    
-    .practice-description {
-        font-size: 10px;
-        line-height: 1.4;
-        max-height: none;
-        overflow: visible;
-    }
-    
-    .practice-nav-btn {
-        width: 30px;
-        height: 30px;
-    }
-    
-    .practice-nav-btn svg {
-        width: 12px;
-        height: 12px;
-    }
-    
-    .practice-pagination {
-        margin-top: var(--space-2);
-        gap: var(--space-2);
-    }
-    
-    .practice-pagination-dot {
-        width: 7px;
-        height: 7px;
-    }
-    
-    /* CONTACTS SLIDE */
-    .slide-contacts .contacts-content {
-        justify-content: center;
-        padding-top: 0;
-    }
-    
-    .slide-contacts .contacts-text-section {
-        width: 100%;
-        padding: var(--space-2) var(--space-3);
-        gap: var(--space-2);
-        margin-top: 0;
-    }
-    
-    .contacts-main-title {
-        font-size: 1rem;
-        margin-bottom: var(--space-1);
-    }
-    
-    .contacts-intro {
-        font-size: 9px;
-        line-height: 1.4;
-        margin-bottom: var(--space-1);
-    }
-    
-    .contacts-info {
-        gap: var(--space-2);
-    }
-    
-    .contact-item {
-        gap: 2px;
-        padding-bottom: var(--space-1);
-    }
-    
-    .contact-label {
-        font-size: 7px;
-    }
-    
-    .contact-value {
-        font-size: 0.625rem;
-        line-height: 1.4;
-    }
-    
-    .spbgka-link {
-        font-size: 0.5625rem;
-    }
-    
-    .contacts-copyright {
-        padding: var(--space-2);
-        margin-top: var(--space-3);
-    }
-    
-    .contacts-copyright::before {
-        width: 60%;
-        max-width: 150px;
-        margin-bottom: var(--space-2);
-    }
-    
-    .contacts-copyright .copyright {
-        font-size: 7px;
-    }
+:root {
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-left: env(safe-area-inset-left, 0px);
+    --safe-right: env(safe-area-inset-right, 0px);
 }
 
 
 /* ============================================
-   МАЛЕНЬКИЕ ЭКРАНЫ (360px - 374px)
+   БАЗОВЫЕ МОБИЛЬНЫЕ СТИЛИ (до 359px)
+   iPhone SE 1st gen (320px), старые Android
    ============================================ */
 
-@media (min-width: 360px) and (max-width: 374px) {
+/* Базовые настройки для самых маленьких экранов */
+.slide-content {
+    padding: var(--space-3);
+    padding-bottom: calc(var(--space-3) + var(--safe-bottom));
+}
+
+/* HOME */
+.home-title {
+    font-size: 1.75rem;
+    margin-bottom: var(--space-2);
+}
+
+.home-subtitle {
+    font-size: 0.75rem;
+    margin-bottom: var(--space-4);
+}
+
+.home-cta {
+    flex-direction: column;
+    gap: var(--space-2);
+    width: 100%;
+}
+
+.btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.625rem;
+    width: 100%;
+    text-align: center;
+}
+
+/* ABOUT */
+.slide-about .about-content {
+    justify-content: flex-start;
+    padding-top: calc(var(--space-6) + var(--safe-top));
+}
+
+.slide-about .about-text-section {
+    width: 100%;
+    padding: var(--space-4) var(--space-3);
+    gap: var(--space-2);
+}
+
+.about-main-title {
+    font-size: 1rem;
+    line-height: 1.2;
+    margin-bottom: var(--space-1);
+}
+
+.about-description p {
+    font-size: 9px;
+    line-height: 1.4;
+}
+
+.about-section-title {
+    font-size: 0.6875rem;
+    margin-top: var(--space-1);
+    margin-bottom: var(--space-1);
+}
+
+.slide-about .about-principles {
+    grid-template-columns: 1fr;
+    gap: var(--space-1);
+}
+
+.principle-title {
+    font-size: 0.5625rem;
+    margin-bottom: 2px;
+}
+
+.principle-text {
+    font-size: 8px;
+    line-height: 1.3;
+}
+
+.about-director {
+    margin-top: var(--space-1);
+    padding: var(--space-1) 0;
+}
+
+.director-name {
+    font-size: 0.6875rem;
+    margin-top: var(--space-1);
+}
+
+.director-title {
+    font-size: 8px;
+}
+
+/* PRACTICES */
+.practices-content {
+    width: 100%;
+    padding: var(--space-3);
+    padding-bottom: calc(var(--space-3) + var(--safe-bottom));
+}
+
+.practice-single-card {
+    padding: var(--space-3);
+    min-height: auto;
+    height: auto;
+    gap: var(--space-2);
+}
+
+.practice-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 2.25rem;
+    margin-bottom: var(--space-1);
+}
+
+.practice-icon img {
+    width: 100%;
+    height: 100%;
+}
+
+.practice-title {
+    font-size: 0.75rem;
+    min-height: auto;
+    margin-bottom: var(--space-1);
+}
+
+.practice-divider {
+    width: 35px;
+    height: 1px;
+    margin-bottom: var(--space-1);
+}
+
+.practice-description {
+    font-size: 10px;
+    line-height: 1.4;
+    max-height: none;
+    overflow: visible;
+}
+
+.practice-nav-btn {
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+}
+
+.practice-nav-btn svg {
+    width: 12px;
+    height: 12px;
+}
+
+.practice-pagination {
+    margin-top: var(--space-2);
+    gap: var(--space-2);
+}
+
+.practice-pagination-dot {
+    width: 7px;
+    height: 7px;
+}
+
+/* CONTACTS */
+.slide-contacts .contacts-content {
+    justify-content: flex-start;
+    padding-top: calc(var(--space-6) + var(--safe-top));
+}
+
+.slide-contacts .contacts-text-section {
+    width: 100%;
+    padding: var(--space-4) var(--space-3);
+    gap: var(--space-2);
+    margin-top: 0;
+}
+
+.contacts-main-title {
+    font-size: 1rem;
+    margin-bottom: var(--space-1);
+}
+
+.contacts-intro {
+    font-size: 9px;
+    line-height: 1.4;
+    margin-bottom: var(--space-1);
+}
+
+.contacts-info {
+    gap: var(--space-2);
+}
+
+.contact-item {
+    gap: 2px;
+    padding-bottom: var(--space-1);
+}
+
+.contact-label {
+    font-size: 7px;
+}
+
+.contact-value {
+    font-size: 0.625rem;
+    line-height: 1.4;
+}
+
+.spbgka-link {
+    font-size: 0.5625rem;
+}
+
+.contacts-copyright {
+    padding: var(--space-2);
+    padding-bottom: calc(var(--space-2) + var(--safe-bottom));
+    margin-top: auto;
+}
+
+.contacts-copyright::before {
+    width: 60%;
+    max-width: 150px;
+    margin-bottom: var(--space-2);
+}
+
+.contacts-copyright .copyright {
+    font-size: 7px;
+}
+
+/* HEADER & NAV (mobile) */
+.header {
+    height: var(--header-height-mobile);
+    padding-top: var(--safe-top);
+}
+
+.header-container {
+    padding: 0 var(--space-3);
+}
+
+.header-logo img {
+    height: 32px;
+}
+
+.header-logo-text {
+    font-size: var(--text-base);
+}
+
+.header-logo-subtitle {
+    font-size: 8px;
+}
+
+.logo-home-btn {
+    top: calc(var(--space-3) + var(--safe-top));
+    left: var(--space-3);
+    width: 44px;
+    height: 44px;
+}
+
+.logo-home-btn img {
+    width: 24px;
+    height: 24px;
+}
+
+/* SWIPER PAGINATION */
+.swiper-pagination {
+    right: auto;
+    left: 50%;
+    top: auto;
+    bottom: calc(var(--space-4) + var(--safe-bottom));
+    transform: translateX(-50%);
+    flex-direction: row;
+}
+
+.swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+}
+
+/* MOBILE MENU */
+.mobile-menu {
+    padding-top: calc(var(--space-8) + var(--safe-top));
+    padding-bottom: calc(var(--space-8) + var(--safe-bottom));
+}
+
+
+/* ============================================
+   360px+ (iPhone SE 2/3, Galaxy S series)
+   ============================================ */
+
+@media (min-width: 360px) {
     .home-title {
         font-size: 2rem;
         margin-bottom: var(--space-3);
@@ -232,12 +303,7 @@
     
     .home-subtitle {
         font-size: 0.8125rem;
-        margin-bottom: var(--space-6);
-    }
-    
-    .home-cta {
-        flex-direction: column;
-        gap: var(--space-2);
+        margin-bottom: var(--space-5);
     }
     
     .btn {
@@ -245,20 +311,12 @@
         font-size: 0.6875rem;
     }
     
-    .slide-about .about-content {
-        justify-content: flex-start;
-        padding-top: var(--space-8);
-    }
-    
     .slide-about .about-text-section {
-        width: 100%;
-        padding: var(--space-8) var(--space-3) var(--space-3) var(--space-3);
-        gap: var(--space-1);
+        padding: var(--space-6) var(--space-4);
     }
     
     .about-main-title {
         font-size: 1.125rem;
-        margin-bottom: var(--space-1);
     }
     
     .about-description p {
@@ -267,13 +325,6 @@
     
     .about-section-title {
         font-size: 0.75rem;
-        margin-top: var(--space-1);
-        margin-bottom: var(--space-1);
-    }
-    
-    .slide-about .about-principles {
-        grid-template-columns: 1fr;
-        gap: var(--space-1);
     }
     
     .principle-title {
@@ -284,22 +335,12 @@
         font-size: 9px;
     }
     
-    .about-director {
-        margin-top: var(--space-2);
-        padding: var(--space-1) 0;
-    }
-    
     .director-name {
         font-size: 0.75rem;
-        margin-top: var(--space-1);
     }
     
     .director-title {
         font-size: 9px;
-    }
-
-    .practices-content {
-        width: 100%;
     }
     
     .practice-single-card {
@@ -309,7 +350,6 @@
     .practice-icon {
         width: 50px;
         height: 50px;
-        font-size: 2.5rem;
     }
     
     .practice-title {
@@ -325,20 +365,12 @@
         height: 32px;
     }
     
-    .slide-contacts .contacts-content {
-        justify-content: flex-start;
-        padding-top: var(--space-10);
-    }
-    
     .slide-contacts .contacts-text-section {
-        padding: var(--space-10) var(--space-3) var(--space-2) var(--space-3);
-        gap: var(--space-2);
-        margin-top: 0;
+        padding: var(--space-6) var(--space-4);
     }
     
     .contacts-main-title {
         font-size: 1.125rem;
-        margin-bottom: var(--space-2);
     }
     
     .contacts-intro {
@@ -357,16 +389,6 @@
         font-size: 0.625rem;
     }
     
-    .contacts-copyright {
-        margin-top: auto;
-        padding: var(--space-3);
-    }
-    
-    .contacts-copyright::before {
-        width: 70%;
-        max-width: 200px;
-    }
-    
     .contacts-copyright .copyright {
         font-size: 8px;
     }
@@ -374,13 +396,12 @@
 
 
 /* ============================================
-   СРЕДНЕ-МАЛЕНЬКИЕ ЭКРАНЫ (375px - 389px)
+   375px+ (iPhone 12 mini, iPhone SE 2/3)
    ============================================ */
 
-@media (min-width: 375px) and (max-width: 389px) {
+@media (min-width: 375px) {
     .home-title {
         font-size: 2.25rem;
-        margin-bottom: var(--space-3);
     }
     
     .home-subtitle {
@@ -389,7 +410,6 @@
     }
     
     .home-cta {
-        flex-direction: column;
         gap: var(--space-3);
     }
     
@@ -398,37 +418,16 @@
         font-size: 0.75rem;
     }
     
-    .slide-about .about-content {
-        justify-content: flex-start;
-        padding-top: var(--space-6);
-    }
-    
-    .slide-about .about-text-section {
-        width: 100%;
-        padding: var(--space-6) var(--space-4) var(--space-3) var(--space-4);
-        gap: var(--space-1);
-    }
-    
     .about-main-title {
         font-size: 1.25rem;
-        line-height: 1.25;
-        margin-bottom: var(--space-1);
     }
     
     .about-description p {
         font-size: 11px;
-        line-height: 1.5;
     }
     
     .about-section-title {
         font-size: 0.8125rem;
-        margin-top: var(--space-1);
-        margin-bottom: var(--space-1);
-    }
-    
-    .slide-about .about-principles {
-        grid-template-columns: 1fr;
-        gap: var(--space-1);
     }
     
     .principle-title {
@@ -439,23 +438,12 @@
         font-size: 10px;
     }
     
-    .about-director {
-        margin-top: var(--space-2);
-        padding: var(--space-1) 0;
-    }
-    
     .director-name {
         font-size: 0.8125rem;
-        margin-top: var(--space-1);
     }
     
     .director-title {
         font-size: 10px;
-    }
-    
-    .practices-content {
-        width: 100%;
-        padding: var(--space-4);
     }
     
     .practice-single-card {
@@ -465,7 +453,6 @@
     .practice-icon {
         width: 54px;
         height: 54px;
-        font-size: 2.75rem;
         margin-bottom: var(--space-2);
     }
     
@@ -482,30 +469,12 @@
         height: 34px;
     }
     
-    .practice-nav-btn svg {
-        width: 15px;
-        height: 15px;
-    }
-    
-    .slide-contacts .contacts-content {
-        justify-content: flex-start;
-        padding-top: var(--space-8);
-    }
-    
-    .slide-contacts .contacts-text-section {
-        padding: var(--space-8) var(--space-4) var(--space-3) var(--space-4);
-        gap: var(--space-2);
-        margin-top: 0;
-    }
-    
     .contacts-main-title {
         font-size: 1.25rem;
-        margin-bottom: var(--space-2);
     }
     
     .contacts-intro {
         font-size: 11px;
-        margin-bottom: var(--space-2);
     }
     
     .contact-label {
@@ -516,20 +485,6 @@
         font-size: 0.75rem;
     }
     
-    .spbgka-link {
-        font-size: 0.6875rem;
-    }
-    
-    .contacts-copyright {
-        margin-top: auto;
-        padding: var(--space-3);
-    }
-    
-    .contacts-copyright::before {
-        width: 75%;
-        max-width: 220px;
-    }
-    
     .contacts-copyright .copyright {
         font-size: 9px;
     }
@@ -537,10 +492,15 @@
 
 
 /* ============================================
-   СРЕДНИЕ ЭКРАНЫ (390px - 413px)
+   390px+ (iPhone 12/13/14 standard)
    ============================================ */
 
-@media (min-width: 390px) and (max-width: 413px) {
+@media (min-width: 390px) {
+    .slide-content {
+        padding: var(--space-4);
+        padding-bottom: calc(var(--space-4) + var(--safe-bottom));
+    }
+    
     .home-title {
         font-size: 2.5rem;
         margin-bottom: var(--space-4);
@@ -551,30 +511,18 @@
         margin-bottom: var(--space-8);
     }
     
-    .home-cta {
-        flex-direction: column;
-        gap: var(--space-3);
-    }
-    
     .btn {
         padding: 0.75rem 1.25rem;
         font-size: 0.8125rem;
     }
     
-    .slide-about .about-content {
-        justify-content: flex-start;
-        padding-top: var(--space-8);
-    }
-    
     .slide-about .about-text-section {
-        width: 100%;
-        padding: var(--space-8) var(--space-4) var(--space-3) var(--space-4);
-        gap: var(--space-2);
+        padding: var(--space-8) var(--space-4);
+        gap: var(--space-3);
     }
     
     .about-main-title {
-        font-size: 1.5rem;
-        line-height: 1.25;
+        font-size: 1.375rem;
     }
     
     .about-description p {
@@ -583,18 +531,17 @@
     }
     
     .about-section-title {
-        font-size: 0.9375rem;
+        font-size: 0.875rem;
         margin-top: var(--space-2);
         margin-bottom: var(--space-2);
     }
     
     .slide-about .about-principles {
-        grid-template-columns: 1fr;
         gap: var(--space-2);
     }
     
     .principle-title {
-        font-size: 0.8125rem;
+        font-size: 0.75rem;
     }
     
     .principle-text {
@@ -608,7 +555,7 @@
     }
     
     .director-name {
-        font-size: 0.9375rem;
+        font-size: 0.875rem;
     }
     
     .director-title {
@@ -616,7 +563,6 @@
     }
     
     .practices-content {
-        width: 100%;
         padding: var(--space-4);
     }
     
@@ -628,7 +574,6 @@
     .practice-icon {
         width: 58px;
         height: 58px;
-        font-size: 3rem;
         margin-bottom: var(--space-3);
     }
     
@@ -653,27 +598,21 @@
     }
     
     .practice-nav-btn svg {
-        width: 16px;
-        height: 16px;
+        width: 14px;
+        height: 14px;
     }
     
     .practice-pagination {
-        margin-top: var(--space-4);
-    }
-    
-    .slide-contacts .contacts-content {
-        justify-content: flex-start;
-        padding-top: var(--space-16);
+        margin-top: var(--space-3);
     }
     
     .slide-contacts .contacts-text-section {
-        padding: var(--space-16) var(--space-4) var(--space-3) var(--space-4);
+        padding: var(--space-8) var(--space-4);
         gap: var(--space-3);
-        margin-top: 0;
     }
     
     .contacts-main-title {
-        font-size: 1.5rem;
+        font-size: 1.375rem;
         margin-bottom: var(--space-2);
     }
     
@@ -696,47 +635,72 @@
     }
     
     .contact-value {
-        font-size: 0.875rem;
-    }
-    
-    .spbgka-link {
         font-size: 0.8125rem;
     }
     
+    .spbgka-link {
+        font-size: 0.75rem;
+    }
+    
     .contacts-copyright {
-        margin-top: auto;
         padding: var(--space-3);
     }
     
     .contacts-copyright::before {
-        width: 80%;
-        max-width: 260px;
+        width: 70%;
+        max-width: 200px;
     }
     
     .contacts-copyright .copyright {
-        font-size: 10px;
+        font-size: 9px;
+    }
+    
+    .header-logo img {
+        height: 36px;
+    }
+    
+    .header-logo-text {
+        font-size: var(--text-lg);
+    }
+    
+    .header-logo-subtitle {
+        font-size: 9px;
+    }
+    
+    .logo-home-btn {
+        top: calc(var(--space-4) + var(--safe-top));
+        left: var(--space-4);
+        width: 48px;
+        height: 48px;
+    }
+    
+    .logo-home-btn img {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .swiper-pagination {
+        bottom: calc(var(--space-6) + var(--safe-bottom));
+    }
+    
+    .swiper-pagination-bullet {
+        width: 10px;
+        height: 10px;
     }
 }
 
 
 /* ============================================
-   БОЛЬШИЕ МОБИЛЬНЫЕ (414px - 430px)
+   414px+ (iPhone Plus/Max models, large Android)
    ============================================ */
 
-@media (min-width: 414px) and (max-width: 430px) {
+@media (min-width: 414px) {
     .home-title {
         font-size: 2.75rem;
-        margin-bottom: var(--space-4);
     }
     
     .home-subtitle {
         font-size: 1rem;
-        margin-bottom: var(--space-8);
-    }
-    
-    .home-cta {
-        flex-direction: column;
-        gap: var(--space-3);
     }
     
     .btn {
@@ -744,19 +708,12 @@
         font-size: 0.875rem;
     }
     
-    .slide-about .about-content {
-        justify-content: flex-start;
-        padding-top: var(--space-10);
-    }
-    
     .slide-about .about-text-section {
-        width: 100%;
-        padding: var(--space-10) var(--space-5) var(--space-3) var(--space-5);
-        gap: var(--space-2);
+        padding: var(--space-10) var(--space-5);
     }
     
     .about-main-title {
-        font-size: 1.625rem;
+        font-size: 1.5rem;
     }
     
     .about-description p {
@@ -766,21 +723,14 @@
     
     .about-section-title {
         font-size: 1rem;
-        margin-top: var(--space-2);
-    }
-    
-    .slide-about .about-principles {
-        grid-template-columns: 1fr;
-        gap: var(--space-2);
     }
     
     .principle-title {
-        font-size: 0.875rem;
+        font-size: 0.8125rem;
     }
     
     .principle-text {
         font-size: 12px;
-        line-height: 1.5;
     }
     
     .director-name {
@@ -792,18 +742,16 @@
     }
     
     .practices-content {
-        width: 100%;
         padding: var(--space-5);
     }
     
     .practice-single-card {
-        padding: var(--space-7) var(--space-5);
+        padding: var(--space-8) var(--space-5);
     }
     
     .practice-icon {
         width: 62px;
         height: 62px;
-        font-size: 3.25rem;
     }
     
     .practice-title {
@@ -812,7 +760,6 @@
     
     .practice-description {
         font-size: 13px;
-        line-height: 1.6;
     }
     
     .practice-nav-btn {
@@ -820,57 +767,50 @@
         height: 38px;
     }
     
-    .slide-contacts .contacts-content {
-        justify-content: flex-start;
-        padding-top: var(--space-20);
+    .practice-nav-btn svg {
+        width: 16px;
+        height: 16px;
     }
     
     .slide-contacts .contacts-text-section {
-        padding: var(--space-20) var(--space-5) var(--space-4) var(--space-5);
+        padding: var(--space-10) var(--space-5);
         gap: var(--space-4);
-        margin-top: 0;
     }
     
     .contacts-main-title {
-        font-size: 1.625rem;
+        font-size: 1.5rem;
     }
     
     .contacts-intro {
         font-size: 13px;
     }
     
-    .contact-label {
-        font-size: 10px;
-    }
-    
     .contact-value {
-        font-size: 0.9375rem;
-    }
-    
-    .spbgka-link {
         font-size: 0.875rem;
     }
     
+    .spbgka-link {
+        font-size: 0.8125rem;
+    }
+    
     .contacts-copyright {
-        margin-top: auto;
         padding: var(--space-4);
     }
     
     .contacts-copyright::before {
-        width: 85%;
-        max-width: 300px;
+        width: 75%;
+        max-width: 250px;
     }
 }
 
 
 /* ============================================
-   ШИРОКИЕ МОБИЛЬНЫЕ (431px - 639px)
+   480px+ (Wide phones, small tablets portrait)
    ============================================ */
 
-@media (min-width: 431px) and (max-width: 639px) {
+@media (min-width: 480px) {
     .home-title {
         font-size: 3rem;
-        margin-bottom: var(--space-5);
     }
     
     .home-subtitle {
@@ -879,22 +819,20 @@
     }
     
     .home-cta {
-        flex-direction: column;
+        flex-direction: row;
+        justify-content: center;
         gap: var(--space-4);
+        width: auto;
     }
     
     .btn {
+        width: auto;
         padding: 0.875rem 1.75rem;
         font-size: 0.9375rem;
     }
     
-    .slide-about .about-content {
-        padding-top: var(--space-10);
-    }
-    
     .slide-about .about-text-section {
-        width: 100%;
-        padding: var(--space-10) var(--space-5) var(--space-4) var(--space-5);
+        padding: var(--space-10) var(--space-6);
     }
     
     .about-main-title {
@@ -909,11 +847,6 @@
         font-size: 1.125rem;
     }
     
-    .slide-about .about-principles {
-        grid-template-columns: 1fr;
-        gap: var(--space-3);
-    }
-    
     .principle-title {
         font-size: 0.9375rem;
     }
@@ -923,18 +856,16 @@
     }
     
     .practices-content {
-        width: 100%;
         padding: var(--space-6);
     }
     
     .practice-single-card {
-        padding: var(--space-8) var(--space-6);
+        padding: var(--space-10) var(--space-6);
     }
     
     .practice-icon {
         width: 68px;
         height: 68px;
-        font-size: 3.5rem;
     }
     
     .practice-title {
@@ -950,17 +881,12 @@
         height: 40px;
     }
     
-    .slide-contacts .contacts-content {
-        padding-top: var(--space-12);
-    }
-    
     .slide-contacts .contacts-text-section {
-        padding: var(--space-12) var(--space-6) var(--space-5) var(--space-6);
-        margin-top: 0;
+        padding: var(--space-12) var(--space-6);
     }
     
     .contacts-main-title {
-        font-size: 1.875rem;
+        font-size: 1.75rem;
     }
     
     .contacts-intro {
@@ -971,17 +897,31 @@
         font-size: 1rem;
     }
     
-    .contacts-copyright {
-        margin-top: auto;
+    .spbgka-link {
+        font-size: 0.875rem;
+    }
+    
+    .contacts-copyright::before {
+        width: 80%;
+        max-width: 300px;
+    }
+    
+    .contacts-copyright .copyright {
+        font-size: 10px;
     }
 }
 
 
 /* ============================================
-   МАЛЕНЬКИЕ ПЛАНШЕТЫ (640px - 767px)
+   640px+ (Small tablets, large phones landscape)
    ============================================ */
 
-@media (min-width: 640px) and (max-width: 767px) {
+@media (min-width: 640px) {
+    .slide-content {
+        padding: var(--space-6);
+        padding-bottom: calc(var(--space-6) + var(--safe-bottom));
+    }
+    
     .home-title {
         font-size: 3.25rem;
     }
@@ -990,9 +930,8 @@
         font-size: 1.125rem;
     }
     
-    .home-cta {
-        flex-direction: row;
-        gap: var(--space-4);
+    .slide-about .about-text-section {
+        padding: var(--space-12) var(--space-8);
     }
     
     .about-main-title {
@@ -1005,7 +944,7 @@
     }
     
     .practice-single-card {
-        padding: var(--space-10) var(--space-8);
+        padding: var(--space-12) var(--space-8);
     }
     
     .practice-icon {
@@ -1020,129 +959,798 @@
     .contacts-main-title {
         font-size: 2rem;
     }
+    
+    .header-container {
+        padding: 0 var(--space-6);
+    }
+    
+    .header-logo img {
+        height: 40px;
+    }
+    
+    .logo-home-btn {
+        width: 56px;
+        height: 56px;
+    }
+    
+    .logo-home-btn img {
+        width: 32px;
+        height: 32px;
+    }
 }
 
 
 /* ============================================
-   ОБЩИЕ МОБИЛЬНЫЕ СТИЛИ (до 767px)
+   768px+ (Tablets: iPad mini, iPad)
    ============================================ */
 
-@media (max-width: 767px) {
+@media (min-width: 768px) {
     .slide-content {
-        padding: var(--space-4);
+        padding: var(--space-8);
+        padding-bottom: calc(var(--space-8) + var(--safe-bottom));
     }
     
+    .home-title {
+        font-size: 3.5rem;
+        margin-bottom: var(--space-5);
+    }
+    
+    .home-subtitle {
+        font-size: 1.25rem;
+        margin-bottom: var(--space-12);
+    }
+    
+    .btn {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+    }
+    
+    .slide-about .about-text-section {
+        width: 85%;
+        padding: var(--space-12) var(--space-10);
+    }
+    
+    .about-main-title {
+        font-size: 2.25rem;
+    }
+    
+    .about-description p {
+        font-size: 15px;
+    }
+    
+    .about-section-title {
+        font-size: 1.25rem;
+    }
+    
+    .slide-about .about-principles {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .principle-title {
+        font-size: 1rem;
+    }
+    
+    .principle-text {
+        font-size: 14px;
+    }
+    
+    .director-name {
+        font-size: 1.125rem;
+    }
+    
+    .director-title {
+        font-size: 13px;
+    }
+    
+    .practices-content {
+        width: 85%;
+        padding: var(--space-8);
+    }
+    
+    .practice-single-card {
+        padding: var(--space-12) var(--space-10);
+        min-height: 420px;
+    }
+    
+    .practice-icon {
+        width: 76px;
+        height: 76px;
+        margin-bottom: var(--space-4);
+    }
+    
+    .practice-title {
+        font-size: 1.25rem;
+        min-height: 70px;
+        margin-bottom: var(--space-3);
+    }
+    
+    .practice-divider {
+        width: 55px;
+        margin-bottom: var(--space-3);
+    }
+    
+    .practice-description {
+        font-size: 15px;
+        max-height: 180px;
+        overflow-y: auto;
+    }
+    
+    .practice-nav-btn {
+        width: 44px;
+        height: 44px;
+    }
+    
+    .practice-nav-btn svg {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .practice-pagination {
+        margin-top: var(--space-4);
+        gap: var(--space-3);
+    }
+    
+    .practice-pagination-dot {
+        width: 10px;
+        height: 10px;
+    }
+    
+    .slide-contacts .contacts-text-section {
+        width: 70%;
+        padding: var(--space-16) var(--space-10);
+    }
+    
+    .contacts-main-title {
+        font-size: 2.25rem;
+        margin-bottom: var(--space-4);
+    }
+    
+    .contacts-intro {
+        font-size: 15px;
+        margin-bottom: var(--space-4);
+    }
+    
+    .contacts-info {
+        gap: var(--space-4);
+    }
+    
+    .contact-label {
+        font-size: 11px;
+    }
+    
+    .contact-value {
+        font-size: 1.0625rem;
+    }
+    
+    .contacts-copyright {
+        padding: var(--space-6);
+    }
+    
+    .contacts-copyright::before {
+        width: 500px;
+        max-width: 80%;
+    }
+    
+    .contacts-copyright .copyright {
+        font-size: 11px;
+    }
+    
+    /* Header - переключаемся на десктопный режим */
     .header {
-        height: var(--header-height-mobile);
+        height: var(--header-height);
     }
     
     .header-container {
-        padding: 0 var(--space-4);
+        padding: 0 var(--space-8);
     }
     
     .header-logo img {
-        height: 36px;
+        height: 44px;
     }
     
     .header-logo-text {
-        font-size: var(--text-lg);
+        font-size: var(--text-xl);
     }
     
     .header-logo-subtitle {
-        font-size: 9px;
-    }
-    
-    .language-switcher {
-        gap: 0;
-        padding: var(--space-1);
-    }
-    
-    .lang-btn {
-        padding: var(--space-2) var(--space-3);
         font-size: var(--text-xs);
-        height: auto;
+    }
+    
+    /* Pagination - справа на десктопе */
+    .swiper-pagination {
+        right: var(--space-6);
+        left: auto;
+        top: 50%;
+        bottom: auto;
+        transform: translateY(-50%);
+        flex-direction: column;
+        gap: var(--space-3);
+    }
+    
+    .swiper-pagination-bullet {
+        width: 12px;
+        height: 12px;
     }
     
     .logo-home-btn {
-        top: var(--space-4);
-        left: var(--space-4);
+        top: var(--space-6);
+        left: var(--space-6);
+        width: 64px;
+        height: 64px;
+    }
+    
+    .logo-home-btn img {
+        width: 36px;
+        height: 36px;
+    }
+    
+    /* Mobile menu скрыт на планшетах */
+    .menu-toggle {
+        display: none;
+    }
+}
+
+
+/* ============================================
+   1024px+ (Large tablets landscape, small laptops)
+   ============================================ */
+
+@media (min-width: 1024px) {
+    .home-title {
+        font-size: 4rem;
+        margin-bottom: var(--space-6);
+    }
+    
+    .home-subtitle {
+        font-size: 1.375rem;
+    }
+    
+    .btn {
+        padding: 1rem 2.25rem;
+    }
+    
+    .slide-about .about-text-section {
+        width: 75%;
+        padding: var(--space-16) var(--space-12);
+    }
+    
+    .about-main-title {
+        font-size: 2.5rem;
+    }
+    
+    .about-description p {
+        font-size: 16px;
+    }
+    
+    .about-section-title {
+        font-size: 1.375rem;
+        margin-top: var(--space-4);
+    }
+    
+    .principle-title {
+        font-size: 1.0625rem;
+    }
+    
+    .principle-text {
+        font-size: 15px;
+    }
+    
+    .about-director {
+        margin-top: var(--space-6);
+    }
+    
+    .director-name {
+        font-size: 1.25rem;
+    }
+    
+    .director-title {
+        font-size: 14px;
+    }
+    
+    .practices-content {
+        width: 70%;
+    }
+    
+    .practice-single-card {
+        padding: var(--space-14) var(--space-12);
+        min-height: 460px;
+    }
+    
+    .practice-icon {
+        width: 80px;
+        height: 80px;
+        margin-bottom: var(--space-5);
+    }
+    
+    .practice-title {
+        font-size: 1.375rem;
+        min-height: 80px;
+    }
+    
+    .practice-divider {
+        width: 60px;
+    }
+    
+    .practice-description {
+        font-size: 16px;
+        max-height: 200px;
+    }
+    
+    .practice-nav-btn {
         width: 48px;
         height: 48px;
     }
     
-    .logo-home-btn img {
-        width: 28px;
-        height: 28px;
+    .practice-nav-btn svg {
+        width: 20px;
+        height: 20px;
     }
     
-    .swiper-pagination {
-        right: auto;
-        left: 50%;
-        top: auto;
-        bottom: var(--space-6);
-        transform: translateX(-50%);
-        flex-direction: row;
+    .slide-contacts .contacts-text-section {
+        width: 60%;
     }
     
-    /* ABOUT - общие мобильные */
-    .slide-about .about-text-section {
-        width: 100%;
+    .contacts-main-title {
+        font-size: 2.5rem;
     }
     
-    .slide-about .about-principles {
-        grid-template-columns: 1fr;
-        gap: var(--space-2);
+    .contacts-intro {
+        font-size: 16px;
     }
     
-    /* PRACTICES - общие мобильные */
-    .practices-swiper {
-        max-width: 100%;
-    }
-    
-    .practice-single-card {
-        min-height: auto;
-        height: auto;
-    }
-    
-    .practice-title {
-        min-height: auto;
-    }
-    
-    .practice-description {
-        max-height: none;
-        overflow: visible;
-    }
-    
-    /* CONTACTS - общие мобильные */
-    .slide-contacts .slide-content {
-        padding: var(--space-4);
+    .contact-value {
+        font-size: 1.125rem;
     }
     
     .contacts-copyright::before {
-        width: 80%;
-        max-width: 300px;
+        width: 600px;
+    }
+    
+    .contacts-copyright .copyright {
+        font-size: 12px;
+    }
+    
+    .header-logo img {
+        height: 48px;
+    }
+    
+    .header-logo-text {
+        font-size: var(--text-2xl);
+    }
+    
+    .swiper-pagination {
+        right: var(--space-8);
+    }
+    
+    .logo-home-btn {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .logo-home-btn img {
+        width: 40px;
+        height: 40px;
     }
 }
 
 
 /* ============================================
-   LANDSCAPE - МАЛЕНЬКИЕ (до 360px высоты)
+   1280px+ (Standard laptops)
    ============================================ */
 
-@media (orientation: landscape) and (max-height: 360px) {
-    .header {
-        height: 42px;
+@media (min-width: 1280px) {
+    .home-content {
+        max-width: 1000px;
+    }
+    
+    .home-title {
+        font-size: 4.5rem;
+    }
+    
+    .home-subtitle {
+        font-size: 1.5rem;
+    }
+    
+    .btn {
+        padding: 1.125rem 2.5rem;
+        font-size: 1.0625rem;
+    }
+    
+    .slide-about .about-text-section {
+        width: 70%;
+    }
+    
+    .about-main-title {
+        font-size: 2.75rem;
+    }
+    
+    .about-description p {
+        font-size: 17px;
+    }
+    
+    .practices-content {
+        width: 65%;
+        max-width: 800px;
+    }
+    
+    .practice-single-card {
+        min-height: 500px;
+    }
+    
+    .practice-title {
+        font-size: 1.5rem;
+        min-height: 90px;
+    }
+    
+    .practice-description {
+        font-size: 16px;
+        max-height: 220px;
+    }
+    
+    .slide-contacts .contacts-text-section {
+        width: 55%;
+    }
+    
+    .contacts-main-title {
+        font-size: 2.75rem;
+    }
+    
+    .contacts-intro {
+        font-size: 17px;
+    }
+}
+
+
+/* ============================================
+   1440px+ (Standard desktops, Full HD)
+   ============================================ */
+
+@media (min-width: 1440px) {
+    .slide-content {
+        max-width: var(--container-2xl);
+    }
+    
+    .home-content {
+        max-width: 1100px;
+    }
+    
+    .home-title {
+        font-size: 5rem;
+    }
+    
+    .home-subtitle {
+        font-size: 1.625rem;
+    }
+    
+    .slide-about .about-content {
+        max-width: 1400px;
+    }
+    
+    .about-main-title {
+        font-size: 3rem;
+    }
+    
+    .about-description p {
+        font-size: 18px;
+    }
+    
+    .about-section-title {
+        font-size: 1.5rem;
+    }
+    
+    .principle-title {
+        font-size: 1.125rem;
+    }
+    
+    .principle-text {
+        font-size: 16px;
+    }
+    
+    .director-name {
+        font-size: 1.375rem;
+    }
+    
+    .director-title {
+        font-size: 15px;
+    }
+    
+    .practices-content {
+        width: 60%;
+        max-width: 900px;
+    }
+    
+    .practice-single-card {
+        padding: var(--space-16) var(--space-16);
+    }
+    
+    .practice-icon {
+        width: 90px;
+        height: 90px;
+    }
+    
+    .practice-title {
+        font-size: 1.75rem;
+    }
+    
+    .practice-description {
+        font-size: 17px;
+        max-height: 250px;
+    }
+    
+    .practice-nav-btn {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .slide-contacts .contacts-text-section {
+        width: 50%;
+    }
+    
+    .contacts-main-title {
+        font-size: 3rem;
+    }
+    
+    .contacts-intro {
+        font-size: 18px;
+    }
+    
+    .contact-value {
+        font-size: 1.25rem;
+    }
+    
+    .contacts-copyright::before {
+        width: 700px;
+    }
+    
+    .contacts-copyright .copyright {
+        font-size: 13px;
+    }
+}
+
+
+/* ============================================
+   1920px+ (Full HD desktops)
+   ============================================ */
+
+@media (min-width: 1920px) {
+    .slide-content {
+        max-width: 1600px;
+    }
+    
+    .home-content {
+        max-width: 1200px;
+    }
+    
+    .home-title {
+        font-size: 5.5rem;
+    }
+    
+    .home-subtitle {
+        font-size: 1.75rem;
+    }
+    
+    .btn {
+        padding: 1.25rem 3rem;
+        font-size: 1.125rem;
+    }
+    
+    .about-main-title {
+        font-size: 3.25rem;
+    }
+    
+    .about-description p {
+        font-size: 19px;
+    }
+    
+    .practices-content {
+        max-width: 1000px;
+    }
+    
+    .practice-single-card {
+        min-height: 550px;
+    }
+    
+    .practice-icon {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .practice-title {
+        font-size: 1.875rem;
+    }
+    
+    .practice-description {
+        font-size: 18px;
+    }
+    
+    .contacts-main-title {
+        font-size: 3.25rem;
+    }
+    
+    .contacts-intro {
+        font-size: 19px;
+    }
+    
+    .contacts-copyright::before {
+        width: 800px;
+    }
+}
+
+
+/* ============================================
+   2560px+ (2K/QHD monitors)
+   ============================================ */
+
+@media (min-width: 2560px) {
+    .slide-content {
+        max-width: 2000px;
+    }
+    
+    .home-content {
+        max-width: 1400px;
+    }
+    
+    .home-title {
+        font-size: 6rem;
+    }
+    
+    .home-subtitle {
+        font-size: 2rem;
+    }
+    
+    .btn {
+        padding: 1.5rem 3.5rem;
+        font-size: 1.25rem;
+    }
+    
+    .about-main-title {
+        font-size: 3.5rem;
+    }
+    
+    .about-description p {
+        font-size: 20px;
+    }
+    
+    .about-section-title {
+        font-size: 1.75rem;
+    }
+    
+    .principle-title {
+        font-size: 1.25rem;
+    }
+    
+    .principle-text {
+        font-size: 17px;
+    }
+    
+    .practices-content {
+        max-width: 1200px;
+    }
+    
+    .practice-single-card {
+        min-height: 600px;
+    }
+    
+    .practice-icon {
+        width: 110px;
+        height: 110px;
+    }
+    
+    .practice-title {
+        font-size: 2rem;
+    }
+    
+    .practice-description {
+        font-size: 19px;
+    }
+    
+    .contacts-main-title {
+        font-size: 3.5rem;
+    }
+    
+    .contacts-intro {
+        font-size: 20px;
+    }
+    
+    .contact-value {
+        font-size: 1.375rem;
+    }
+    
+    .contacts-copyright .copyright {
+        font-size: 14px;
     }
     
     .header-logo img {
-        height: 26px;
+        height: 56px;
+    }
+    
+    .swiper-pagination-bullet {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+
+/* ============================================
+   3840px+ (4K monitors)
+   ============================================ */
+
+@media (min-width: 3840px) {
+    .slide-content {
+        max-width: 2800px;
+    }
+    
+    .home-content {
+        max-width: 2000px;
+    }
+    
+    .home-title {
+        font-size: 8rem;
+    }
+    
+    .home-subtitle {
+        font-size: 2.5rem;
+    }
+    
+    .btn {
+        padding: 2rem 5rem;
+        font-size: 1.5rem;
+    }
+    
+    .about-main-title {
+        font-size: 4.5rem;
+    }
+    
+    .about-description p {
+        font-size: 24px;
+    }
+    
+    .practices-content {
+        max-width: 1600px;
+    }
+    
+    .practice-single-card {
+        min-height: 800px;
+    }
+    
+    .practice-icon {
+        width: 140px;
+        height: 140px;
+    }
+    
+    .practice-title {
+        font-size: 2.5rem;
+    }
+    
+    .practice-description {
+        font-size: 22px;
+    }
+    
+    .contacts-main-title {
+        font-size: 4.5rem;
+    }
+}
+
+
+/* ============================================
+   LANDSCAPE MOBILE (до 768px ширины и до 500px высоты)
+   ============================================ */
+
+@media (orientation: landscape) and (max-width: 767px) and (max-height: 500px) {
+    /* Уменьшаем header */
+    .header {
+        height: 44px;
+    }
+    
+    .header-logo img {
+        height: 28px;
     }
     
     .logo-home-btn {
-        width: 34px;
-        height: 34px;
+        width: 36px;
+        height: 36px;
         top: var(--space-2);
-        left: var(--space-2);
+        left: var(--space-3);
     }
     
     .logo-home-btn img {
@@ -1150,226 +1758,14 @@
         height: 20px;
     }
     
+    /* Pagination сбоку */
     .swiper-pagination {
-        bottom: var(--space-2);
-    }
-    
-    .swiper-pagination-bullet {
-        width: 7px;
-        height: 7px;
-    }
-    
-    .slide-content {
-        padding: var(--space-2) var(--space-6);
-    }
-    
-    .home-title {
-        font-size: 1.125rem;
-        margin-bottom: var(--space-1);
-    }
-    
-    .home-subtitle {
-        font-size: 0.625rem;
-        margin-bottom: var(--space-2);
-    }
-    
-    .home-cta {
-        flex-direction: row;
-        gap: var(--space-2);
-    }
-    
-    .btn {
-        padding: 0.375rem 0.875rem;
-        font-size: 0.5625rem;
-    }
-    
-    .slide-about .about-text-section {
-        padding: var(--space-2) var(--space-8) var(--space-1) var(--space-8);
-        gap: var(--space-1);
-        max-height: 85vh;
-        overflow-y: auto;
-    }
-    
-    .about-main-title {
-        font-size: 0.8125rem;
-        margin-bottom: 0;
-        line-height: 1.2;
-    }
-    
-    .about-description p {
-        font-size: 8px;
-        line-height: 1.3;
-    }
-    
-    .about-section-title {
-        font-size: 0.5625rem;
-        margin-top: var(--space-1);
-        margin-bottom: var(--space-1);
-    }
-    
-    .slide-about .about-principles {
-        grid-template-columns: repeat(3, 1fr);
-        gap: var(--space-1);
-    }
-    
-    .principle-title {
-        font-size: 0.5rem;
-        margin-bottom: 2px;
-    }
-    
-    .principle-text {
-        font-size: 7px;
-        line-height: 1.2;
-    }
-    
-    .about-director {
-        margin-top: var(--space-1);
-        padding: var(--space-1) 0;
-    }
-    
-    .director-name {
-        font-size: 0.5625rem;
-        margin-top: 2px;
-    }
-    
-    .director-title {
-        font-size: 7px;
-    }
-    
-    .practices-content {
-        width: 100%;
-        padding: var(--space-2) var(--space-4);
-    }
-    
-    .practice-single-card {
-        padding: var(--space-2) var(--space-4);
-        gap: var(--space-1);
-    }
-    
-    .practice-icon {
-        width: 32px;
-        height: 32px;
-        font-size: 1.5rem;
-        margin-bottom: var(--space-1);
-    }
-    
-    .practice-title {
-        font-size: 0.625rem;
-        margin-bottom: var(--space-1);
-    }
-    
-    .practice-divider {
-        width: 25px;
-        height: 1px;
-        margin-bottom: var(--space-1);
-    }
-    
-    .practice-description {
-        font-size: 8px;
-        line-height: 1.3;
-        max-height: 55px;
-        overflow-y: auto;
-    }
-    
-    .practice-nav-btn {
-        width: 24px;
-        height: 24px;
-    }
-    
-    .practice-nav-btn svg {
-        width: 10px;
-        height: 10px;
-    }
-    
-    .practice-pagination {
-        margin-top: var(--space-1);
-        gap: var(--space-1);
-    }
-    
-    .practice-pagination-dot {
-        width: 6px;
-        height: 6px;
-    }
-    
-    .slide-contacts .contacts-text-section {
-        padding: var(--space-2) var(--space-8) var(--space-1) var(--space-8);
-        gap: var(--space-1);
-        max-height: 82vh;
-        overflow-y: auto;
-    }
-    
-    .contacts-main-title {
-        font-size: 0.8125rem;
-        margin-bottom: var(--space-1);
-    }
-    
-    .contacts-intro {
-        font-size: 8px;
-        line-height: 1.3;
-        margin-bottom: var(--space-1);
-    }
-    
-    .contacts-info {
-        gap: var(--space-1);
-    }
-    
-    .contact-item {
-        gap: 0;
-        padding-bottom: var(--space-1);
-    }
-    
-    .contact-label {
-        font-size: 7px;
-    }
-    
-    .contact-value {
-        font-size: 0.5625rem;
-        line-height: 1.3;
-    }
-    
-    .spbgka-link {
-        font-size: 0.5rem;
-    }
-    
-    .contacts-copyright {
-        padding: var(--space-1) var(--space-2);
-        margin-top: var(--space-2);
-    }
-    
-    .contacts-copyright::before {
-        width: 35%;
-        max-width: 120px;
-        margin-bottom: var(--space-1);
-    }
-    
-    .contacts-copyright .copyright {
-        font-size: 7px;
-    }
-}
-
-
-/* ============================================
-   LANDSCAPE - СРЕДНИЕ (361px - 390px высоты)
-   iPhone 12/13/14 landscape (844x390)
-   ============================================ */
-
-@media (orientation: landscape) and (min-height: 361px) and (max-height: 390px) {
-    .header {
-        height: 46px;
-    }
-    
-    .header-logo img {
-        height: 30px;
-    }
-    
-    .logo-home-btn {
-        width: 38px;
-        height: 38px;
-    }
-    
-    .logo-home-btn img {
-        width: 22px;
-        height: 22px;
+        right: var(--space-4);
+        left: auto;
+        top: 50%;
+        bottom: auto;
+        transform: translateY(-50%);
+        flex-direction: column;
     }
     
     .swiper-pagination-bullet {
@@ -1381,13 +1777,14 @@
         padding: var(--space-2) var(--space-8);
     }
     
+    /* HOME */
     .home-title {
-        font-size: 1.375rem;
+        font-size: 1.5rem;
         margin-bottom: var(--space-2);
     }
     
     .home-subtitle {
-        font-size: 0.6875rem;
+        font-size: 0.75rem;
         margin-bottom: var(--space-3);
     }
     
@@ -1399,19 +1796,25 @@
     .btn {
         padding: 0.5rem 1rem;
         font-size: 0.625rem;
+        width: auto;
+    }
+    
+    /* ABOUT */
+    .slide-about .about-content {
+        padding-top: var(--space-4);
     }
     
     .slide-about .about-text-section {
-        padding: var(--space-3) var(--space-10) var(--space-2) var(--space-10);
+        padding: var(--space-4) var(--space-10);
         gap: var(--space-1);
-        max-height: 88vh;
+        max-height: calc(100vh - 60px);
+        max-height: calc(var(--vh, 1vh) * 100 - 60px);
         overflow-y: auto;
     }
     
     .about-main-title {
-        font-size: 0.9375rem;
+        font-size: 1rem;
         margin-bottom: var(--space-1);
-        line-height: 1.2;
     }
     
     .about-description p {
@@ -1420,7 +1823,7 @@
     }
     
     .about-section-title {
-        font-size: 0.6875rem;
+        font-size: 0.625rem;
         margin-top: var(--space-1);
         margin-bottom: var(--space-1);
     }
@@ -1432,7 +1835,6 @@
     
     .principle-title {
         font-size: 0.5625rem;
-        margin-bottom: 2px;
     }
     
     .principle-text {
@@ -1454,24 +1856,26 @@
         font-size: 8px;
     }
     
+    /* PRACTICES */
     .practices-content {
-        padding: var(--space-3) var(--space-6);
+        padding: var(--space-2) var(--space-6);
     }
     
     .practice-single-card {
         padding: var(--space-3) var(--space-5);
         gap: var(--space-2);
+        min-height: auto;
     }
     
     .practice-icon {
-        width: 38px;
-        height: 38px;
-        font-size: 1.875rem;
+        width: 40px;
+        height: 40px;
         margin-bottom: var(--space-1);
     }
     
     .practice-title {
-        font-size: 0.6875rem;
+        font-size: 0.75rem;
+        min-height: auto;
         margin-bottom: var(--space-1);
     }
     
@@ -1483,23 +1887,22 @@
     .practice-description {
         font-size: 9px;
         line-height: 1.4;
-        max-height: 65px;
+        max-height: 80px;
         overflow-y: auto;
     }
     
     .practice-nav-btn {
-        width: 26px;
-        height: 26px;
+        width: 28px;
+        height: 28px;
     }
     
     .practice-nav-btn svg {
-        width: 11px;
-        height: 11px;
+        width: 12px;
+        height: 12px;
     }
     
     .practice-pagination {
         margin-top: var(--space-2);
-        gap: var(--space-2);
     }
     
     .practice-pagination-dot {
@@ -1507,21 +1910,26 @@
         height: 7px;
     }
     
+    /* CONTACTS */
+    .slide-contacts .contacts-content {
+        padding-top: var(--space-4);
+    }
+    
     .slide-contacts .contacts-text-section {
-        padding: var(--space-3) var(--space-10) var(--space-2) var(--space-10);
+        padding: var(--space-4) var(--space-10);
         gap: var(--space-2);
-        max-height: 85vh;
+        max-height: calc(100vh - 80px);
+        max-height: calc(var(--vh, 1vh) * 100 - 80px);
         overflow-y: auto;
     }
     
     .contacts-main-title {
-        font-size: 0.9375rem;
+        font-size: 1rem;
         margin-bottom: var(--space-1);
     }
     
     .contacts-intro {
         font-size: 9px;
-        line-height: 1.4;
         margin-bottom: var(--space-1);
     }
     
@@ -1540,7 +1948,6 @@
     
     .contact-value {
         font-size: 0.625rem;
-        line-height: 1.4;
     }
     
     .spbgka-link {
@@ -1553,8 +1960,8 @@
     }
     
     .contacts-copyright::before {
-        width: 40%;
-        max-width: 160px;
+        width: 35%;
+        max-width: 150px;
         margin-bottom: var(--space-1);
     }
     
@@ -1565,144 +1972,193 @@
 
 
 /* ============================================
-   ПЛАНШЕТЫ (768px+)
+   LANDSCAPE TABLETS (768px - 1024px ширины)
+   iPad landscape, small laptops
    ============================================ */
 
-@media (min-width: 768px) and (max-width: 1023px) {
-    .home-title {
-        font-size: var(--text-5xl);
+@media (orientation: landscape) and (min-width: 768px) and (max-width: 1023px) {
+    .slide-about .about-text-section {
+        max-height: calc(100vh - 100px);
+        max-height: calc(var(--vh, 1vh) * 100 - 100px);
+        overflow-y: auto;
     }
     
-    .section-title {
-        font-size: var(--text-4xl);
-    }
-    
-    .slide-about .about-principles {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .horizontal-swiper {
-        height: 75vh;
+    .slide-contacts .contacts-text-section {
+        max-height: calc(100vh - 120px);
+        max-height: calc(var(--vh, 1vh) * 100 - 120px);
+        overflow-y: auto;
     }
 }
 
-@media (min-width: 1024px) and (max-width: 1279px) and (orientation: landscape) {
-    .home-title {
-        font-size: var(--text-5xl);
-    }
-    
-    .section-title {
-        font-size: var(--text-4xl);
-    }
-    
-    .practice-card {
-        padding: var(--space-6);
-    }
-    
-    .practice-title {
-        font-size: var(--text-xl);
-    }
-}
 
-@media (min-width: 1440px) {
-    .slide-content {
-        max-width: var(--container-2xl);
-    }
-    
-    .home-content {
-        max-width: 1100px;
-    }
-    
-    .about-content {
-        max-width: 1400px;
-    }
-    
-    .home-title {
-        font-size: 4.5rem;
-    }
-    
-    .home-subtitle {
-        font-size: var(--text-3xl);
-    }
-}
+/* ============================================
+   HEIGHT-BASED ADJUSTMENTS
+   Для коротких экранов (ноутбуки 768px height и меньше)
+   ============================================ */
 
-@media (min-width: 1920px) {
+@media (max-height: 700px) and (min-width: 768px) {
     .home-title {
-        font-size: 5rem;
-    }
-    
-    .section-title {
-        font-size: 3.5rem;
-    }
-    
-    .slide-content {
-        max-width: 1600px;
-    }
-}
-
-@media (max-height: 700px) {
-    .home-title {
-        font-size: var(--text-4xl);
-        margin-bottom: var(--space-4);
-    }
-    
-    .home-subtitle {
-        font-size: var(--text-lg);
-        margin-bottom: var(--space-8);
-    }
-    
-    .section-title {
-        font-size: var(--text-3xl);
-        margin-bottom: var(--space-8);
-    }
-    
-    .horizontal-swiper {
-        height: 75vh;
-    }
-}
-
-@media (max-height: 600px) {
-    .home-title {
-        font-size: var(--text-3xl);
+        font-size: 3rem;
         margin-bottom: var(--space-3);
     }
     
     .home-subtitle {
-        font-size: var(--text-base);
+        font-size: 1rem;
         margin-bottom: var(--space-6);
     }
     
     .btn {
-        padding: var(--space-2) var(--space-6);
+        padding: 0.75rem 1.5rem;
     }
     
-    .section-title {
-        font-size: var(--text-2xl);
-        margin-bottom: var(--space-6);
+    .slide-about .about-text-section {
+        padding: var(--space-8) var(--space-8);
+        max-height: calc(100vh - 60px);
+        max-height: calc(var(--vh, 1vh) * 100 - 60px);
+        overflow-y: auto;
     }
     
-    .horizontal-swiper {
-        height: 70vh;
+    .about-main-title {
+        font-size: 1.75rem;
+    }
+    
+    .about-description p {
+        font-size: 13px;
+    }
+    
+    .practice-single-card {
+        padding: var(--space-8) var(--space-8);
+        min-height: auto;
+    }
+    
+    .practice-icon {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .practice-title {
+        font-size: 1.125rem;
+        min-height: auto;
+    }
+    
+    .practice-description {
+        max-height: 120px;
+    }
+    
+    .slide-contacts .contacts-text-section {
+        max-height: calc(100vh - 80px);
+        max-height: calc(var(--vh, 1vh) * 100 - 80px);
+        overflow-y: auto;
+    }
+    
+    .contacts-main-title {
+        font-size: 1.75rem;
     }
 }
 
+
+@media (max-height: 600px) and (min-width: 768px) {
+    .home-title {
+        font-size: 2.5rem;
+        margin-bottom: var(--space-2);
+    }
+    
+    .home-subtitle {
+        font-size: 0.9375rem;
+        margin-bottom: var(--space-4);
+    }
+    
+    .btn {
+        padding: 0.625rem 1.25rem;
+        font-size: 0.875rem;
+    }
+    
+    .about-main-title {
+        font-size: 1.5rem;
+    }
+    
+    .about-description p {
+        font-size: 12px;
+    }
+    
+    .about-section-title {
+        font-size: 0.9375rem;
+    }
+    
+    .principle-title {
+        font-size: 0.75rem;
+    }
+    
+    .principle-text {
+        font-size: 11px;
+    }
+    
+    .practice-single-card {
+        padding: var(--space-6);
+    }
+    
+    .practice-icon {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .practice-title {
+        font-size: 1rem;
+    }
+    
+    .practice-description {
+        font-size: 13px;
+        max-height: 100px;
+    }
+    
+    .contacts-main-title {
+        font-size: 1.5rem;
+    }
+    
+    .contacts-intro {
+        font-size: 12px;
+    }
+}
+
+
+/* ============================================
+   ОЧЕНЬ ВЫСОКИЕ ЭКРАНЫ (1200px+ height)
+   Большие мониторы в portrait или просто высокие дисплеи
+   ============================================ */
+
 @media (min-height: 1200px) {
     .slide-content {
-        max-height: 1000px;
+        max-height: 1100px;
     }
     
     .home-content {
-        max-height: 800px;
-    }
-    
-    .section-title {
-        margin-bottom: var(--space-16);
-    }
-    
-    .about-text {
-        margin-bottom: var(--space-16);
+        max-height: 900px;
     }
 }
+
+
+/* ============================================
+   CARD ANIMATION (для practices slider)
+   ============================================ */
+
+.practice-card-content {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.practice-card-content.slide-out {
+    opacity: 0;
+    transform: translateX(-20px);
+}
+
+.practice-card-content.slide-in {
+    opacity: 0;
+    transform: translateX(20px);
+}
+
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
 
 .hide-mobile {
     display: none;
@@ -1734,13 +2190,19 @@
     }
 }
 
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
 @media print {
     .header,
     .swiper-pagination,
     .swiper-button-prev,
     .swiper-button-next,
     .logo-home-btn,
-    .menu-toggle {
+    .menu-toggle,
+    .mobile-menu {
         display: none !important;
     }
     
