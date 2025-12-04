@@ -17,9 +17,11 @@ class Presentation {
     init() {
         this.totalSlidesEl.textContent = this.totalSlides;
         
+        // Button navigation
         this.prevBtn.addEventListener('click', () => this.prevSlide());
         this.nextBtn.addEventListener('click', () => this.nextSlide());
         
+        // Keyboard navigation
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
                 this.prevSlide();
@@ -39,28 +41,70 @@ class Presentation {
             }
         });
         
+        // Mouse wheel navigation with throttle
+        let wheelTimeout;
+        let isWheeling = false;
+        
+        document.addEventListener('wheel', (e) => {
+            if (isWheeling) return;
+            
+            const delta = e.deltaY;
+            
+            if (Math.abs(delta) > 30) {
+                isWheeling = true;
+                
+                if (delta > 0) {
+                    // Scroll down - next slide
+                    this.nextSlide();
+                } else {
+                    // Scroll up - previous slide
+                    this.prevSlide();
+                }
+                
+                // Throttle to prevent too fast scrolling
+                setTimeout(() => {
+                    isWheeling = false;
+                }, 800);
+            }
+        }, { passive: true });
+        
+        // Touch/swipe navigation
         let touchStartX = 0;
         let touchEndX = 0;
+        let touchStartY = 0;
+        let touchEndY = 0;
         
         document.addEventListener('touchstart', (e) => {
             touchStartX = e.changedTouches[0].screenX;
-        });
+            touchStartY = e.changedTouches[0].screenY;
+        }, { passive: true });
+        
+        document.addEventListener('touchmove', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            touchEndY = e.changedTouches[0].screenY;
+        }, { passive: true });
         
         document.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
             this.handleSwipe();
-        });
+        }, { passive: true });
         
-        const handleSwipe = () => {
-            if (touchEndX < touchStartX - 50) {
-                this.nextSlide();
-            }
-            if (touchEndX > touchStartX + 50) {
-                this.prevSlide();
+        this.handleSwipe = () => {
+            const diffX = touchStartX - touchEndX;
+            const diffY = touchStartY - touchEndY;
+            
+            // Only trigger if horizontal swipe is bigger than vertical (not scrolling content)
+            if (Math.abs(diffX) > Math.abs(diffY)) {
+                if (Math.abs(diffX) > 50) {
+                    if (diffX > 0) {
+                        // Swipe left - next slide
+                        this.nextSlide();
+                    } else {
+                        // Swipe right - previous slide
+                        this.prevSlide();
+                    }
+                }
             }
         };
-        
-        this.handleSwipe = handleSwipe;
         
         this.updateSlide();
         
